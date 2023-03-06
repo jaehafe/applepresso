@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from './Home.style';
+import * as S from './Home.style';
 
 function Home() {
   return <S.Container>Home</S.Container>;
