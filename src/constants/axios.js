@@ -8,3 +8,7 @@ export const axiosInstance = axios.create({
     username: `${import.meta.env.VITE_USERNAME}`,
   },
 });
+
+export const axiosFirebase = axios.create({
+  baseURL: `${import.meta.env.VITE_BASE_URL}`,
+});
