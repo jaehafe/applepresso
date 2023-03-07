@@ -27,7 +27,7 @@ export const NavigateTitle = styled.h3`
 `;
 
 export const MainWrapper = styled.div`
-  margin-top: 100px;
+  margin-top: 80px;
   height: 600px;
   padding: 0 20px;
   border: 1px solid;
@@ -63,3 +63,37 @@ export const Button = styled.button`
 `;
 
 // export const mainLogo = styled();
+
+export const LoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+`;
+
+export const LoginInput = styled.input`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 46px;
+
+  border: 1px solid #d7a1b5;
+  border-radius: 6px;
+  padding: 16px;
+
+  &::placeholder {
+    color: #d7a1b5;
+  }
+`;
+
+const FormButton = styled.button`
+  border: 1px solid;
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+`;
+
+export const SignButton = styled.button`
+  border-bottom: 2px solid var(--main-color);
+`;
