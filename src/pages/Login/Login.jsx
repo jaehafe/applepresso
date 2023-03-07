@@ -54,7 +54,7 @@ function SignUp() {
     } = await login(values);
     console.log('handleLogin displayName', displayName);
 
-    navigate('/home');
+    navigate('/main/home');
   };
 
   return (
