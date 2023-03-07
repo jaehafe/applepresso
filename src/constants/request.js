@@ -22,8 +22,7 @@ export const requestLogin = async (info) => {
       email: info.email,
       password: info.password,
     });
-    console.log(res.data);
-    localStorage.setItem('token', JSON.stringify(res.data.accessToken));
+
     return res.data;
   } catch (err) {
     throw new Error();
