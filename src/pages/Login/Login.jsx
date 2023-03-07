@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './Login.style';
 import Logo from '../../assets/banapressoLogo.png';
-import SingupInput from '../../components/SignupInput/SignupInput';
 import { requestLogin } from '../../constants/request';
+import { LoginContext } from '../../contexts/LoginContextProvider';
+import SignupInput from '../../components/SignupInput/SignupInput';
 
 function SignUp() {
+  const { login } = useContext(LoginContext);
+
   const [values, setValues] = useState({ email: '', password: '' });
   console.log(values);
+
   const inputs = [
     {
       id: 1,
@@ -45,10 +49,10 @@ function SignUp() {
   };
 
   const handleLogin = async () => {
-    console.log('loginvalues', values);
-    const { user } = await requestLogin(values);
-    const { displayName, email, profileImg } = user;
-    console.log(displayName);
+    const {
+      user: { displayName, email, profileImg },
+    } = await login(values);
+    console.log('handleLogin displayName', displayName);
 
     navigate('/home');
   };
@@ -70,7 +74,7 @@ function SignUp() {
         <S.LoginForm>
           {inputs.map((input) => {
             return (
-              <SingupInput
+              <SignupInput
                 key={input.id}
                 {...input}
                 value={values[input.name] || ''}
