@@ -55,7 +55,7 @@ const HeroInfo = [
 function Home() {
   const navigate = useNavigate();
   const handleAddOrder = () => {
-    navigate('/order');
+    navigate('/main/home/order');
   };
 
   return (
