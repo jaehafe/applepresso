@@ -1,23 +1,26 @@
 import React from 'react';
 import * as S from './MenuDetail.style';
 import { useParams } from 'react-router-dom';
-import { setMenu } from '../../../constants/data/setMenu';
+import { menuDatas } from '../../../constants/data/menuDatas';
 
 function MenuDetail() {
-  console.log(setMenu);
   const { id } = useParams();
   console.log('id', id);
-  const menuData = setMenu.find((menu) => menu.id === id);
+  const menuData = menuDatas.find((menu) => menu.id === id);
   console.log('menuData', menuData);
   return (
-    <div>
-      <S.Container>
+    <>
+      <S.HeaderContainer>
         <S.HeaderWrapper>
-          <S.HeaderTitle>{menuData.title}</S.HeaderTitle>
-          <S.StyledFiSearch />
+          <S.HeaderTitleWrapper>
+            <S.StyledBsArrowLeft />
+            <S.HeaderTitle>{menuData.title}</S.HeaderTitle>
+          </S.HeaderTitleWrapper>
+          <S.StyledAiOutlineUnorderedList />
         </S.HeaderWrapper>
-      </S.Container>
-    </div>
+      </S.HeaderContainer>
+      <S.MenuContainer>123</S.MenuContainer>
+    </>
   );
 }
 
