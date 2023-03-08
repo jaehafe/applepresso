@@ -26,7 +26,7 @@ const NavLists = [
     active: false,
   },
   {
-    navigate: 'milkTeaLattee',
+    navigate: 'milkTeaLatte',
     id: 'MILK_TEA_LATTEE',
     name: 'MILK TEA & LATTEE',
     active: false,
