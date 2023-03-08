@@ -8,16 +8,16 @@ import { useNavigate } from 'react-router-dom';
 
 const NavLists = [
   {
-    navigate: 'coffee',
-    id: 'COFFEE',
-    name: 'COFFEE',
-    active: false,
-  },
-  {
     navigate: 'recommend',
     id: 'RECOMMEND',
     name: '추천',
     active: true,
+  },
+  {
+    navigate: 'coffee',
+    id: 'COFFEE',
+    name: 'COFFEE',
+    active: false,
   },
   {
     navigate: 'setMenu',
@@ -25,7 +25,6 @@ const NavLists = [
     name: 'SET MENU',
     active: false,
   },
-
   {
     navigate: 'milkTeaLattee',
     id: 'MILK_TEA_LATTEE',
@@ -59,11 +58,11 @@ const NavLists = [
 ];
 
 function MenuHeader() {
-  const [activeNav, setActiveNav] = useState('coffee');
+  const [activeNav, setActiveNav] = useState('recommend');
   const navigate = useNavigate();
 
   const handleNavigate = (path) => {
-    // navigate(path);
+    navigate(path);
     setActiveNav(path);
   };
   return (
