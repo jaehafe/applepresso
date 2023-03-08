@@ -1,11 +1,13 @@
 import React from 'react';
 import MenuList from '../../../components/MenuList/MenuList';
-import { menus } from '../../../constants/data/coffee';
+import { menuDatas } from '../../../constants/data/menuDatas';
+
+const coffeeData = menuDatas.filter((menu) => menu.tags.includes('coffee'));
 
 function CoffeeMenu() {
   return (
     <>
-      <MenuList menus={menus} />
+      <MenuList menus={coffeeData} />
     </>
   );
 }

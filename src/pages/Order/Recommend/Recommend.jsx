@@ -1,13 +1,15 @@
 import React from 'react';
 import * as S from './Recommend.style';
-import { menus } from '../../../constants/data/coffee';
-import { setMenu } from '../../../constants/data/setMenu';
-import { milkTeaLatte } from '../../../constants/data/milkTeaLatte';
 import { A11y } from 'swiper';
 // import { Swiper, SwiperSlide } from 'swiper/react';
 // import 'swiper/css/pagination';
 import 'swiper/css';
 import RecommendList from '../../../components/RecommendList/RecommendList';
+import { menuDatas } from '../../../constants/data/menuDatas';
+
+const coffeeMenu = menuDatas.filter((menu) => menu.tags.includes('coffee'));
+const bestMenu = menuDatas.filter((menu) => menu.isBest === true);
+const newMenu = menuDatas.filter((menu) => menu.isNew === true);
 
 function Recommend() {
   return (
@@ -23,7 +25,7 @@ function Recommend() {
             // bulletClass: CustomBullet,
           }}
         >
-          {menus.map((menu) => (
+          {coffeeMenu.map((menu) => (
             <S.RecommendList key={menu.id}>
               <RecommendList key={menu.id} {...menu} />
             </S.RecommendList>
@@ -31,7 +33,7 @@ function Recommend() {
         </S.RecommendLists>
       </S.Wrapper>
       <S.Wrapper>
-        <S.RecommendTitle>세트 메뉴</S.RecommendTitle>
+        <S.RecommendTitle>BEST 메뉴</S.RecommendTitle>
         <S.RecommendLists
           modules={[A11y]}
           spaceBetween={10}
@@ -41,7 +43,7 @@ function Recommend() {
             // bulletClass: CustomBullet,
           }}
         >
-          {setMenu.map((menu) => (
+          {bestMenu.map((menu) => (
             <S.RecommendList key={menu.id}>
               <RecommendList key={menu.id} {...menu} />
             </S.RecommendList>
@@ -50,7 +52,7 @@ function Recommend() {
       </S.Wrapper>
       {/*  */}
       <S.Wrapper>
-        <S.RecommendTitle>밀크 티 & 라떼</S.RecommendTitle>
+        <S.RecommendTitle>새로운 메뉴</S.RecommendTitle>
         <S.RecommendLists
           modules={[A11y]}
           spaceBetween={10}
@@ -60,7 +62,7 @@ function Recommend() {
             // bulletClass: CustomBullet,
           }}
         >
-          {milkTeaLatte.map((menu) => (
+          {newMenu.map((menu) => (
             <S.RecommendList key={menu.id}>
               <RecommendList key={menu.id} {...menu} />
             </S.RecommendList>
