@@ -20,7 +20,6 @@ export const IMGWrapper = styled.div`
 //
 export const MenuStatus = styled.span`
   position: absolute;
-  border: 1px solid;
   border-radius: 10px;
   width: auto;
   padding: 7px 8px;

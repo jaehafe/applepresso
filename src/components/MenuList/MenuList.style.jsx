@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  border: 1px solid;
+  /* border: 1px solid; */
   margin: 170px 0 100px;
   min-height: 100vh;
 `;
@@ -13,5 +13,5 @@ export const MenuLists = styled.ul`
 `;
 
 export const MenuList = styled.li`
-  border: 1px solid;
+  /* border: 1px solid; */
 `;
