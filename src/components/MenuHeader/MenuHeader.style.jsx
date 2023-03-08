@@ -3,7 +3,7 @@ import { FiSearch } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const Container = styled.div`
-  z-index: 1;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@ export const HeaderTitle = styled.h2`
 `;
 
 export const HeaderNav = styled(Swiper)`
-  z-index: 1;
+  z-index: 10;
   position: fixed;
   top: 80px;
   left: 50%;
