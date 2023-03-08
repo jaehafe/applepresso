@@ -2,10 +2,9 @@ import React from 'react';
 import * as S from './RecommendList.style';
 
 function RecommendList(props) {
-  const { id, title, price, ENTitle, desc, thumbnail, isNew, isBest, ...menuProps } =
-    props;
+  const { id, title, price, thumbnail, isNew, isBest } = props;
   return (
-    <S.RecommendList key={id}>
+    <div>
       <S.IMGWrapper>
         {isNew && (
           <S.RecommendStatus $isNew={isNew} $isBest={isBest}>
@@ -25,7 +24,7 @@ function RecommendList(props) {
         </S.InfoTitle>
         <S.InfoPrice>{price.toLocaleString()}원</S.InfoPrice>
       </S.RecommendInfo>
-    </S.RecommendList>
+    </div>
   );
 }
 

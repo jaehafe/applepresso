@@ -30,7 +30,6 @@ export const MainWrapper = styled.div`
   margin-top: 80px;
   height: 600px;
   padding: 0 20px;
-  /* border: 1px solid; */
 `;
 export const HeroNum = styled.div`
   width: 30px;

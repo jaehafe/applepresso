@@ -11,6 +11,7 @@ import MenuHeader from './components/MenuHeader/MenuHeader';
 import Recommend from './pages/Order/Recommend/Recommend';
 import SetMenu from './pages/Order/SetMenu/SetMenu';
 import CoffeeMenu from './pages/Order/CoffeeMenu/CoffeeMenu';
+import MilkTeaLatte from './pages/Order/MilkTeaLatte/MilkTeaLatte';
 
 const Layout = () => {
   return (
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
           {
             path: 'setMenu',
             element: <SetMenu />,
+          },
+          {
+            path: 'milkTeaLatte',
+            element: <MilkTeaLatte />,
           },
         ],
       },
