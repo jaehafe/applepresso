@@ -12,6 +12,7 @@ import Recommend from './pages/Order/Recommend/Recommend';
 import SetMenu from './pages/Order/SetMenu/SetMenu';
 import CoffeeMenu from './pages/Order/CoffeeMenu/CoffeeMenu';
 import MilkTeaLatte from './pages/Order/MilkTeaLatte/MilkTeaLatte';
+import MenuDetail from './pages/Order/MenuDetail/MenuDetail';
 
 const Layout = () => {
   return (
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
   { path: '/', element: <InitPage /> },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <Signup /> },
+  { path: '/menuDetail/:id', element: <MenuDetail /> },
   {
     path: '/main',
     element: <Layout />,
