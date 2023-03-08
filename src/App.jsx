@@ -1,14 +1,16 @@
 import React from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import * as S from './App.style';
+
 import Home from './pages/Home/Home';
 import InitPage from './pages/InitPage/InitPage';
 import Login from './pages/Login/Login';
 import Signup from './pages/Singup/Signup';
 import MainNav from './components/MainNav/MainNav';
-import Order from './pages/Order/Order';
-import CoffeeMenu from './pages/CoffeeMenu/CoffeeMenu';
 import MenuHeader from './components/MenuHeader/MenuHeader';
-import * as S from './App.style';
+import Recommend from './pages/Order/Recommend/Recommend';
+import SetMenu from './pages/Order/SetMenu/SetMenu';
+import CoffeeMenu from './pages/Order/CoffeeMenu/CoffeeMenu';
 
 const Layout = () => {
   return (
@@ -36,14 +38,22 @@ const router = createBrowserRouter([
     path: '/main',
     element: <Layout />,
     children: [
-      { path: '/main/home', element: <Home /> },
+      { path: 'home', element: <Home /> },
       {
-        // index: true,
+        path: 'order',
         element: <OrderLayout />,
         children: [
           {
-            path: '/main/home/order',
-            element: <Order />,
+            path: 'recommend',
+            element: <Recommend />,
+          },
+          {
+            path: 'coffee',
+            element: <CoffeeMenu />,
+          },
+          {
+            path: 'setMenu',
+            element: <SetMenu />,
           },
         ],
       },
