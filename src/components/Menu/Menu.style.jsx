@@ -5,6 +5,7 @@ export const Container = styled.div`
   gap: 20px;
   padding: 30px 20px;
   border-bottom: 1px solid rgb(225, 212, 212);
+  cursor: pointer;
 `;
 
 export const Wrapper = styled.div`

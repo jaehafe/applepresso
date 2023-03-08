@@ -2,10 +2,24 @@ import React from 'react';
 import * as S from './Menu.style';
 
 function Menus(props) {
-  const { id, title, price, ENTitle, desc, thumbnail, isNew, isBest, ...menuProps } =
-    props;
+  const {
+    id,
+    title,
+    price,
+    ENTitle,
+    desc,
+    thumbnail,
+    isNew,
+    isBest,
+    onClick,
+    ...menuProps
+  } = props;
+
+  const handleClick = () => {
+    onClick(id);
+  };
   return (
-    <S.Container>
+    <S.Container onClick={handleClick}>
       <S.Wrapper>
         <S.IMGWrapper>
           {isNew && (
