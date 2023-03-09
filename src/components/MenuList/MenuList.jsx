@@ -5,23 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 function MenuList(props) {
   console.log(props);
-  const navigate = useNavigate();
-
-  const handleMenu = (id) => {
-    console.log('123');
-    navigate(`/menuDetail/${id}`);
-  };
 
   return (
     <S.Container>
       <S.MenuLists>
         {props.menus.map((menu) => (
-          <Menu
-            key={menu.id}
-            {...menu}
-            value={menu.id}
-            onClick={() => handleMenu(menu.id)}
-          />
+          <Menu key={menu.id} {...menu} value={menu.id} />
         ))}
       </S.MenuLists>
     </S.Container>

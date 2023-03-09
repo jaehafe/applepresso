@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from './Menu.style';
 
 function Menus(props) {
@@ -15,11 +16,14 @@ function Menus(props) {
     ...menuProps
   } = props;
 
-  const handleClick = () => {
-    onClick(id);
+  const navigate = useNavigate();
+
+  const HandleNavigateToDetail = () => {
+    navigate(`/menuDetail/${id}`);
   };
+
   return (
-    <S.Container onClick={handleClick}>
+    <S.Container onClick={HandleNavigateToDetail}>
       <S.Wrapper>
         <S.IMGWrapper>
           {isNew && (
