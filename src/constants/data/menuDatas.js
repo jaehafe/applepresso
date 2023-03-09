@@ -11,6 +11,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: true,
+    isChecked: false,
     discountRate: 10,
   },
   {
@@ -25,6 +26,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: false,
     isBest: true,
+    isChecked: false,
     discountRate: 10,
   },
   {
@@ -39,6 +41,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: false,
+    isChecked: false,
     discountRate: 10,
   },
   {
@@ -53,6 +56,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: false,
     isBest: false,
+    isChecked: false,
     discountRate: 10,
   },
   {
@@ -67,6 +71,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: false,
+    isChecked: false,
     discountRate: 10,
   },
   {
@@ -81,6 +86,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: false,
     isBest: false,
+    isChecked: false,
     discountRate: 20,
   },
   {
@@ -95,6 +101,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: true,
+    isChecked: false,
     discountRate: 20,
   },
   {
@@ -109,6 +116,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: false,
     isBest: false,
+    isChecked: false,
     discountRate: 20,
   },
   {
@@ -123,6 +131,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: false,
     isBest: false,
+    isChecked: false,
     discountRate: 20,
   },
   {
@@ -137,6 +146,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: false,
     isBest: true,
+    isChecked: false,
     discountRate: 20,
   },
   {
@@ -151,6 +161,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: false,
+    isChecked: false,
     discountRate: 20,
   },
   {
@@ -165,6 +176,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: false,
     isBest: false,
+    isChecked: false,
     discountRate: 15,
   },
   {
@@ -179,6 +191,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: false,
     isBest: false,
+    isChecked: false,
     discountRate: 15,
   },
   {
@@ -193,6 +206,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: true,
+    isChecked: false,
     discountRate: 15,
   },
   {
@@ -207,6 +221,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: true,
+    isChecked: false,
     discountRate: 15,
   },
   {
@@ -221,6 +236,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: true,
+    isChecked: false,
     discountRate: 10,
   },
   {
@@ -235,6 +251,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: false,
+    isChecked: false,
     discountRate: 15,
   },
   {
@@ -249,6 +266,7 @@ export const menuDatas = [
     isSoldOut: false,
     isNew: true,
     isBest: false,
+    isChecked: false,
     discountRate: 20,
   },
 ];
