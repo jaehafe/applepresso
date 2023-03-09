@@ -5,19 +5,15 @@ import { requestLogin } from '../constants/request';
 export const CartContext = createContext();
 
 function CartContextProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
-
-  const login = async (info) => {
-    const data = await requestLogin(info);
-    setCurrentUser(data);
-    return data;
+  const cartContext = {
+    items: cartState.items,
+    totalAmount: cartState.totalAmount,
+    addItem: addItemToCartHandler,
+    removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler,
   };
 
-  useEffect(() => {
-    localStorage.setItem('BANA_USER', JSON.stringify(currentUser));
-  }, [currentUser]);
-
-  return <CartContext.Provider>{children}</CartContext.Provider>;
+  return <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>;
 }
 
 export default CartContextProvider;
