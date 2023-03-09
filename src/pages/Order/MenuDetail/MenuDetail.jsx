@@ -5,6 +5,7 @@ import { menuDatas } from '../../../constants/data/menuDatas';
 import RecommendList from '../../../components/RecommendList/RecommendList';
 import { A11y } from 'swiper';
 import 'swiper/css';
+import CartButton from '../../../components/CartButton/CartButton';
 
 const coffeeMenu = menuDatas.filter((menu) => menu.tags.includes('coffee'));
 const bestMenu = menuDatas.filter((menu) => menu.isBest === true);
@@ -29,12 +30,17 @@ function MenuDetail() {
     thumbnail,
   } = menuData;
 
+  const handleNavigateToCart = () => {
+    navigate('/cart');
+  };
+
   const handleNavigate = () => {
     navigate(-1);
   };
 
   return (
     <>
+      <CartButton onClick={handleNavigateToCart} />
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
