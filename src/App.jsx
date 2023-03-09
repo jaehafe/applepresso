@@ -13,6 +13,8 @@ import SetMenu from './pages/Order/SetMenu/SetMenu';
 import CoffeeMenu from './pages/Order/CoffeeMenu/CoffeeMenu';
 import MilkTeaLatte from './pages/Order/MilkTeaLatte/MilkTeaLatte';
 import MenuDetail from './pages/Order/MenuDetail/MenuDetail';
+import CartButton from './components/CartButton/CartButton';
+import Cart from './pages/Cart/Cart';
 
 const Layout = () => {
   return (
@@ -26,6 +28,7 @@ const Layout = () => {
 const OrderLayout = () => {
   return (
     <S.Container>
+      <CartButton />
       <MenuHeader />
       <Outlet />
     </S.Container>
@@ -37,6 +40,7 @@ const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <Signup /> },
   { path: '/menuDetail/:id', element: <MenuDetail /> },
+  { path: '/cart', element: <Cart /> },
   {
     path: '/main',
     element: <Layout />,

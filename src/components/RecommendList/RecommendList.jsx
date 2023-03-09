@@ -1,11 +1,17 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as S from './RecommendList.style';
 
 function RecommendList(props) {
   const { id, title, price, thumbnail, isNew, isBest } = props;
+
+  const navigate = useNavigate();
+  const HandleNavigateToDetail = () => {
+    navigate(`/menuDetail/${id}`);
+  };
   return (
     <div>
-      <S.IMGWrapper>
+      <S.IMGWrapper onClick={HandleNavigateToDetail}>
         {isNew && (
           <S.RecommendStatus $isNew={isNew} $isBest={isBest}>
             {isBest ? 'NEW & BEST' : 'NEW'}
