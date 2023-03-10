@@ -55,6 +55,7 @@ function MenuDetail() {
       amount: Number(amountRef.current.innerText),
       price,
       thumbnail,
+      discountRate,
     });
   };
 

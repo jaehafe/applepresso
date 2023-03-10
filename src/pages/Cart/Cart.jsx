@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './Cart.style';
 import { useNavigate } from 'react-router-dom';
 import { menuDatas } from '../../constants/data/menuDatas';
+import CartContext from '../../store/CartContext';
 
 // const coffeeData = menuDatas.filter((menu) => menu.tags.includes('coffee'));
 // console.log(coffeeData);
 
 function Cart() {
   const navigate = useNavigate();
+  const MenuCountRef = useRef(null);
+  const cartCtx = useContext(CartContext);
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
   const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
+  const [menuCount, setMenuCount] = useState(null);
 
   /** 총 가격, 수량 렌더링 함수 */
   const calculateTotalPriceQty = () => {
@@ -33,11 +37,6 @@ function Cart() {
       totalQty,
     };
   };
-
-  /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
-  useEffect(() => {
-    setCartMenus(menuDatas.filter((menu) => menu.tags.includes('coffee')));
-  }, []);
 
   /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
   const handleRemoveMenu = () => {
@@ -91,6 +90,23 @@ function Cart() {
     navigate(-1);
   };
 
+  /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
+  useEffect(() => {
+    // setCartMenus(cartCtx.items.filter((menu) => menu.tags.includes('coffee')));
+    setCartMenus(cartCtx.items);
+  }, [cartCtx.items]);
+
+  const addToCartHandler = () => {
+    cartCtx.addItem({});
+  };
+
+  const handleMinusMenuCount = () => {};
+
+  const handlePlusMenuCount = () => {
+    // setMenuCount(menuCount + 1);
+    addToCartHandler();
+  };
+
   useEffect(() => {
     const { totalPrice, totalQty } = calculateTotalPriceQty();
     console.log('checkedMenus updated:', checkedMenus);
@@ -116,9 +132,11 @@ function Cart() {
       </S.HeaderContainer>
       <S.CartBody>
         {cartMenus.map((menu) => {
-          const { id, thumbnail, title, price, discountRate, isChecked } = menu;
-          const discountPrice = (price / discountRate).toFixed(0).toLocaleString();
-          const finalPrice = (price - discountPrice).toLocaleString();
+          const { id, thumbnail, title, price, discountRate, isChecked, amount } = menu;
+          const discountPrice = ((amount * price) / discountRate)
+            .toFixed(0)
+            .toLocaleString();
+          const finalPrice = (amount * price - discountPrice).toLocaleString();
 
           return (
             <S.OrderDetailWrapper key={id}>
@@ -136,20 +154,20 @@ function Cart() {
                 <S.ThumbnailWrapper>
                   <S.Thumbnail src={thumbnail} alt={title} />
                   <S.MenuCountWrapper>
-                    <S.MenuCountMinus>-</S.MenuCountMinus>
-                    <S.MenuCount>1</S.MenuCount>
-                    <S.MenuCountPlus>+</S.MenuCountPlus>
+                    <S.MenuCountMinus onClick={handleMinusMenuCount}>-</S.MenuCountMinus>
+                    <S.MenuCount ref={MenuCountRef}>{amount}</S.MenuCount>
+                    <S.MenuCountPlus onClick={handlePlusMenuCount}>+</S.MenuCountPlus>
                   </S.MenuCountWrapper>
                 </S.ThumbnailWrapper>
                 <S.OrderInfo>
                   <S.TitleWrapper>
                     <S.Title>{title}</S.Title>
-                    <S.Price>{price.toLocaleString()}</S.Price>
+                    <S.Price>{(amount * price).toLocaleString()}원</S.Price>
                   </S.TitleWrapper>
                   {discountRate && (
                     <S.Options>
                       <S.Option>이벤트 할인</S.Option>
-                      <S.OptionPrice>-{discountPrice}원</S.OptionPrice>
+                      <S.OptionPrice>-{discountPrice.toLocaleString()}원</S.OptionPrice>
                     </S.Options>
                   )}
                   <S.TotalWrapper>
