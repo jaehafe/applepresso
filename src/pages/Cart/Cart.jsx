@@ -135,6 +135,11 @@ function Cart() {
               <S.OrderDetail>
                 <S.ThumbnailWrapper>
                   <S.Thumbnail src={thumbnail} alt={title} />
+                  <S.MenuCountWrapper>
+                    <S.MenuCountMinus>-</S.MenuCountMinus>
+                    <S.MenuCount>1</S.MenuCount>
+                    <S.MenuCountPlus>+</S.MenuCountPlus>
+                  </S.MenuCountWrapper>
                 </S.ThumbnailWrapper>
                 <S.OrderInfo>
                   <S.TitleWrapper>

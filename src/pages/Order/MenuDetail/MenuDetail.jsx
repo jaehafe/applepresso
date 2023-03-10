@@ -38,6 +38,8 @@ function MenuDetail() {
     navigate(-1);
   };
 
+  const handleAddToCart = () => {};
+
   return (
     <>
       <CartButton onClick={handleNavigateToCart} />
@@ -82,7 +84,7 @@ function MenuDetail() {
         </S.MenuSelectWrapper> */}
       </S.OrderOptionContainer>
       <S.OrderButtons>
-        <S.AddCartButton>담기</S.AddCartButton>
+        <S.AddCartButton onClick={handleAddToCart}>담기</S.AddCartButton>
         <S.OrderNowButton>바로 주문하기</S.OrderNowButton>
       </S.OrderButtons>
       {/* 추천메뉴 */}

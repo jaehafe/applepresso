@@ -92,7 +92,7 @@ export const OrderDetail = styled.div`
 `;
 
 export const ThumbnailWrapper = styled.div`
-  width: 100px;
+  width: 130px;
   height: 100px;
   border-radius: 20px;
   background-color: #fff;
@@ -103,6 +103,49 @@ export const Thumbnail = styled.img`
   height: 100px;
   object-fit: contain;
 `;
+
+// 수량 조절
+export const MenuCountWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+`;
+
+export const MenuCountButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+  transition: background-color 0.3s ease;
+
+  &:hover,
+  &:active {
+    color: #fff;
+    background-color: var(--main-color);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
+export const MenuCount = styled.div``;
+
+export const MenuCountMinus = styled(MenuCountButton)`
+  border: 1px solid;
+`;
+
+export const MenuCountPlus = styled(MenuCountButton)`
+  border: 1px solid;
+`;
+
 export const OrderInfo = styled.div`
   display: flex;
   flex-direction: column;
