@@ -15,7 +15,7 @@ function Cart() {
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
   const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
-  const [menuCount, setMenuCount] = useState(null);
+  const [menuCount, setMenuCount] = useState(0);
 
   /** 총 가격, 수량 렌더링 함수 */
   const calculateTotalPriceQty = () => {
@@ -98,26 +98,53 @@ function Cart() {
     setCartMenus(cartCtx.items);
   }, [cartCtx.items]);
 
-  // const addToCartHandler = () => {
-  //   cartCtx.addItem({});
-  // };
-
-  const handleMinusMenuCount = () => {};
-
-  const handlePlusMenuCount = ({ ...infos }) => {
-    console.log('123');
-    // setMenuCount(menuCount + 1);
-
+  const addToCartHandler = (infos) => {
     cartCtx.addItem({
       id: infos.id,
       title: infos.title,
-      amount: infos.amount,
+      amount: 1,
       price: infos.price,
       thumbnail: infos.thumbnail,
       discountRate: infos.discountRate,
       isChecked: infos.isChecked,
     });
   };
+
+  const handleMinusMenuCount = () => {};
+
+  const handlePlusMenuCount = ({ ...infos }) => {
+    // 1. cartMenus에서 id값을 찾아서
+    // 2. amount를 1씩 증가
+
+    console.log('123');
+    // setMenuCount(menuCount + 1);
+    addToCartHandler(infos);
+
+    // cartCtx.addItem({
+    //   id: infos.id,
+    //   title: infos.title,
+    //   amount: infos.amount,
+    //   price: infos.price,
+    //   thumbnail: infos.thumbnail,
+    //   discountRate: infos.discountRate,
+    //   isChecked: infos.isChecked,
+    // });
+  };
+
+  // const handlePlusMenuCount = ({ ...infos }) => {
+  //   console.log('123');
+  //   // setMenuCount(menuCount + 1);
+
+  //   cartCtx.addItem({
+  //     id: infos.id,
+  //     title: infos.title,
+  //     amount: infos.amount,
+  //     price: infos.price,
+  //     thumbnail: infos.thumbnail,
+  //     discountRate: infos.discountRate,
+  //     isChecked: infos.isChecked,
+  //   });
+  // };
 
   useEffect(() => {
     const { totalPrice, totalQty } = calculateTotalPriceQty();
