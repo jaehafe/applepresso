@@ -11,6 +11,28 @@ function Cart() {
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
+  const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
+
+  /** 총 가격, 수량 렌더링 함수 */
+  const calculateTotalPriceQty = () => {
+    const { totalPrice, totalQty } = cartMenus.reduce(
+      (acc, menu) => {
+        acc.totalPrice += menu.price;
+        acc.totalQty++;
+        return acc;
+      },
+      // 초기값
+      { totalPrice: 0, totalQty: 0 }
+    );
+    // total 상태에 저장
+    setTotal({ totalPrice, totalQty });
+
+    // useEffect 사용을 위한 return 값
+    return {
+      totalPrice: totalPrice.toLocaleString(),
+      totalQty,
+    };
+  };
 
   /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
   useEffect(() => {
@@ -70,6 +92,7 @@ function Cart() {
   };
 
   useEffect(() => {
+    const { totalPrice, totalQty } = calculateTotalPriceQty();
     console.log('checkedMenus updated:', checkedMenus);
     console.log('cartMenus updated', cartMenus);
   }, [checkedMenus, cartMenus]);
@@ -135,7 +158,7 @@ function Cart() {
         })}
         {/*  */}
       </S.CartBody>
-      <S.ButtonContainer>
+      <S.ButtonContainer deleteMenu={deleteMenu}>
         {' '}
         {deleteMenu ? (
           <>
@@ -154,7 +177,13 @@ function Cart() {
             </S.DeleteSelectedMenuButton>
           </>
         ) : (
-          <S.OrderButton>주문하기</S.OrderButton>
+          <S.OrderButtonWrapper>
+            <S.OrderCalculateWrapper>
+              <S.OrderTotalCount>총 {total.totalQty}개</S.OrderTotalCount>
+              <S.OrderTotalPrice>{total.totalPrice.toLocaleString()}원</S.OrderTotalPrice>
+            </S.OrderCalculateWrapper>
+            <S.OrderButton>주문하기</S.OrderButton>
+          </S.OrderButtonWrapper>
         )}
       </S.ButtonContainer>
     </S.Container>
