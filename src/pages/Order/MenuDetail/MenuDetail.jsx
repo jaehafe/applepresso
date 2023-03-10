@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import * as S from './MenuDetail.style';
 import { useParams, useNavigate } from 'react-router-dom';
 import { menuDatas } from '../../../constants/data/menuDatas';
@@ -14,7 +14,10 @@ const newMenu = menuDatas.filter((menu) => menu.isNew === true);
 
 function MenuDetail() {
   const cartCtx = useContext(CartContext);
+  const [menuCount, setMenuCount] = useState(1);
+
   console.log('cartCtx', cartCtx);
+  console.log('cartCtx.items', cartCtx.items);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -55,9 +58,15 @@ function MenuDetail() {
     });
   };
 
-  const handleMinusMenuCount = () => {};
+  const handleMinusMenuCount = () => {
+    if (menuCount > 1) {
+      setMenuCount(menuCount - 1);
+    }
+  };
 
-  const handlePlusMenuCount = () => {};
+  const handlePlusMenuCount = () => {
+    setMenuCount(menuCount + 1);
+  };
 
   return (
     <>
@@ -94,7 +103,7 @@ function MenuDetail() {
           <S.CountSpan>수량</S.CountSpan>
           <S.CountControlWrapper>
             <S.CountMinus onClick={handleMinusMenuCount}>-</S.CountMinus>
-            <S.CountQty ref={amountRef}>1</S.CountQty>
+            <S.CountQty ref={amountRef}>{menuCount}</S.CountQty>
             <S.CountPlus onClick={handlePlusMenuCount}>+</S.CountPlus>
           </S.CountControlWrapper>
         </S.MenuSelectWrapper>

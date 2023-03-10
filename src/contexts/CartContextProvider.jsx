@@ -14,10 +14,12 @@ const cartReducer = (state, action) => {
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
+    console.log('existingCartItemIndex', existingCartItemIndex);
     const existingCartItem = state.items[existingCartItemIndex];
     console.log('existingCartItem', existingCartItem);
 
     let updatedItems;
+    // 카트에 이미 해당 메뉴가 존재할 때
     if (existingCartItem) {
       const updatedItem = {
         ...existingCartItem,
@@ -26,7 +28,8 @@ const cartReducer = (state, action) => {
       updatedItems = [...state.items];
       updatedItems[existingCartItemIndex] = updatedItem;
     } else {
-      updatedItems = state.items.concat(action.item);
+      // 카트에 이미 해당 메뉴가 존재하지 않을 때
+      updatedItems = [...state.items, action.item];
     }
 
     const updatedTotalAmount = state.totalAmount + action.item.amount * action.item.price;
@@ -52,8 +55,6 @@ function CartContextProvider({ children }) {
   const clearCartHandler = () => {
     dispatchCartAction({ type: 'CLEAR' });
   };
-
-  console.log('cartState', cartState);
 
   const cartContext = {
     items: cartState.items,
