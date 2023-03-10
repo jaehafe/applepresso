@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './Cart.style';
 import { useNavigate } from 'react-router-dom';
 import { menuDatas } from '../../constants/data/menuDatas';
+import CartContext from '../../store/CartContext';
 
 // const coffeeData = menuDatas.filter((menu) => menu.tags.includes('coffee'));
 // console.log(coffeeData);
 
 function Cart() {
   const navigate = useNavigate();
+  const MenuCountRef = useRef(null);
+  const cartCtx = useContext(CartContext);
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
@@ -33,11 +36,6 @@ function Cart() {
       totalQty,
     };
   };
-
-  /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
-  useEffect(() => {
-    setCartMenus(menuDatas.filter((menu) => menu.tags.includes('coffee')));
-  }, []);
 
   /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
   const handleRemoveMenu = () => {
@@ -81,14 +79,42 @@ function Cart() {
 
   /** 선택한 메뉴만 카트에서 삭제 */
   const handleDeleteSelectedMenuFromCart = () => {
+    console.log('cartMenus', cartMenus);
     alert('선택한 메뉴를 삭제하시겠습니까?');
+
     const updatedCheckedMenu = cartMenus.filter((menu) => menu.isChecked === false);
     // setCheckedMenus(updatedCheckedMenu);
     console.log('checkedMenus', checkedMenus);
     setCartMenus(updatedCheckedMenu);
   };
+
   const handleToBack = () => {
     navigate(-1);
+  };
+
+  /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
+  useEffect(() => {
+    setCartMenus(cartCtx.items);
+  }, [cartCtx.items]);
+
+  const addToCartHandler = (infos) => {
+    cartCtx.addItem({
+      id: infos.id,
+      title: infos.title,
+      amount: 1,
+      price: infos.price,
+      thumbnail: infos.thumbnail,
+      discountRate: infos.discountRate,
+      isChecked: infos.isChecked,
+    });
+  };
+
+  const handleMinusMenuCount = (id) => {
+    cartCtx.removeItem(id);
+  };
+
+  const handlePlusMenuCount = ({ ...infos }) => {
+    addToCartHandler(infos);
   };
 
   useEffect(() => {
@@ -116,9 +142,11 @@ function Cart() {
       </S.HeaderContainer>
       <S.CartBody>
         {cartMenus.map((menu) => {
-          const { id, thumbnail, title, price, discountRate, isChecked } = menu;
-          const discountPrice = (price / discountRate).toFixed(0).toLocaleString();
-          const finalPrice = (price - discountPrice).toLocaleString();
+          const { id, thumbnail, title, price, discountRate, isChecked, amount } = menu;
+          const discountPrice = ((amount * price) / discountRate)
+            .toFixed(0)
+            .toLocaleString();
+          const finalPrice = (amount * price - discountPrice).toLocaleString();
 
           return (
             <S.OrderDetailWrapper key={id}>
@@ -135,16 +163,37 @@ function Cart() {
               <S.OrderDetail>
                 <S.ThumbnailWrapper>
                   <S.Thumbnail src={thumbnail} alt={title} />
+                  <S.MenuCountWrapper>
+                    <S.MenuCountMinus onClick={() => handleMinusMenuCount(id)}>
+                      -
+                    </S.MenuCountMinus>
+                    <S.MenuCount ref={MenuCountRef}>{amount}</S.MenuCount>
+                    <S.MenuCountPlus
+                      onClick={() =>
+                        handlePlusMenuCount({
+                          id,
+                          title,
+                          amount: Number(MenuCountRef.current.innerText),
+                          price,
+                          thumbnail,
+                          discountRate,
+                          isChecked,
+                        })
+                      }
+                    >
+                      +
+                    </S.MenuCountPlus>
+                  </S.MenuCountWrapper>
                 </S.ThumbnailWrapper>
                 <S.OrderInfo>
                   <S.TitleWrapper>
                     <S.Title>{title}</S.Title>
-                    <S.Price>{price.toLocaleString()}</S.Price>
+                    <S.Price>{(amount * price).toLocaleString()}원</S.Price>
                   </S.TitleWrapper>
                   {discountRate && (
                     <S.Options>
                       <S.Option>이벤트 할인</S.Option>
-                      <S.OptionPrice>-{discountPrice}원</S.OptionPrice>
+                      <S.OptionPrice>-{discountPrice.toLocaleString()}원</S.OptionPrice>
                     </S.Options>
                   )}
                   <S.TotalWrapper>

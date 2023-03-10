@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import * as S from './MenuDetail.style';
 import { useParams, useNavigate } from 'react-router-dom';
 import { menuDatas } from '../../../constants/data/menuDatas';
@@ -6,17 +6,24 @@ import RecommendList from '../../../components/RecommendList/RecommendList';
 import { A11y } from 'swiper';
 import 'swiper/css';
 import CartButton from '../../../components/CartButton/CartButton';
+import CartContext from '../../../store/CartContext';
 
 const coffeeMenu = menuDatas.filter((menu) => menu.tags.includes('coffee'));
 const bestMenu = menuDatas.filter((menu) => menu.isBest === true);
 const newMenu = menuDatas.filter((menu) => menu.isNew === true);
 
 function MenuDetail() {
+  const cartCtx = useContext(CartContext);
+  const [menuCount, setMenuCount] = useState(1);
+
+  console.log('cartCtx', cartCtx);
+  console.log('cartCtx.items', cartCtx.items);
+
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log('id', id);
+
   const menuData = menuDatas.find((menu) => menu.id === id);
-  console.log('menuData', menuData);
+
   const {
     title,
     ENTitle,
@@ -24,6 +31,7 @@ function MenuDetail() {
     discountRate,
     isBest,
     isNew,
+    isChecked,
     isSoldOut,
     price,
     tags,
@@ -36,6 +44,31 @@ function MenuDetail() {
 
   const handleNavigate = () => {
     navigate(-1);
+  };
+
+  const amountRef = useRef(null);
+  console.log('amountRef', amountRef);
+
+  const addToCartHandler = () => {
+    cartCtx.addItem({
+      id,
+      title,
+      amount: Number(amountRef.current.innerText),
+      price,
+      thumbnail,
+      discountRate,
+      isChecked,
+    });
+  };
+
+  const handleMinusMenuCount = () => {
+    if (menuCount > 1) {
+      setMenuCount(menuCount - 1);
+    }
+  };
+
+  const handlePlusMenuCount = () => {
+    setMenuCount(menuCount + 1);
   };
 
   return (
@@ -72,9 +105,9 @@ function MenuDetail() {
         <S.MenuSelectWrapper>
           <S.CountSpan>수량</S.CountSpan>
           <S.CountControlWrapper>
-            <S.CountMinus>-</S.CountMinus>
-            <S.CountQty>1</S.CountQty>
-            <S.CountPlus>+</S.CountPlus>
+            <S.CountMinus onClick={handleMinusMenuCount}>-</S.CountMinus>
+            <S.CountQty ref={amountRef}>{menuCount}</S.CountQty>
+            <S.CountPlus onClick={handlePlusMenuCount}>+</S.CountPlus>
           </S.CountControlWrapper>
         </S.MenuSelectWrapper>
         {/* <S.MenuSelectWrapper>
@@ -82,7 +115,7 @@ function MenuDetail() {
         </S.MenuSelectWrapper> */}
       </S.OrderOptionContainer>
       <S.OrderButtons>
-        <S.AddCartButton>담기</S.AddCartButton>
+        <S.AddCartButton onClick={addToCartHandler}>담기</S.AddCartButton>
         <S.OrderNowButton>바로 주문하기</S.OrderNowButton>
       </S.OrderButtons>
       {/* 추천메뉴 */}
