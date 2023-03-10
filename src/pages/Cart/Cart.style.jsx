@@ -147,8 +147,7 @@ export const TotalPrice = styled.div`
 export const ButtonContainer = styled.div`
   z-index: 10;
   display: flex;
-  /* flex-direction: column; */
-  /* justify-content: center; */
+
   justify-content: space-around;
   align-items: center;
   position: fixed;
@@ -156,14 +155,21 @@ export const ButtonContainer = styled.div`
   left: 50%;
   transform: translateX(-50%);
   width: 500px;
-  height: 80px;
+  transition: height 0.3s ease-in-out;
+  height: ${(props) => (props.deleteMenu ? '80px' : '130px')};
+
   background-color: #fff;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 `;
 
-export const OrderButton = styled.button`
+export const OrderButtonWrapper = styled.div`
   width: 100%;
   height: 100%;
+`;
+export const OrderButton = styled.button`
+  width: 100%;
+  height: 80px;
+
   background-color: #e9adb6;
   color: #fff;
   font-size: 26px;
@@ -174,8 +180,24 @@ export const OrderButton = styled.button`
   }
 `;
 
+export const OrderCalculateWrapper = styled.div`
+  height: 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  font-size: 20px;
+  border-top: 1px solid rgb(239, 224, 224);
+`;
+
+export const OrderTotalCount = styled.div``;
+export const OrderTotalPrice = styled.div`
+  color: var(--main-color);
+  font-size: 26px;
+`;
+
 export const SelectAllButton = styled.button`
-  border: 1px solid;
   width: 50%;
   height: 100%;
   color: #fff;
@@ -183,11 +205,13 @@ export const SelectAllButton = styled.button`
   font-size: 26px;
 `;
 export const DeleteSelectedMenuButton = styled.button`
-  border: 1px solid;
   width: 50%;
   height: 100%;
   color: #fff;
   background-color: ${(props) =>
-    props.selectedMenus ? 'rgba(233, 173, 182, 0.8)' : 'grey'};
+    props.selectedMenus ? '#e9adb6' : 'rgba(233, 173, 182, 0.4)'};
+  pointer-events: ${(props) => (props.selectedMenus ? 'auto' : 'none')};
+  /* cursor: ${(props) => (props.selectedMenus ? 'pointer' : 'not-allowed')}; */
+
   font-size: 26px;
 `;

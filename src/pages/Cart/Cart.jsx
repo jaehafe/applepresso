@@ -10,18 +10,43 @@ function Cart() {
   const navigate = useNavigate();
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
-  const [coffeeData, setCoffeeData] = useState([]);
+  const [cartMenus, setCartMenus] = useState([]);
+  const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
 
+  /** 총 가격, 수량 렌더링 함수 */
+  const calculateTotalPriceQty = () => {
+    const { totalPrice, totalQty } = cartMenus.reduce(
+      (acc, menu) => {
+        acc.totalPrice += menu.price;
+        acc.totalQty++;
+        return acc;
+      },
+      // 초기값
+      { totalPrice: 0, totalQty: 0 }
+    );
+    // total 상태에 저장
+    setTotal({ totalPrice, totalQty });
+
+    // useEffect 사용을 위한 return 값
+    return {
+      totalPrice: totalPrice.toLocaleString(),
+      totalQty,
+    };
+  };
+
+  /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
   useEffect(() => {
-    setCoffeeData(menuDatas.filter((menu) => menu.tags.includes('coffee')));
+    setCartMenus(menuDatas.filter((menu) => menu.tags.includes('coffee')));
   }, []);
 
+  /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
   const handleRemoveMenu = () => {
     setDeleteMenu(!deleteMenu);
   };
 
+  /** 체크메뉴 핸들링 */
   const handleCheckMenu = (id) => {
-    const updatedMenus = coffeeData.map((menu) => {
+    const updatedMenus = cartMenus.map((menu) => {
       if (menu.id === id) {
         return {
           ...menu,
@@ -32,31 +57,45 @@ function Cart() {
       }
     });
 
+    console.log('updatedMenus', updatedMenus);
+    setCartMenus(updatedMenus);
     const updatedCheckedMenu = updatedMenus.filter((menu) => menu.isChecked === true);
     console.log('updatedCheckedMenu', updatedCheckedMenu);
     setCheckedMenus(updatedCheckedMenu);
-    console.log('updatedMenus', updatedMenus);
-    setCoffeeData(updatedMenus);
   };
 
   /** 완료 버튼을 클릭하면 checkbox 모두 false로 수정 */
   const handleChangeToAllFalse = () => {
-    // const updatedMenus = coffeeData.map((menu) => ({ ...menu, isChecked: false }));
+    const updatedMenus = cartMenus.map((menu) => ({ ...menu, isChecked: false }));
+    setCartMenus(updatedMenus);
     setCheckedMenus([]);
   };
 
-  const handleDeleteSelectedMenuFromCart = () => {
-    const updatedMenus = checkedMenus.filter((menu) => menu.isChecked === true);
+  /** checkbox 전체 선택 */
+  const handleSelectAll = () => {
+    const updatedMenus = cartMenus.map((menu) => ({ ...menu, isChecked: true }));
+    setCartMenus(updatedMenus);
     setCheckedMenus(updatedMenus);
+    // setCheckedMenus([]);
+  };
+
+  /** 선택한 메뉴만 카트에서 삭제 */
+  const handleDeleteSelectedMenuFromCart = () => {
+    alert('선택한 메뉴를 삭제하시겠습니까?');
+    const updatedCheckedMenu = cartMenus.filter((menu) => menu.isChecked === false);
+    // setCheckedMenus(updatedCheckedMenu);
     console.log('checkedMenus', checkedMenus);
+    setCartMenus(updatedCheckedMenu);
   };
   const handleToBack = () => {
     navigate(-1);
   };
 
   useEffect(() => {
+    const { totalPrice, totalQty } = calculateTotalPriceQty();
     console.log('checkedMenus updated:', checkedMenus);
-  }, [checkedMenus]);
+    console.log('cartMenus updated', cartMenus);
+  }, [checkedMenus, cartMenus]);
 
   return (
     <S.Container>
@@ -64,7 +103,7 @@ function Cart() {
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
             <S.StyledBsArrowLeft onClick={handleToBack} />
-            <S.HeaderTitle>담기 ({coffeeData.length}개)</S.HeaderTitle>
+            <S.HeaderTitle>담기 ({cartMenus.length}개)</S.HeaderTitle>
           </S.HeaderTitleWrapper>
           <div onClick={handleRemoveMenu}>
             {deleteMenu ? (
@@ -76,7 +115,7 @@ function Cart() {
         </S.HeaderWrapper>
       </S.HeaderContainer>
       <S.CartBody>
-        {coffeeData.map((menu) => {
+        {cartMenus.map((menu) => {
           const { id, thumbnail, title, price, discountRate, isChecked } = menu;
           const discountPrice = (price / discountRate).toFixed(0).toLocaleString();
           const finalPrice = (price - discountPrice).toLocaleString();
@@ -87,7 +126,7 @@ function Cart() {
               {deleteMenu ? (
                 <S.CheckBox
                   type="checkbox"
-                  // checked={isChecked}
+                  checked={isChecked}
                   onChange={() => handleCheckMenu(id)}
                 />
               ) : (
@@ -119,15 +158,15 @@ function Cart() {
         })}
         {/*  */}
       </S.CartBody>
-      <S.ButtonContainer>
+      <S.ButtonContainer deleteMenu={deleteMenu}>
         {' '}
         {deleteMenu ? (
           <>
             <S.SelectAllButton>
               {checkedMenus.length ? (
-                <div onClick={handleRemoveMenu}>선택해제</div>
+                <div onClick={handleChangeToAllFalse}>선택해제</div>
               ) : (
-                <div>전체선택</div>
+                <div onClick={handleSelectAll}>전체선택</div>
               )}
             </S.SelectAllButton>
             <S.DeleteSelectedMenuButton
@@ -138,7 +177,13 @@ function Cart() {
             </S.DeleteSelectedMenuButton>
           </>
         ) : (
-          <S.OrderButton>주문하기</S.OrderButton>
+          <S.OrderButtonWrapper>
+            <S.OrderCalculateWrapper>
+              <S.OrderTotalCount>총 {total.totalQty}개</S.OrderTotalCount>
+              <S.OrderTotalPrice>{total.totalPrice.toLocaleString()}원</S.OrderTotalPrice>
+            </S.OrderCalculateWrapper>
+            <S.OrderButton>주문하기</S.OrderButton>
+          </S.OrderButtonWrapper>
         )}
       </S.ButtonContainer>
     </S.Container>
