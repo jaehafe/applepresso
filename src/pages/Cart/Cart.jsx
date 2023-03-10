@@ -80,12 +80,15 @@ function Cart() {
 
   /** 선택한 메뉴만 카트에서 삭제 */
   const handleDeleteSelectedMenuFromCart = () => {
+    console.log('cartMenus', cartMenus);
     alert('선택한 메뉴를 삭제하시겠습니까?');
+
     const updatedCheckedMenu = cartMenus.filter((menu) => menu.isChecked === false);
     // setCheckedMenus(updatedCheckedMenu);
     console.log('checkedMenus', checkedMenus);
     setCartMenus(updatedCheckedMenu);
   };
+
   const handleToBack = () => {
     navigate(-1);
   };

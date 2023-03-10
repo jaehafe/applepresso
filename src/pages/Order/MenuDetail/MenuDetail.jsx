@@ -31,6 +31,7 @@ function MenuDetail() {
     discountRate,
     isBest,
     isNew,
+    isChecked,
     isSoldOut,
     price,
     tags,
@@ -56,6 +57,7 @@ function MenuDetail() {
       price,
       thumbnail,
       discountRate,
+      isChecked,
     });
   };
 
