@@ -15,7 +15,6 @@ function Cart() {
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
   const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
-  const [menuCount, setMenuCount] = useState(0);
 
   /** 총 가격, 수량 렌더링 함수 */
   const calculateTotalPriceQty = () => {
@@ -110,41 +109,13 @@ function Cart() {
     });
   };
 
-  const handleMinusMenuCount = () => {};
-
-  const handlePlusMenuCount = ({ ...infos }) => {
-    // 1. cartMenus에서 id값을 찾아서
-    // 2. amount를 1씩 증가
-
-    console.log('123');
-    // setMenuCount(menuCount + 1);
-    addToCartHandler(infos);
-
-    // cartCtx.addItem({
-    //   id: infos.id,
-    //   title: infos.title,
-    //   amount: infos.amount,
-    //   price: infos.price,
-    //   thumbnail: infos.thumbnail,
-    //   discountRate: infos.discountRate,
-    //   isChecked: infos.isChecked,
-    // });
+  const handleMinusMenuCount = (id) => {
+    cartCtx.removeItem(id);
   };
 
-  // const handlePlusMenuCount = ({ ...infos }) => {
-  //   console.log('123');
-  //   // setMenuCount(menuCount + 1);
-
-  //   cartCtx.addItem({
-  //     id: infos.id,
-  //     title: infos.title,
-  //     amount: infos.amount,
-  //     price: infos.price,
-  //     thumbnail: infos.thumbnail,
-  //     discountRate: infos.discountRate,
-  //     isChecked: infos.isChecked,
-  //   });
-  // };
+  const handlePlusMenuCount = ({ ...infos }) => {
+    addToCartHandler(infos);
+  };
 
   useEffect(() => {
     const { totalPrice, totalQty } = calculateTotalPriceQty();
@@ -193,7 +164,9 @@ function Cart() {
                 <S.ThumbnailWrapper>
                   <S.Thumbnail src={thumbnail} alt={title} />
                   <S.MenuCountWrapper>
-                    <S.MenuCountMinus onClick={handleMinusMenuCount}>-</S.MenuCountMinus>
+                    <S.MenuCountMinus onClick={() => handleMinusMenuCount(id)}>
+                      -
+                    </S.MenuCountMinus>
                     <S.MenuCount ref={MenuCountRef}>{amount}</S.MenuCount>
                     <S.MenuCountPlus
                       onClick={() =>
