@@ -95,19 +95,28 @@ function Cart() {
 
   /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
   useEffect(() => {
-    // setCartMenus(cartCtx.items.filter((menu) => menu.tags.includes('coffee')));
     setCartMenus(cartCtx.items);
   }, [cartCtx.items]);
 
-  const addToCartHandler = () => {
-    cartCtx.addItem({});
-  };
+  // const addToCartHandler = () => {
+  //   cartCtx.addItem({});
+  // };
 
   const handleMinusMenuCount = () => {};
 
-  const handlePlusMenuCount = () => {
+  const handlePlusMenuCount = ({ ...infos }) => {
+    console.log('123');
     // setMenuCount(menuCount + 1);
-    addToCartHandler();
+
+    cartCtx.addItem({
+      id: infos.id,
+      title: infos.title,
+      amount: infos.amount,
+      price: infos.price,
+      thumbnail: infos.thumbnail,
+      discountRate: infos.discountRate,
+      isChecked: infos.isChecked,
+    });
   };
 
   useEffect(() => {
@@ -159,7 +168,21 @@ function Cart() {
                   <S.MenuCountWrapper>
                     <S.MenuCountMinus onClick={handleMinusMenuCount}>-</S.MenuCountMinus>
                     <S.MenuCount ref={MenuCountRef}>{amount}</S.MenuCount>
-                    <S.MenuCountPlus onClick={handlePlusMenuCount}>+</S.MenuCountPlus>
+                    <S.MenuCountPlus
+                      onClick={() =>
+                        handlePlusMenuCount({
+                          id,
+                          title,
+                          amount: Number(MenuCountRef.current.innerText),
+                          price,
+                          thumbnail,
+                          discountRate,
+                          isChecked,
+                        })
+                      }
+                    >
+                      +
+                    </S.MenuCountPlus>
                   </S.MenuCountWrapper>
                 </S.ThumbnailWrapper>
                 <S.OrderInfo>
