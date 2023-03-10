@@ -12,14 +12,17 @@ function Cart() {
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
 
+  /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
   useEffect(() => {
     setCartMenus(menuDatas.filter((menu) => menu.tags.includes('coffee')));
   }, []);
 
+  /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
   const handleRemoveMenu = () => {
     setDeleteMenu(!deleteMenu);
   };
 
+  /** 체크메뉴 핸들링 */
   const handleCheckMenu = (id) => {
     const updatedMenus = cartMenus.map((menu) => {
       if (menu.id === id) {
@@ -32,11 +35,11 @@ function Cart() {
       }
     });
 
+    console.log('updatedMenus', updatedMenus);
+    setCartMenus(updatedMenus);
     const updatedCheckedMenu = updatedMenus.filter((menu) => menu.isChecked === true);
     console.log('updatedCheckedMenu', updatedCheckedMenu);
     setCheckedMenus(updatedCheckedMenu);
-    console.log('updatedMenus', updatedMenus);
-    setCartMenus(updatedMenus);
   };
 
   /** 완료 버튼을 클릭하면 checkbox 모두 false로 수정 */
