@@ -46,6 +46,15 @@ function Cart() {
     setCheckedMenus([]);
   };
 
+  /** checkbox 전체 선택 */
+  const handleSelectAll = () => {
+    const updatedMenus = cartMenus.map((menu) => ({ ...menu, isChecked: true }));
+    setCartMenus(updatedMenus);
+    setCheckedMenus(updatedMenus);
+    // setCheckedMenus([]);
+  };
+
+  /** 선택한 메뉴만 카트에서 삭제 */
   const handleDeleteSelectedMenuFromCart = () => {
     alert('선택한 메뉴를 삭제하시겠습니까?');
     const updatedCheckedMenu = cartMenus.filter((menu) => menu.isChecked === false);
@@ -59,7 +68,8 @@ function Cart() {
 
   useEffect(() => {
     console.log('checkedMenus updated:', checkedMenus);
-  }, [checkedMenus]);
+    console.log('cartMenus updated', cartMenus);
+  }, [checkedMenus, cartMenus]);
 
   return (
     <S.Container>
@@ -90,7 +100,7 @@ function Cart() {
               {deleteMenu ? (
                 <S.CheckBox
                   type="checkbox"
-                  // checked={isChecked}
+                  checked={isChecked}
                   onChange={() => handleCheckMenu(id)}
                 />
               ) : (
@@ -128,9 +138,9 @@ function Cart() {
           <>
             <S.SelectAllButton>
               {checkedMenus.length ? (
-                <div onClick={handleRemoveMenu}>선택해제</div>
+                <div onClick={handleChangeToAllFalse}>선택해제</div>
               ) : (
-                <div>전체선택</div>
+                <div onClick={handleSelectAll}>전체선택</div>
               )}
             </S.SelectAllButton>
             <S.DeleteSelectedMenuButton

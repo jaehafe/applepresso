@@ -189,5 +189,6 @@ export const DeleteSelectedMenuButton = styled.button`
   color: #fff;
   background-color: ${(props) =>
     props.selectedMenus ? 'rgba(233, 173, 182, 0.8)' : 'grey'};
+  pointer-events: ${(props) => (props.selectedMenus ? 'auto' : 'none')};
   font-size: 26px;
 `;
