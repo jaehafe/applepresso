@@ -10,10 +10,10 @@ function Cart() {
   const navigate = useNavigate();
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
-  const [coffeeData, setCoffeeData] = useState([]);
+  const [cartMenus, setCartMenus] = useState([]);
 
   useEffect(() => {
-    setCoffeeData(menuDatas.filter((menu) => menu.tags.includes('coffee')));
+    setCartMenus(menuDatas.filter((menu) => menu.tags.includes('coffee')));
   }, []);
 
   const handleRemoveMenu = () => {
@@ -21,7 +21,7 @@ function Cart() {
   };
 
   const handleCheckMenu = (id) => {
-    const updatedMenus = coffeeData.map((menu) => {
+    const updatedMenus = cartMenus.map((menu) => {
       if (menu.id === id) {
         return {
           ...menu,
@@ -36,19 +36,22 @@ function Cart() {
     console.log('updatedCheckedMenu', updatedCheckedMenu);
     setCheckedMenus(updatedCheckedMenu);
     console.log('updatedMenus', updatedMenus);
-    setCoffeeData(updatedMenus);
+    setCartMenus(updatedMenus);
   };
 
   /** 완료 버튼을 클릭하면 checkbox 모두 false로 수정 */
   const handleChangeToAllFalse = () => {
-    // const updatedMenus = coffeeData.map((menu) => ({ ...menu, isChecked: false }));
+    const updatedMenus = cartMenus.map((menu) => ({ ...menu, isChecked: false }));
+    setCartMenus(updatedMenus);
     setCheckedMenus([]);
   };
 
   const handleDeleteSelectedMenuFromCart = () => {
-    const updatedMenus = checkedMenus.filter((menu) => menu.isChecked === true);
-    setCheckedMenus(updatedMenus);
+    alert('선택한 메뉴를 삭제하시겠습니까?');
+    const updatedCheckedMenu = cartMenus.filter((menu) => menu.isChecked === false);
+    // setCheckedMenus(updatedCheckedMenu);
     console.log('checkedMenus', checkedMenus);
+    setCartMenus(updatedCheckedMenu);
   };
   const handleToBack = () => {
     navigate(-1);
@@ -64,7 +67,7 @@ function Cart() {
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
             <S.StyledBsArrowLeft onClick={handleToBack} />
-            <S.HeaderTitle>담기 ({coffeeData.length}개)</S.HeaderTitle>
+            <S.HeaderTitle>담기 ({cartMenus.length}개)</S.HeaderTitle>
           </S.HeaderTitleWrapper>
           <div onClick={handleRemoveMenu}>
             {deleteMenu ? (
@@ -76,7 +79,7 @@ function Cart() {
         </S.HeaderWrapper>
       </S.HeaderContainer>
       <S.CartBody>
-        {coffeeData.map((menu) => {
+        {cartMenus.map((menu) => {
           const { id, thumbnail, title, price, discountRate, isChecked } = menu;
           const discountPrice = (price / discountRate).toFixed(0).toLocaleString();
           const finalPrice = (price - discountPrice).toLocaleString();
