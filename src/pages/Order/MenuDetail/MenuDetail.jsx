@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
 import * as S from './MenuDetail.style';
 import { useParams, useNavigate } from 'react-router-dom';
 import { menuDatas } from '../../../constants/data/menuDatas';
@@ -6,17 +6,21 @@ import RecommendList from '../../../components/RecommendList/RecommendList';
 import { A11y } from 'swiper';
 import 'swiper/css';
 import CartButton from '../../../components/CartButton/CartButton';
+import CartContext from '../../../store/CartContext';
 
 const coffeeMenu = menuDatas.filter((menu) => menu.tags.includes('coffee'));
 const bestMenu = menuDatas.filter((menu) => menu.isBest === true);
 const newMenu = menuDatas.filter((menu) => menu.isNew === true);
 
 function MenuDetail() {
+  const cartCtx = useContext(CartContext);
+  console.log('cartCtx', cartCtx);
+
   const navigate = useNavigate();
   const { id } = useParams();
-  console.log('id', id);
+
   const menuData = menuDatas.find((menu) => menu.id === id);
-  console.log('menuData', menuData);
+
   const {
     title,
     ENTitle,
@@ -38,7 +42,22 @@ function MenuDetail() {
     navigate(-1);
   };
 
-  const handleAddToCart = () => {};
+  const amountRef = useRef(null);
+  console.log('amountRef', amountRef);
+
+  const addToCartHandler = () => {
+    cartCtx.addItem({
+      id,
+      title,
+      amount: Number(amountRef.current.innerText),
+      price,
+      thumbnail,
+    });
+  };
+
+  const handleMinusMenuCount = () => {};
+
+  const handlePlusMenuCount = () => {};
 
   return (
     <>
@@ -74,9 +93,9 @@ function MenuDetail() {
         <S.MenuSelectWrapper>
           <S.CountSpan>수량</S.CountSpan>
           <S.CountControlWrapper>
-            <S.CountMinus>-</S.CountMinus>
-            <S.CountQty>1</S.CountQty>
-            <S.CountPlus>+</S.CountPlus>
+            <S.CountMinus onClick={handleMinusMenuCount}>-</S.CountMinus>
+            <S.CountQty ref={amountRef}>1</S.CountQty>
+            <S.CountPlus onClick={handlePlusMenuCount}>+</S.CountPlus>
           </S.CountControlWrapper>
         </S.MenuSelectWrapper>
         {/* <S.MenuSelectWrapper>
@@ -84,7 +103,7 @@ function MenuDetail() {
         </S.MenuSelectWrapper> */}
       </S.OrderOptionContainer>
       <S.OrderButtons>
-        <S.AddCartButton onClick={handleAddToCart}>담기</S.AddCartButton>
+        <S.AddCartButton onClick={addToCartHandler}>담기</S.AddCartButton>
         <S.OrderNowButton>바로 주문하기</S.OrderNowButton>
       </S.OrderButtons>
       {/* 추천메뉴 */}

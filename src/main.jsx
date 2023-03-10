@@ -9,11 +9,11 @@ import CartContextProvider from './contexts/CartContextProvider';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <LoginContextProvider>
-      {/* <CartContextProvider> */}
-      <ResetCss />
-      <GlobalStyles />
-      <App />
-      {/* </CartContextProvider> */}
+      <CartContextProvider>
+        <ResetCss />
+        <GlobalStyles />
+        <App />
+      </CartContextProvider>
     </LoginContextProvider>
   </React.StrictMode>
 );
