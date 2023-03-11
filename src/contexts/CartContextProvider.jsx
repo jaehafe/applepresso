@@ -57,9 +57,9 @@ const cartReducer = (state, action) => {
       updatedItems[existingItemIndex] = updatedItem;
     }
 
+    console.log('action.id.price', action.id.price);
     // 총 가격
-    const updatedTotalAmount =
-      state.totalAmount - existingItem.amount * existingItem.price;
+    const updatedTotalAmount = state.totalAmount - 1 * existingItem.price;
 
     return {
       items: updatedItems,
@@ -81,17 +81,10 @@ const cartReducer = (state, action) => {
     // 총 가격
     const updatedTotalAmount =
       state.totalAmount - existingItem.amount * existingItem.price;
-    // 할인 가격
-    const discountTotalAmount =
-      state.discountAmount - existingItem.amount * existingItem.price;
-    // 할인된 가격
-    const discountedTotalAmount = updatedTotalAmount - discountTotalAmount;
 
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
-      discountAmount: discountTotalAmount,
-      discountedAmount: discountedTotalAmount,
     };
   }
 };
