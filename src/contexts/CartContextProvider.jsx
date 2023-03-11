@@ -57,7 +57,7 @@ const cartReducer = (state, action) => {
     const existingItemIndex = state.items.findIndex((item) => item.id === action.id);
     const existingItem = state.items[existingItemIndex];
     console.log('remove existingItem', existingItem);
-    const updatedTotalAmount = state.totalAmount - existingItem.price;
+
     let updatedItems;
 
     if (!existingItem || existingItem.amount === 1) return state;
@@ -69,9 +69,20 @@ const cartReducer = (state, action) => {
       updatedItems[existingItemIndex] = updatedItem;
     }
 
+    // 총 가격
+    const updatedTotalAmount =
+      state.totalAmount - existingItem.amount * existingItem.price;
+    // 할인 가격
+    const discountTotalAmount =
+      state.discountAmount - existingItem.price * existingItem.discountRate;
+    // 할인된 가격
+    const discountedTotalAmount = updatedTotalAmount - discountTotalAmount;
+
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
+      discountAmount: discountTotalAmount,
+      discountedAmount: discountedTotalAmount,
     };
   }
 
@@ -79,7 +90,7 @@ const cartReducer = (state, action) => {
   if (action.type === 'REMOVECHECKEDITEM') {
     const existingItemIndex = state.items.findIndex((item) => item.id === action.id);
     const existingItem = state.items[existingItemIndex];
-    const updatedTotalAmount = state.totalAmount - existingItem.price;
+
     let updatedItems;
     // updatedItems = [...state.items];
     // updatedItems.filter((item) => item.id !== action.id);
@@ -89,9 +100,20 @@ const cartReducer = (state, action) => {
       updatedItems = state.items.filter((item) => item.id !== action.id);
     }
 
+    // 총 가격
+    const updatedTotalAmount =
+      state.totalAmount - existingItem.amount * existingItem.price;
+    // 할인 가격
+    const discountTotalAmount =
+      state.discountAmount - existingItem.amount * existingItem.price;
+    // 할인된 가격
+    const discountedTotalAmount = updatedTotalAmount - discountTotalAmount;
+
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
+      discountAmount: discountTotalAmount,
+      discountedAmount: discountedTotalAmount,
     };
   }
 };
