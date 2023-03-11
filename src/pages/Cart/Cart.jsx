@@ -13,7 +13,7 @@ function Cart() {
   const handleToBack = () => {
     navigate(-1);
   };
-  const MenuCountRef = useRef(null);
+
   const cartCtx = useContext(CartContext);
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
@@ -165,13 +165,13 @@ function Cart() {
                     <S.MenuCountMinus onClick={() => handleMinusMenuCount(id)}>
                       -
                     </S.MenuCountMinus>
-                    <S.MenuCount ref={MenuCountRef}>{amount}</S.MenuCount>
+                    <S.MenuCount>{amount}</S.MenuCount>
                     <S.MenuCountPlus
                       onClick={() =>
                         handlePlusMenuCount({
                           id,
                           title,
-                          amount: Number(MenuCountRef.current.innerText),
+                          amount,
                           price,
                           thumbnail,
                           discountRate,
