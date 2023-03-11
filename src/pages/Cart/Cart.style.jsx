@@ -167,7 +167,7 @@ export const Options = styled.div`
   justify-content: space-between;
 `;
 export const Option = styled.div`
-  color: rgb(174, 153, 153);
+  color: var(--subtitle-color);
 `;
 export const OptionPrice = styled.div``;
 

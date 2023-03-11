@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { BsCart2 } from 'react-icons/bs';
 
 export const Container = styled.div`
@@ -15,6 +15,7 @@ export const Container = styled.div`
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   cursor: pointer;
+  animation: ${({ btnIsHighlighted }) => btnIsHighlighted && bump} 300ms ease-out;
 `;
 
 export const StyledBsCart2 = styled(BsCart2)`
@@ -39,4 +40,22 @@ export const CartInQtyWrapper = styled.div`
 export const CartInQty = styled.span`
   color: var(--main-color);
   transform: translateY(1px);
+`;
+
+const bump = keyframes`
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.9);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 `;

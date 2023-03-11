@@ -15,6 +15,7 @@ import MilkTeaLatte from './pages/Order/MilkTeaLatte/MilkTeaLatte';
 import MenuDetail from './pages/Order/MenuDetail/MenuDetail';
 import CartButton from './components/CartButton/CartButton';
 import Cart from './pages/Cart/Cart';
+import ConfirmOrder from './pages/ConfirmOrder/ConfirmOrder';
 
 const Layout = () => {
   return (
@@ -41,6 +42,7 @@ const router = createBrowserRouter([
   { path: '/signup', element: <Signup /> },
   { path: '/menuDetail/:id', element: <MenuDetail /> },
   { path: '/cart', element: <Cart /> },
+  { path: '/confirmOrder', element: <ConfirmOrder /> },
   {
     path: '/main',
     element: <Layout />,
