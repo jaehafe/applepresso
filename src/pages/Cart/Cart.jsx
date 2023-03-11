@@ -237,7 +237,7 @@ function Cart() {
             <S.OrderCalculateWrapper>
               <S.OrderTotalCount>총 {cartCtx.total.totalQty}개</S.OrderTotalCount>
               <S.OrderTotalPrice>
-                {cartCtx.total.totalPrice.toLocaleString()}원
+                {cartCtx.total.discountedPrices.toLocaleString()}원
               </S.OrderTotalPrice>
             </S.OrderCalculateWrapper>
             <S.OrderButton>주문하기</S.OrderButton>

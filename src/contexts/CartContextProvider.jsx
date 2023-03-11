@@ -5,7 +5,13 @@ import CartContext from '../store/CartContext';
 
 const defaultCartState = {
   items: [],
-  total: { totalPrice: 0, totalQty: 0, totalDiscountRate: 0 },
+  total: {
+    total: 0,
+    totalQty: 0,
+    originalPrices: [],
+    discountPrices: [],
+    discountedPrices: [],
+  },
   totalAmount: 0,
 };
 
@@ -94,7 +100,13 @@ const cartReducer = (state, action) => {
 
 function CartContextProvider({ children }) {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
-  const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
+  const [total, setTotal] = useState({
+    total: 0,
+    totalQty: 0,
+    originalPrices: [],
+    discountPrices: [],
+    discountedPrices: [],
+  });
 
   console.log('cartState', cartState);
   const addItemToCartHandler = (item) => {
@@ -115,30 +127,52 @@ function CartContextProvider({ children }) {
 
   /** 총 가격, 수량 렌더링 함수 */
   const calculateTotalPriceQty = () => {
-    const { totalPrice, totalQty } = cartState.items.reduce(
-      (acc, menu) => {
-        acc.totalPrice += menu.price * menu.amount;
-        acc.totalQty += menu.amount;
-        return acc;
-      },
-      // 초기값
-      { totalPrice: 0, totalQty: 0 }
-    );
+    const { total, totalQty, originalPrices, discountPrices, discountedPrices } =
+      cartState.items.reduce(
+        (acc, item) => {
+          const qty = item.amount;
+          const originalPrice = item.amount * item.price;
+          const discountPrice = (item.amount * item.price) / item.discountRate;
+          const discountedPrice = originalPrice - discountPrice;
+          return {
+            total: acc.total + discountedPrice,
+            totalQty: acc.totalQty + qty,
+            originalPrices: [...acc.originalPrices, originalPrice],
+            discountPrices: [...acc.discountPrices, discountPrice],
+            discountedPrices: [...acc.discountedPrices, discountedPrice],
+          };
+        },
+        {
+          total: 0,
+          totalQty: 0,
+          originalPrices: [],
+          discountPrices: [],
+          discountedPrices: [],
+        }
+      );
     // total 상태에 저장
-    setTotal({ totalPrice, totalQty });
-    console.log('totalPrice', totalPrice);
-    console.log('totalQty', totalQty);
+    setTotal({
+      total: 0,
+      totalQty: 0,
+      originalPrices: [],
+      discountPrices: [],
+      discountedPrices: [],
+    });
 
     // useEffect 사용을 위한 return 값
     return {
-      totalPrice: totalPrice.toLocaleString(),
+      total,
       totalQty,
+      originalPrices,
+      discountPrices,
+      discountedPrices,
     };
   };
 
   useEffect(() => {
-    const { totalPrice, totalQty } = calculateTotalPriceQty();
-    setTotal({ totalPrice, totalQty });
+    const { total, totalQty, originalPrices, discountPrices, discountedPrices } =
+      calculateTotalPriceQty();
+    setTotal({ total, totalQty, originalPrices, discountPrices, discountedPrices });
   }, [cartState.items]);
 
   //
@@ -147,9 +181,11 @@ function CartContextProvider({ children }) {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     total: {
-      totalPrice: total.totalPrice,
+      total: total.total,
       totalQty: total.totalQty,
-      totalDiscountRate: total.totalDiscountRate,
+      originalPrices: total.originalPrices,
+      discountPrices: total.discountPrices,
+      discountedPrices: total.discountedPrices,
     },
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
