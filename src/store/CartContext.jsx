@@ -6,6 +6,7 @@ const CartContext = createContext({
   total: {
     total: 0,
     totalQty: 0,
+    finalPrice: 0,
     originalPrices: [],
     discountPrices: [],
     discountedPrices: [],

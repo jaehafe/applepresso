@@ -8,6 +8,7 @@ const defaultCartState = {
   total: {
     total: 0,
     totalQty: 0,
+    finalPrice: 0,
     originalPrices: [],
     discountPrices: [],
     discountedPrices: [],
@@ -103,6 +104,7 @@ function CartContextProvider({ children }) {
   const [total, setTotal] = useState({
     total: 0,
     totalQty: 0,
+    finalPrice: 0,
     originalPrices: [],
     discountPrices: [],
     discountedPrices: [],
@@ -127,37 +129,50 @@ function CartContextProvider({ children }) {
 
   /** 총 가격, 수량 렌더링 함수 */
   const calculateTotalPriceQty = () => {
-    const { total, totalQty, originalPrices, discountPrices, discountedPrices } =
-      cartState.items.reduce(
-        (acc, item) => {
-          const qty = item.amount;
-          const originalPrice = item.amount * item.price;
-          const discountPrice = (item.amount * item.price) / item.discountRate;
-          const discountedPrice = originalPrice - discountPrice;
-          return {
-            total: acc.total + discountedPrice,
-            totalQty: acc.totalQty + qty,
-            originalPrices: [...acc.originalPrices, originalPrice],
-            discountPrices: [...acc.discountPrices, discountPrice],
-            discountedPrices: [...acc.discountedPrices, discountedPrice],
-          };
-        },
-        {
-          total: 0,
-          totalQty: 0,
-          originalPrices: [],
-          discountPrices: [],
-          discountedPrices: [],
-        }
-      );
+    const {
+      total,
+      totalQty,
+      originalPrices,
+      discountPrices,
+      discountedPrices,
+      finalPrice,
+    } = cartState.items.reduce(
+      (acc, item) => {
+        const qty = item.amount;
+        const originalPrice = item.amount * item.price;
+        const discountPrice = (item.amount * item.price) / item.discountRate;
+        const discountedPrice = originalPrice - discountPrice;
+        const discountedPrices = [...acc.discountedPrices, discountedPrice];
+        const finalPrice = discountedPrices.reduce((acc, val) => {
+          return (acc += val);
+        }, 0);
+        console.log('pri', finalPrice);
+        return {
+          total: acc.total + discountedPrice,
+          totalQty: acc.totalQty + qty,
+          originalPrices: [...acc.originalPrices, originalPrice],
+          discountPrices: [...acc.discountPrices, discountPrice],
+          discountedPrices: [...acc.discountedPrices, discountedPrice],
+          finalPrice,
+        };
+      },
+      {
+        total: 0,
+        totalQty: 0,
+        originalPrices: [],
+        discountPrices: [],
+        discountedPrices: [],
+      }
+    );
     // total 상태에 저장
-    setTotal({
-      total: 0,
-      totalQty: 0,
-      originalPrices: [],
-      discountPrices: [],
-      discountedPrices: [],
-    });
+    // setTotal({
+    //   total: 0,
+    //   totalQty: 0,
+    //   originalPrices: [],
+    //   discountPrices: [],
+    //   discountedPrices: [],
+    //   finalPrice,
+    // });
 
     // useEffect 사용을 위한 return 값
     return {
@@ -166,13 +181,27 @@ function CartContextProvider({ children }) {
       originalPrices,
       discountPrices,
       discountedPrices,
+      finalPrice,
     };
   };
 
   useEffect(() => {
-    const { total, totalQty, originalPrices, discountPrices, discountedPrices } =
-      calculateTotalPriceQty();
-    setTotal({ total, totalQty, originalPrices, discountPrices, discountedPrices });
+    const {
+      total,
+      totalQty,
+      originalPrices,
+      discountPrices,
+      discountedPrices,
+      finalPrice,
+    } = calculateTotalPriceQty();
+    setTotal({
+      total,
+      totalQty,
+      originalPrices,
+      discountPrices,
+      discountedPrices,
+      finalPrice,
+    });
   }, [cartState.items]);
 
   //
@@ -186,6 +215,7 @@ function CartContextProvider({ children }) {
       originalPrices: total.originalPrices,
       discountPrices: total.discountPrices,
       discountedPrices: total.discountedPrices,
+      finalPrice: total.finalPrice,
     },
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
