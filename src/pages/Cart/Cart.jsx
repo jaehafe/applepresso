@@ -81,13 +81,26 @@ function Cart() {
     // setCheckedMenus([]);
   };
 
+  // const handleCheckedMenu = (id) => {
+  //   cartCtx.removeItem(id);
+  // };
+
   /** 선택한 메뉴만 카트에서 삭제 */
   const handleDeleteSelectedMenuFromCart = () => {
     console.log('cartMenus', cartMenus);
     alert('선택한 메뉴를 삭제하시겠습니까?');
 
     const updatedCheckedMenu = cartMenus.filter((menu) => menu.isChecked === false);
-    // setCheckedMenus(updatedCheckedMenu);
+    //
+    const CheckedMenu = cartMenus.filter((menu) => menu.isChecked === true);
+    const CheckedMenuIds = CheckedMenu.map((menu) => menu.id);
+    console.log('!!!', CheckedMenuIds);
+
+    CheckedMenuIds.forEach((id) => {
+      cartCtx.removeCheckedItem(id);
+    });
+
+    console.log('updatedCheckedMenu', updatedCheckedMenu);
     console.log('checkedMenus', checkedMenus);
     setCartMenus(updatedCheckedMenu);
   };
