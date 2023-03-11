@@ -17,6 +17,8 @@ export const GlobalStyles = createGlobalStyle`
   --main-color: #F965A3;
   --box-shadow: 0 0 0 1px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 5%),
     0 12px 24px rgb(0 0 0 / 5%);
+  --division: rgb(239, 224, 224);
+  --subtitle-color: rgb(174, 153, 153);
   }
   
   *,
