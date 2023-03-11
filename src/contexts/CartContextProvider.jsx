@@ -6,9 +6,6 @@ import CartContext from '../store/CartContext';
 const defaultCartState = {
   items: [],
   totalAmount: 0,
-  discountAmount: 0,
-  discountedAmount: 0,
-  totalQuantity: 0,
 };
 
 const cartReducer = (state, action) => {
@@ -37,19 +34,10 @@ const cartReducer = (state, action) => {
 
     // 총 가격
     const updatedTotalAmount = state.totalAmount + action.item.amount * action.item.price;
-    // 할인 가격
-    const discountTotalAmount =
-      state.discountAmount + action.item.amount * action.item.discountRate;
-    // 할인된 가격
-    const discountedTotalAmount = state.totalAmount - state.discountAmount;
-    console.log('updatedTotalAmount', updatedTotalAmount);
-    console.log('discountTotalAmount', discountTotalAmount);
-    console.log('discountedTotalAmount', discountedTotalAmount);
+
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
-      discountAmount: discountTotalAmount,
-      discountedAmount: discountedTotalAmount,
     };
   }
   // REMOVE
@@ -72,17 +60,10 @@ const cartReducer = (state, action) => {
     // 총 가격
     const updatedTotalAmount =
       state.totalAmount - existingItem.amount * existingItem.price;
-    // 할인 가격
-    const discountTotalAmount =
-      state.discountAmount - existingItem.price * existingItem.discountRate;
-    // 할인된 가격
-    const discountedTotalAmount = updatedTotalAmount - discountTotalAmount;
 
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,
-      discountAmount: discountTotalAmount,
-      discountedAmount: discountedTotalAmount,
     };
   }
 
@@ -92,11 +73,8 @@ const cartReducer = (state, action) => {
     const existingItem = state.items[existingItemIndex];
 
     let updatedItems;
-    // updatedItems = [...state.items];
-    // updatedItems.filter((item) => item.id !== action.id);
 
     if (existingItem) {
-      // const updatedItem = state.items.filter((item) => item.id !== action.id);
       updatedItems = state.items.filter((item) => item.id !== action.id);
     }
 
