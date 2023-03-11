@@ -5,6 +5,7 @@ import CartContext from '../store/CartContext';
 
 const defaultCartState = {
   items: [],
+  total: { totalPrice: 0, totalQty: 0, totalDiscountRate: 0 },
   totalAmount: 0,
 };
 
@@ -93,6 +94,8 @@ const cartReducer = (state, action) => {
 
 function CartContextProvider({ children }) {
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
+  const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
+
   console.log('cartState', cartState);
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item });
@@ -110,9 +113,44 @@ function CartContextProvider({ children }) {
     dispatchCartAction({ type: 'CLEAR' });
   };
 
+  /** 총 가격, 수량 렌더링 함수 */
+  const calculateTotalPriceQty = () => {
+    const { totalPrice, totalQty } = cartState.items.reduce(
+      (acc, menu) => {
+        acc.totalPrice += menu.price * menu.amount;
+        acc.totalQty += menu.amount;
+        return acc;
+      },
+      // 초기값
+      { totalPrice: 0, totalQty: 0 }
+    );
+    // total 상태에 저장
+    setTotal({ totalPrice, totalQty });
+    console.log('totalPrice', totalPrice);
+    console.log('totalQty', totalQty);
+
+    // useEffect 사용을 위한 return 값
+    return {
+      totalPrice: totalPrice.toLocaleString(),
+      totalQty,
+    };
+  };
+
+  useEffect(() => {
+    const { totalPrice, totalQty } = calculateTotalPriceQty();
+    setTotal({ totalPrice, totalQty });
+  }, [cartState.items]);
+
+  //
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
+    total: {
+      totalPrice: total.totalPrice,
+      totalQty: total.totalQty,
+      totalDiscountRate: total.totalDiscountRate,
+    },
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
     removeCheckedItem: removeCheckedItemFromCartHandler,

@@ -10,42 +10,41 @@ function Cart() {
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
-  const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
-
+  console.log('cartCtx', cartCtx);
   /** 뒤로가기 */
   const handleToBack = () => {
     navigate(-1);
   };
 
-  /** 총 가격, 수량 렌더링 함수 */
-  const calculateTotalPriceQty = () => {
-    const { totalPrice, totalQty } = cartMenus.reduce(
-      (acc, menu) => {
-        acc.totalPrice += menu.price * menu.amount;
-        acc.totalQty += menu.amount;
-        return acc;
-      },
-      // 초기값
-      { totalPrice: 0, totalQty: 0 }
-    );
-    // total 상태에 저장
-    setTotal({ totalPrice, totalQty });
-    console.log('totalPrice', totalPrice);
-    console.log('totalQty', totalQty);
+  // /** 총 가격, 수량 렌더링 함수 */
+  // const calculateTotalPriceQty = () => {
+  //   const { totalPrice, totalQty } = cartMenus.reduce(
+  //     (acc, menu) => {
+  //       acc.totalPrice += menu.price * menu.amount;
+  //       acc.totalQty += menu.amount;
+  //       return acc;
+  //     },
+  //     // 초기값
+  //     { totalPrice: 0, totalQty: 0 }
+  //   );
+  //   // total 상태에 저장
+  //   setTotal({ totalPrice, totalQty });
+  //   console.log('totalPrice', totalPrice);
+  //   console.log('totalQty', totalQty);
 
-    // useEffect 사용을 위한 return 값
-    return {
-      totalPrice: totalPrice.toLocaleString(),
-      totalQty,
-    };
-  };
+  //   // useEffect 사용을 위한 return 값
+  //   return {
+  //     totalPrice: totalPrice.toLocaleString(),
+  //     totalQty,
+  //   };
+  // };
 
-  useEffect(() => {
-    const { totalPrice, totalQty } = calculateTotalPriceQty();
-    setTotal({ totalPrice, totalQty });
-    // console.log('checkedMenus updated:', checkedMenus);
-    // console.log('cartMenus updated', cartMenus);
-  }, [checkedMenus, cartMenus]);
+  // useEffect(() => {
+  //   const { totalPrice, totalQty } = calculateTotalPriceQty();
+  //   setTotal({ totalPrice, totalQty });
+  //   // console.log('checkedMenus updated:', checkedMenus);
+  //   // console.log('cartMenus updated', cartMenus);
+  // }, [checkedMenus, cartMenus]);
 
   /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
   const handleRemoveMenu = () => {
@@ -139,7 +138,7 @@ function Cart() {
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
             <S.StyledBsArrowLeft onClick={handleToBack} />
-            <S.HeaderTitle>담기 ({total.totalQty}개)</S.HeaderTitle>
+            <S.HeaderTitle>담기 ({cartCtx.total.totalQty}개)</S.HeaderTitle>
           </S.HeaderTitleWrapper>
           <div onClick={handleRemoveMenu}>
             {deleteMenu ? (
@@ -236,8 +235,10 @@ function Cart() {
         ) : (
           <S.OrderButtonWrapper>
             <S.OrderCalculateWrapper>
-              <S.OrderTotalCount>총 {total.totalQty}개</S.OrderTotalCount>
-              <S.OrderTotalPrice>{total.totalPrice.toLocaleString()}원</S.OrderTotalPrice>
+              <S.OrderTotalCount>총 {cartCtx.total.totalQty}개</S.OrderTotalCount>
+              <S.OrderTotalPrice>
+                {cartCtx.total.totalPrice.toLocaleString()}원
+              </S.OrderTotalPrice>
             </S.OrderCalculateWrapper>
             <S.OrderButton>주문하기</S.OrderButton>
           </S.OrderButtonWrapper>
