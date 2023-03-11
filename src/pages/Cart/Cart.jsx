@@ -16,35 +16,9 @@ function Cart() {
     navigate(-1);
   };
 
-  // /** 총 가격, 수량 렌더링 함수 */
-  // const calculateTotalPriceQty = () => {
-  //   const { totalPrice, totalQty } = cartMenus.reduce(
-  //     (acc, menu) => {
-  //       acc.totalPrice += menu.price * menu.amount;
-  //       acc.totalQty += menu.amount;
-  //       return acc;
-  //     },
-  //     // 초기값
-  //     { totalPrice: 0, totalQty: 0 }
-  //   );
-  //   // total 상태에 저장
-  //   setTotal({ totalPrice, totalQty });
-  //   console.log('totalPrice', totalPrice);
-  //   console.log('totalQty', totalQty);
-
-  //   // useEffect 사용을 위한 return 값
-  //   return {
-  //     totalPrice: totalPrice.toLocaleString(),
-  //     totalQty,
-  //   };
-  // };
-
-  // useEffect(() => {
-  //   const { totalPrice, totalQty } = calculateTotalPriceQty();
-  //   setTotal({ totalPrice, totalQty });
-  //   // console.log('checkedMenus updated:', checkedMenus);
-  //   // console.log('cartMenus updated', cartMenus);
-  // }, [checkedMenus, cartMenus]);
+  const navigateToConfirmOrder = () => {
+    navigate('/confirmOrder');
+  };
 
   /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
   const handleRemoveMenu = () => {
@@ -240,7 +214,7 @@ function Cart() {
                 {cartCtx.total?.finalPrice?.toLocaleString()}원
               </S.OrderTotalPrice>
             </S.OrderCalculateWrapper>
-            <S.OrderButton>주문하기</S.OrderButton>
+            <S.OrderButton onClick={navigateToConfirmOrder}>주문하기</S.OrderButton>
           </S.OrderButtonWrapper>
         )}
       </S.ButtonContainer>
