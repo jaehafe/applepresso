@@ -47,7 +47,7 @@ function InitPage() {
               num="01"
               title="바나프레소 앱에서
               기다림 없이
-              바로 주문하세요"
+              바로 주문하세요."
               desc="커피가 필요한 지금,
               때와 장소에 상관 없이 필요할 때 바로 주문"
               aniName={InitPageAni01}
