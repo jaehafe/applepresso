@@ -38,6 +38,13 @@ function Cart() {
     };
   };
 
+  useEffect(() => {
+    const { totalPrice, totalQty } = calculateTotalPriceQty();
+    setTotal({ totalPrice, totalQty });
+    // console.log('checkedMenus updated:', checkedMenus);
+    // console.log('cartMenus updated', cartMenus);
+  }, [checkedMenus, cartMenus]);
+
   /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
   const handleRemoveMenu = () => {
     setDeleteMenu(!deleteMenu);
@@ -96,6 +103,7 @@ function Cart() {
       }
     }
     setCartMenus(updatedCheckedMenu);
+    setCheckedMenus([]);
   };
 
   /** 카트에 담긴 메뉴만 렌더링 될 때 가져오기(성능이슈) */
@@ -122,12 +130,6 @@ function Cart() {
   const handlePlusMenuCount = ({ ...infos }) => {
     addToCartHandler(infos);
   };
-
-  useEffect(() => {
-    const { totalPrice, totalQty } = calculateTotalPriceQty();
-    console.log('checkedMenus updated:', checkedMenus);
-    console.log('cartMenus updated', cartMenus);
-  }, [checkedMenus, cartMenus]);
 
   return (
     <S.Container>
