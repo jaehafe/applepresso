@@ -76,16 +76,18 @@ const cartReducer = (state, action) => {
 
     if (existingItem) {
       updatedItems = state.items.filter((item) => item.id !== action.id);
+
+      // 총 가격
+      const updatedTotalAmount =
+        state.totalAmount - existingItem.amount * existingItem.price;
+
+      return {
+        items: updatedItems,
+        totalAmount: updatedTotalAmount,
+      };
     }
 
-    // 총 가격
-    const updatedTotalAmount =
-      state.totalAmount - existingItem.amount * existingItem.price;
-
-    return {
-      items: updatedItems,
-      totalAmount: updatedTotalAmount,
-    };
+    return state;
   }
 };
 

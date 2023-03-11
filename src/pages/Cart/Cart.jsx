@@ -21,8 +21,8 @@ function Cart() {
   const calculateTotalPriceQty = () => {
     const { totalPrice, totalQty } = cartMenus.reduce(
       (acc, menu) => {
-        acc.totalPrice += menu.price;
-        acc.totalQty++;
+        acc.totalPrice += menu.price * menu.amount;
+        acc.totalQty += menu.amount;
         return acc;
       },
       // 초기값
@@ -30,6 +30,8 @@ function Cart() {
     );
     // total 상태에 저장
     setTotal({ totalPrice, totalQty });
+    console.log('totalPrice', totalPrice);
+    console.log('totalQty', totalQty);
 
     // useEffect 사용을 위한 return 값
     return {
@@ -137,7 +139,7 @@ function Cart() {
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
             <S.StyledBsArrowLeft onClick={handleToBack} />
-            <S.HeaderTitle>담기 ({cartMenus.length}개)</S.HeaderTitle>
+            <S.HeaderTitle>담기 ({total.totalQty}개)</S.HeaderTitle>
           </S.HeaderTitleWrapper>
           <div onClick={handleRemoveMenu}>
             {deleteMenu ? (
