@@ -9,6 +9,10 @@ import CartContext from '../../store/CartContext';
 
 function Cart() {
   const navigate = useNavigate();
+  /** 뒤로가기 */
+  const handleToBack = () => {
+    navigate(-1);
+  };
   const MenuCountRef = useRef(null);
   const cartCtx = useContext(CartContext);
   const [deleteMenu, setDeleteMenu] = useState(false);
@@ -88,11 +92,7 @@ function Cart() {
     setCartMenus(updatedCheckedMenu);
   };
 
-  const handleToBack = () => {
-    navigate(-1);
-  };
-
-  /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
+  /** 카트에 담긴 메뉴만 렌더링 될 때 가져오기(성능이슈) */
   useEffect(() => {
     setCartMenus(cartCtx.items);
   }, [cartCtx.items]);
@@ -143,10 +143,8 @@ function Cart() {
       <S.CartBody>
         {cartMenus.map((menu) => {
           const { id, thumbnail, title, price, discountRate, isChecked, amount } = menu;
-          const discountPrice = ((amount * price) / discountRate)
-            .toFixed(0)
-            .toLocaleString();
-          const finalPrice = (amount * price - discountPrice).toLocaleString();
+          const discountPrice = (amount * price) / discountRate;
+          const finalPrice = amount * price - discountPrice;
 
           return (
             <S.OrderDetailWrapper key={id}>
@@ -198,7 +196,7 @@ function Cart() {
                   )}
                   <S.TotalWrapper>
                     <S.TotalTitle>합계</S.TotalTitle>
-                    <S.TotalPrice>{finalPrice}원</S.TotalPrice>
+                    <S.TotalPrice>{finalPrice.toLocaleString()}원</S.TotalPrice>
                   </S.TotalWrapper>
                 </S.OrderInfo>
               </S.OrderDetail>
