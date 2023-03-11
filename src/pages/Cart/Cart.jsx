@@ -78,30 +78,26 @@ function Cart() {
     const updatedMenus = cartMenus.map((menu) => ({ ...menu, isChecked: true }));
     setCartMenus(updatedMenus);
     setCheckedMenus(updatedMenus);
-    // setCheckedMenus([]);
   };
-
-  // const handleCheckedMenu = (id) => {
-  //   cartCtx.removeItem(id);
-  // };
 
   /** 선택한 메뉴만 카트에서 삭제 */
   const handleDeleteSelectedMenuFromCart = () => {
     console.log('cartMenus', cartMenus);
-    alert('선택한 메뉴를 삭제하시겠습니까?');
+    // 체크된 메뉴들
+    const checkedMenus = cartMenus.filter((menu) => menu.isChecked === true);
+    // 체크된 메뉴들의 id
+    const checkedMenuIds = checkedMenus.map((menu) => menu.id);
+    // 체크된 메뉴들의 id에 해당하지 않는 나머지 메뉴들
+    const updatedCheckedMenu = cartMenus.filter(
+      (menu) => !checkedMenuIds.includes(menu.id)
+    );
 
-    const updatedCheckedMenu = cartMenus.filter((menu) => menu.isChecked === false);
-    //
-    const CheckedMenu = cartMenus.filter((menu) => menu.isChecked === true);
-    const CheckedMenuIds = CheckedMenu.map((menu) => menu.id);
-    console.log('!!!', CheckedMenuIds);
-
-    CheckedMenuIds.forEach((id) => {
-      cartCtx.removeCheckedItem(id);
-    });
-
-    console.log('updatedCheckedMenu', updatedCheckedMenu);
-    console.log('checkedMenus', checkedMenus);
+    if (checkedMenuIds.length > 0) {
+      const confirmDelete = window.confirm('선택한 메뉴를 삭제하시겠습니끼?');
+      if (confirmDelete) {
+        checkedMenuIds.forEach((id) => cartCtx.removeCheckedItem(id));
+      }
+    }
     setCartMenus(updatedCheckedMenu);
   };
 
