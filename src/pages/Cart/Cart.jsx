@@ -1,41 +1,50 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './Cart.style';
 import { useNavigate } from 'react-router-dom';
-import { menuDatas } from '../../constants/data/menuDatas';
 import CartContext from '../../store/CartContext';
-
-// const coffeeData = menuDatas.filter((menu) => menu.tags.includes('coffee'));
-// console.log(coffeeData);
 
 function Cart() {
   const navigate = useNavigate();
-  const MenuCountRef = useRef(null);
+
   const cartCtx = useContext(CartContext);
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
-  const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
-
-  /** 총 가격, 수량 렌더링 함수 */
-  const calculateTotalPriceQty = () => {
-    const { totalPrice, totalQty } = cartMenus.reduce(
-      (acc, menu) => {
-        acc.totalPrice += menu.price;
-        acc.totalQty++;
-        return acc;
-      },
-      // 초기값
-      { totalPrice: 0, totalQty: 0 }
-    );
-    // total 상태에 저장
-    setTotal({ totalPrice, totalQty });
-
-    // useEffect 사용을 위한 return 값
-    return {
-      totalPrice: totalPrice.toLocaleString(),
-      totalQty,
-    };
+  console.log('cartCtx', cartCtx);
+  /** 뒤로가기 */
+  const handleToBack = () => {
+    navigate(-1);
   };
+
+  // /** 총 가격, 수량 렌더링 함수 */
+  // const calculateTotalPriceQty = () => {
+  //   const { totalPrice, totalQty } = cartMenus.reduce(
+  //     (acc, menu) => {
+  //       acc.totalPrice += menu.price * menu.amount;
+  //       acc.totalQty += menu.amount;
+  //       return acc;
+  //     },
+  //     // 초기값
+  //     { totalPrice: 0, totalQty: 0 }
+  //   );
+  //   // total 상태에 저장
+  //   setTotal({ totalPrice, totalQty });
+  //   console.log('totalPrice', totalPrice);
+  //   console.log('totalQty', totalQty);
+
+  //   // useEffect 사용을 위한 return 값
+  //   return {
+  //     totalPrice: totalPrice.toLocaleString(),
+  //     totalQty,
+  //   };
+  // };
+
+  // useEffect(() => {
+  //   const { totalPrice, totalQty } = calculateTotalPriceQty();
+  //   setTotal({ totalPrice, totalQty });
+  //   // console.log('checkedMenus updated:', checkedMenus);
+  //   // console.log('cartMenus updated', cartMenus);
+  // }, [checkedMenus, cartMenus]);
 
   /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
   const handleRemoveMenu = () => {
@@ -74,28 +83,38 @@ function Cart() {
     const updatedMenus = cartMenus.map((menu) => ({ ...menu, isChecked: true }));
     setCartMenus(updatedMenus);
     setCheckedMenus(updatedMenus);
-    // setCheckedMenus([]);
   };
 
   /** 선택한 메뉴만 카트에서 삭제 */
   const handleDeleteSelectedMenuFromCart = () => {
     console.log('cartMenus', cartMenus);
-    alert('선택한 메뉴를 삭제하시겠습니까?');
+    // 체크된 메뉴들
+    const checkedMenus = cartMenus.filter((menu) => menu.isChecked === true);
+    // 체크된 메뉴들의 id
+    const checkedMenuIds = checkedMenus.map((menu) => menu.id);
+    // 체크된 메뉴들의 id에 해당하지 않는 나머지 메뉴들
+    const updatedCheckedMenu = cartMenus.filter(
+      (menu) => !checkedMenuIds.includes(menu.id)
+    );
 
-    const updatedCheckedMenu = cartMenus.filter((menu) => menu.isChecked === false);
-    // setCheckedMenus(updatedCheckedMenu);
-    console.log('checkedMenus', checkedMenus);
+    if (checkedMenuIds.length > 0) {
+      const confirmDelete = window.confirm('선택한 메뉴를 삭제하시겠습니끼?');
+      if (confirmDelete) {
+        checkedMenuIds.forEach((id) => cartCtx.removeCheckedItem(id));
+      }
+    }
     setCartMenus(updatedCheckedMenu);
+    setCheckedMenus([]);
   };
 
-  const handleToBack = () => {
-    navigate(-1);
-  };
-
-  /** 태그가 커피인 것만 렌더링 될 때 가져오기(성능이슈) */
+  /** 카트에 담긴 메뉴만 렌더링 될 때 가져오기(성능이슈) */
   useEffect(() => {
     setCartMenus(cartCtx.items);
   }, [cartCtx.items]);
+
+  const handleMinusMenuCount = (id) => {
+    cartCtx.removeItem(id);
+  };
 
   const addToCartHandler = (infos) => {
     cartCtx.addItem({
@@ -109,19 +128,9 @@ function Cart() {
     });
   };
 
-  const handleMinusMenuCount = (id) => {
-    cartCtx.removeItem(id);
-  };
-
   const handlePlusMenuCount = ({ ...infos }) => {
     addToCartHandler(infos);
   };
-
-  useEffect(() => {
-    const { totalPrice, totalQty } = calculateTotalPriceQty();
-    console.log('checkedMenus updated:', checkedMenus);
-    console.log('cartMenus updated', cartMenus);
-  }, [checkedMenus, cartMenus]);
 
   return (
     <S.Container>
@@ -129,7 +138,7 @@ function Cart() {
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
             <S.StyledBsArrowLeft onClick={handleToBack} />
-            <S.HeaderTitle>담기 ({cartMenus.length}개)</S.HeaderTitle>
+            <S.HeaderTitle>담기 ({cartCtx.total.totalQty}개)</S.HeaderTitle>
           </S.HeaderTitleWrapper>
           <div onClick={handleRemoveMenu}>
             {deleteMenu ? (
@@ -143,10 +152,8 @@ function Cart() {
       <S.CartBody>
         {cartMenus.map((menu) => {
           const { id, thumbnail, title, price, discountRate, isChecked, amount } = menu;
-          const discountPrice = ((amount * price) / discountRate)
-            .toFixed(0)
-            .toLocaleString();
-          const finalPrice = (amount * price - discountPrice).toLocaleString();
+          const discountPrice = (amount * price) / discountRate;
+          const finalPrice = amount * price - discountPrice;
 
           return (
             <S.OrderDetailWrapper key={id}>
@@ -167,13 +174,13 @@ function Cart() {
                     <S.MenuCountMinus onClick={() => handleMinusMenuCount(id)}>
                       -
                     </S.MenuCountMinus>
-                    <S.MenuCount ref={MenuCountRef}>{amount}</S.MenuCount>
+                    <S.MenuCount>{amount}</S.MenuCount>
                     <S.MenuCountPlus
                       onClick={() =>
                         handlePlusMenuCount({
                           id,
                           title,
-                          amount: Number(MenuCountRef.current.innerText),
+                          amount,
                           price,
                           thumbnail,
                           discountRate,
@@ -198,7 +205,7 @@ function Cart() {
                   )}
                   <S.TotalWrapper>
                     <S.TotalTitle>합계</S.TotalTitle>
-                    <S.TotalPrice>{finalPrice}원</S.TotalPrice>
+                    <S.TotalPrice>{finalPrice.toLocaleString()}원</S.TotalPrice>
                   </S.TotalWrapper>
                 </S.OrderInfo>
               </S.OrderDetail>
@@ -228,8 +235,10 @@ function Cart() {
         ) : (
           <S.OrderButtonWrapper>
             <S.OrderCalculateWrapper>
-              <S.OrderTotalCount>총 {total.totalQty}개</S.OrderTotalCount>
-              <S.OrderTotalPrice>{total.totalPrice.toLocaleString()}원</S.OrderTotalPrice>
+              <S.OrderTotalCount>총 {cartCtx.total.totalQty}개</S.OrderTotalCount>
+              <S.OrderTotalPrice>
+                {cartCtx.total.finalPrice.toLocaleString()}원
+              </S.OrderTotalPrice>
             </S.OrderCalculateWrapper>
             <S.OrderButton>주문하기</S.OrderButton>
           </S.OrderButtonWrapper>

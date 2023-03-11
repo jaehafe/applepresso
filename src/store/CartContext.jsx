@@ -3,9 +3,14 @@ import React, { createContext } from 'react';
 const CartContext = createContext({
   items: [],
   totalAmount: 0,
-  discountAmount: 0,
-  discountedAmount: 0,
-  totalQuantity: 0,
+  total: {
+    total: 0,
+    totalQty: 0,
+    finalPrice: 0,
+    originalPrices: [],
+    discountPrices: [],
+    discountedPrices: [],
+  },
   addItem: (item) => {},
   removeItem: (id) => {},
   removeCheckedItem: (id) => {},

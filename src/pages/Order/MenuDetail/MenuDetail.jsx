@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import * as S from './MenuDetail.style';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { menuDatas } from '../../../constants/data/menuDatas';
 import RecommendList from '../../../components/RecommendList/RecommendList';
 import { A11y } from 'swiper';
@@ -43,7 +43,7 @@ function MenuDetail() {
   };
 
   const handleNavigate = () => {
-    navigate(-1);
+    navigate();
   };
 
   const amountRef = useRef(null);
@@ -80,7 +80,9 @@ function MenuDetail() {
             <S.StyledBsArrowLeft onClick={handleNavigate} />
             <S.HeaderTitle>{menuData.title}</S.HeaderTitle>
           </S.HeaderTitleWrapper>
-          <S.StyledAiOutlineUnorderedList onClick={handleNavigate} />
+          <Link to="/main/order/recommend">
+            <S.StyledAiOutlineUnorderedList />
+          </Link>
         </S.HeaderWrapper>
       </S.HeaderContainer>
       <S.MenuContainer>
