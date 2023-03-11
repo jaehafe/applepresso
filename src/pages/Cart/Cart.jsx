@@ -1,24 +1,21 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './Cart.style';
 import { useNavigate } from 'react-router-dom';
-import { menuDatas } from '../../constants/data/menuDatas';
 import CartContext from '../../store/CartContext';
-
-// const coffeeData = menuDatas.filter((menu) => menu.tags.includes('coffee'));
-// console.log(coffeeData);
 
 function Cart() {
   const navigate = useNavigate();
-  /** 뒤로가기 */
-  const handleToBack = () => {
-    navigate(-1);
-  };
 
   const cartCtx = useContext(CartContext);
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
   const [total, setTotal] = useState({ totalPrice: 0, totalQty: 0 });
+
+  /** 뒤로가기 */
+  const handleToBack = () => {
+    navigate(-1);
+  };
 
   /** 총 가격, 수량 렌더링 함수 */
   const calculateTotalPriceQty = () => {
@@ -106,6 +103,10 @@ function Cart() {
     setCartMenus(cartCtx.items);
   }, [cartCtx.items]);
 
+  const handleMinusMenuCount = (id) => {
+    cartCtx.removeItem(id);
+  };
+
   const addToCartHandler = (infos) => {
     cartCtx.addItem({
       id: infos.id,
@@ -116,10 +117,6 @@ function Cart() {
       discountRate: infos.discountRate,
       isChecked: infos.isChecked,
     });
-  };
-
-  const handleMinusMenuCount = (id) => {
-    cartCtx.removeItem(id);
   };
 
   const handlePlusMenuCount = ({ ...infos }) => {
