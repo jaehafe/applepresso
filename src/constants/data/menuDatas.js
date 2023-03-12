@@ -177,7 +177,7 @@ export const menuDatas = [
     isNew: false,
     isBest: false,
     isChecked: false,
-    discountRate: 15,
+    discountRate: 10,
   },
   {
     id: 'ButterBagelSet',
@@ -192,7 +192,7 @@ export const menuDatas = [
     isNew: false,
     isBest: false,
     isChecked: false,
-    discountRate: 15,
+    discountRate: 10,
   },
   {
     id: 'PlainBagelset',
@@ -207,7 +207,7 @@ export const menuDatas = [
     isNew: true,
     isBest: true,
     isChecked: false,
-    discountRate: 15,
+    discountRate: 10,
   },
   {
     id: 'OnionBagelset',
@@ -222,7 +222,7 @@ export const menuDatas = [
     isNew: true,
     isBest: true,
     isChecked: false,
-    discountRate: 15,
+    discountRate: 10,
   },
   {
     id: 'CustardDonutset',
@@ -252,7 +252,7 @@ export const menuDatas = [
     isNew: true,
     isBest: false,
     isChecked: false,
-    discountRate: 15,
+    discountRate: 10,
   },
   {
     id: 'HotChickenPaniniset',
