@@ -55,7 +55,7 @@ function ConfirmOrder() {
           </S.SelectedShopWrapper>
           <S.SelectedShopAddress>서울특별시 동대문구 회기로 176</S.SelectedShopAddress>
         </S.SelectShopWrapper>
-        {/*  */}
+        {/* 테이크 아웃 장소 선택 */}
         <S.SelectTakeoutOptionWrapper>
           <S.SelectTakeoutOptionTitle>장소 선택</S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
@@ -84,7 +84,7 @@ function ConfirmOrder() {
             제조 / 픽업 요청사항 <S.StyledIoIosArrowForward />
           </S.TakeoutRequestMemo>
         </S.SelectTakeoutOptionWrapper>
-        {/*  */}
+        {/* 포잔 선택 */}
         <S.SelectTakeoutOptionWrapper>
           <S.SelectTakeoutOptionTitle>포장 선택</S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
@@ -98,7 +98,7 @@ function ConfirmOrder() {
             </S.TakeOutOptions>
           </S.TakeoutOptionsWrapper>
         </S.SelectTakeoutOptionWrapper>
-        {/*  */}
+        {/* 쿠폰 */}
         <S.SelectCouponWrapper>
           <S.SelectCouponHeaderWrapper>
             <S.SelectCouponTitleWrapper>
@@ -128,7 +128,7 @@ function ConfirmOrder() {
             <S.PointApplyTitle>포인트 결제 불가 (사용 가능 0P)</S.PointApplyTitle>
           </S.PointApplyCheckBoxWrapper>
         </S.SelectPointWrapper>
-        {/* 픽업 */}
+        {/* 픽업 예정시간 */}
         <S.SelectPickupTimeWrapper>
           <S.SelectPickupTimeHeaderWrapper>
             <S.SelectPointTitleWrapper>픽업 예정시간</S.SelectPointTitleWrapper>
