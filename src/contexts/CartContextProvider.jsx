@@ -140,7 +140,9 @@ function CartContextProvider({ children }) {
       (acc, item) => {
         const qty = item.amount;
         const originalPrice = item.amount * item.price;
-        const discountPrice = (item.amount * item.price) / item.discountRate;
+        const discountPrice =
+          item.amount * item.price -
+          item.amount * item.price * (1 - item.discountRate / 100);
         const discountedPrice = originalPrice - discountPrice;
         const discountedPrices = [...acc.discountedPrices, discountedPrice];
         const finalPrice = discountedPrices.reduce((acc, val) => {

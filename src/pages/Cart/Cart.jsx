@@ -126,7 +126,8 @@ function Cart() {
       <S.CartBody>
         {cartMenus.map((menu) => {
           const { id, thumbnail, title, price, discountRate, isChecked, amount } = menu;
-          const discountPrice = (amount * price) / discountRate;
+          const discountPrice =
+            amount * price - amount * price * (1 - discountRate / 100);
           const finalPrice = amount * price - discountPrice;
 
           return (
