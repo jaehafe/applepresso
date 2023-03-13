@@ -1,6 +1,4 @@
 import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
-import { axiosFirebase } from '../constants/axios';
-import usePostMenu from '../hooks/usePostMenu';
 import { LoginContext } from './LoginContextProvider';
 
 export const CartContext = createContext({
@@ -138,26 +136,6 @@ function CartContextProvider({ children }) {
 
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item });
-
-    axiosFirebase
-      .post(`/cart.json`, {
-        user: currentUser.user.email,
-        menu: {
-          id: item.id,
-          title: item.title,
-          amount: item.amount,
-          price: item.price,
-          thumbnail: item.thumbnail,
-          discountRate: item.discountRate,
-          isChecked: item.isChecked,
-        },
-      })
-      .then((res) => {
-        console.log('Menu added to cart successfully!');
-      })
-      .catch((err) => {
-        console.log('Failed to add menu to cart:', err);
-      });
   };
 
   const removeItemFromCartHandler = (id) => {
@@ -265,3 +243,23 @@ function CartContextProvider({ children }) {
 }
 
 export default CartContextProvider;
+
+// axiosFirebase
+//   .post(`/cart.json`, {
+//     user: currentUser.user.email,
+//     menu: {
+//       id: item.id,
+//       title: item.title,
+//       amount: item.amount,
+//       price: item.price,
+//       thumbnail: item.thumbnail,
+//       discountRate: item.discountRate,
+//       isChecked: item.isChecked,
+//     },
+//   })
+//   .then((res) => {
+//     console.log('Menu added to cart successfully!');
+//   })
+//   .catch((err) => {
+//     console.log('Failed to add menu to cart:', err);
+//   });
