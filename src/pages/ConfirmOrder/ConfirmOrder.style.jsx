@@ -293,7 +293,11 @@ export const OrderDetailHeaderWrapper = styled(SelectHeaderWrapper)`
 export const OrderDetailTitleWrapper = styled(SelectTitle)``;
 
 // 주문내역 메뉴들
-export const MenusContainer = styled.div``;
+export const MenusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 export const MenuDetail = styled.div`
   display: flex;
 `;
@@ -324,6 +328,10 @@ export const TitleWrapper = styled.div`
   font-weight: 500;
 `;
 export const Title = styled.div``;
+export const Amount = styled.div`
+  font-size: 20px;
+  color: var(--subtitle-color);
+`;
 export const Price = styled.div``;
 export const Options = styled.div`
   display: flex;
