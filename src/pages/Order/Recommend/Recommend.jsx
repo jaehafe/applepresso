@@ -14,8 +14,8 @@ function Recommend() {
   const bestMenu = data.filter((menu) => menu.isBest === true);
   const newMenu = data.filter((menu) => menu.isNew === true);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
   return (
     <S.Container>
       <S.Wrapper>
