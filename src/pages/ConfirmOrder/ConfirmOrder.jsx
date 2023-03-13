@@ -3,14 +3,18 @@ import * as S from './ConfirmOrder.style';
 import { useNavigate } from 'react-router-dom';
 import { formatPrice } from '../../utils/format';
 import { CartContext } from '../../contexts/CartContextProvider';
+import usePostMenu from '../../hooks/usePostMenu';
+import { LoginContext } from '../../contexts/LoginContextProvider';
 
 function ConfirmOrder() {
+  const { postMenu, error, success } = usePostMenu('/pay');
+  const cartCtx = useContext(CartContext);
+  const { currentUser } = useContext(LoginContext);
+
   const navigate = useNavigate();
   const handleToBack = () => {
     navigate(-1);
   };
-
-  const cartCtx = useContext(CartContext);
 
   const originalPrice = cartCtx.total.originalPrices.reduce((acc, val) => {
     return (acc += val);
@@ -19,6 +23,16 @@ function ConfirmOrder() {
   const discountPrice = cartCtx.total.discountPrices.reduce((acc, val) => {
     return (acc += val);
   }, 0);
+
+  const handlePayment = () => {
+    postMenu({ user: currentUser?.user, orderDetail: cartCtx.items });
+
+    const confirmPayment = window.confirm('주문 완료!');
+    if (confirmPayment) {
+      cartCtx.clearCart();
+      navigate('/main/home');
+    }
+  };
 
   return (
     <S.Container>
@@ -209,7 +223,9 @@ function ConfirmOrder() {
         </S.PaymentCalcWrapper>
         {/*  */}
         <S.PaymentButtonContainer>
-          <S.PaymentButtonWrapper>주문 결제하기</S.PaymentButtonWrapper>
+          <S.PaymentButtonWrapper onClick={handlePayment}>
+            주문 결제하기
+          </S.PaymentButtonWrapper>
         </S.PaymentButtonContainer>
         {/*  */}
       </S.BodyPaddingTop>

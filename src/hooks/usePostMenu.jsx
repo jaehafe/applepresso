@@ -1,22 +1,19 @@
 import React, { useCallback, useState } from 'react';
 import { axiosFirebase } from '../constants/axios';
 
-function usePostMenu() {
+function usePostMenu(url) {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
-  const postMenu = useCallback(async (info) => {
+  const postMenu = useCallback(async ({ ...info }) => {
     try {
+      setSuccess(false);
       setLoading(true);
-      const res = await axiosFirebase.post('/cart.json', {
-        id: info.id,
-        title: info.title,
-        amount: info.amount,
-        price: info.price,
-        thumbnail: info.thumbnail,
-        discountRate: info.discountRate,
-        isChecked: info.isChecked,
+      const res = await axiosFirebase.post(`${url}.json`, {
+        user: info.user,
+        orderDetail: info.orderDetail,
       });
       setData(res.data);
     } catch (err) {
@@ -24,13 +21,11 @@ function usePostMenu() {
       setError(err);
     } finally {
       setLoading(false);
+      setSuccess(true);
     }
   }, []);
 
-  useEffect(() => {
-    postMenu();
-  }, [postMenu]);
-  return { data, loading, error };
+  return { data, loading, error, postMenu, success };
 }
 
 export default usePostMenu;

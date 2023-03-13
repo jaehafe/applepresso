@@ -22,13 +22,9 @@ function MenuDetail() {
     }
   }, [data, id]);
 
-  const menuDetail = data.find((menu) => menu.id === id);
-
   const coffeeMenu = data.filter((menu) => menu.tags.includes('coffee'));
   const bestMenu = data.filter((menu) => menu.isBest === true);
   const newMenu = data.filter((menu) => menu.isNew === true);
-
-  // console.log('menuData', menuData);
 
   const {
     title,
