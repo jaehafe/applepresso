@@ -1,13 +1,25 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
 import * as S from './ConfirmOrder.style';
-import banner1 from '../../assets/homeBanner/banner1.jpeg';
+import { useNavigate } from 'react-router-dom';
+import { formatPrice } from '../../utils/format';
+import { CartContext } from '../../contexts/CartContextProvider';
 
 function ConfirmOrder() {
   const navigate = useNavigate();
   const handleToBack = () => {
     navigate(-1);
   };
+
+  const cartCtx = useContext(CartContext);
+
+  const originalPrice = cartCtx.total.originalPrices.reduce((acc, val) => {
+    return (acc += val);
+  }, 0);
+
+  const discountPrice = cartCtx.total.discountPrices.reduce((acc, val) => {
+    return (acc += val);
+  }, 0);
+
   return (
     <S.Container>
       <S.HeaderContainer>
@@ -42,7 +54,7 @@ function ConfirmOrder() {
           </S.SelectedShopWrapper>
           <S.SelectedShopAddress>서울특별시 동대문구 회기로 176</S.SelectedShopAddress>
         </S.SelectShopWrapper>
-        {/*  */}
+        {/* 테이크 아웃 장소 선택 */}
         <S.SelectTakeoutOptionWrapper>
           <S.SelectTakeoutOptionTitle>장소 선택</S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
@@ -71,7 +83,7 @@ function ConfirmOrder() {
             제조 / 픽업 요청사항 <S.StyledIoIosArrowForward />
           </S.TakeoutRequestMemo>
         </S.SelectTakeoutOptionWrapper>
-        {/*  */}
+        {/* 포잔 선택 */}
         <S.SelectTakeoutOptionWrapper>
           <S.SelectTakeoutOptionTitle>포장 선택</S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
@@ -85,7 +97,7 @@ function ConfirmOrder() {
             </S.TakeOutOptions>
           </S.TakeoutOptionsWrapper>
         </S.SelectTakeoutOptionWrapper>
-        {/*  */}
+        {/* 쿠폰 */}
         <S.SelectCouponWrapper>
           <S.SelectCouponHeaderWrapper>
             <S.SelectCouponTitleWrapper>
@@ -115,7 +127,7 @@ function ConfirmOrder() {
             <S.PointApplyTitle>포인트 결제 불가 (사용 가능 0P)</S.PointApplyTitle>
           </S.PointApplyCheckBoxWrapper>
         </S.SelectPointWrapper>
-        {/* 픽업 */}
+        {/* 픽업 예정시간 */}
         <S.SelectPickupTimeWrapper>
           <S.SelectPickupTimeHeaderWrapper>
             <S.SelectPointTitleWrapper>픽업 예정시간</S.SelectPointTitleWrapper>
@@ -135,53 +147,69 @@ function ConfirmOrder() {
           </S.SelectPaymentHeaderWrapper>
           <S.SelectPaymentInfo>신한 (4364-2007-****-7483)</S.SelectPaymentInfo>
         </S.SelectPaymentWrapper>
-        {/*  */}
+        {/* 주문메뉴 */}
         <S.OrderDetailWrapper>
           <S.OrderDetailHeaderWrapper>
-            <S.OrderDetailTitleWrapper>주문 내역 2개</S.OrderDetailTitleWrapper>
+            <S.OrderDetailTitleWrapper>
+              주문 내역 {cartCtx.total.totalQty}개
+            </S.OrderDetailTitleWrapper>
           </S.OrderDetailHeaderWrapper>
           {/* 주문 메뉴들 */}
           <S.MenusContainer>
-            <S.MenuDetail>
-              <S.ThumbnailWrapper>
-                <S.Thumbnail src={banner1} alt="banner" />
-              </S.ThumbnailWrapper>
-              <S.OrderInfo>
-                <S.TitleWrapper>
-                  <S.Title>페퍼로니파니니 세트</S.Title>
-                  <S.Price>5,900원</S.Price>
-                </S.TitleWrapper>
+            {cartCtx.items.map((item) => {
+              const { id, thumbnail, title, price, discountRate, amount } = item;
+              const discountPrice =
+                amount * price - amount * price * (1 - discountRate / 100);
+              const finalPrice = amount * price - discountPrice;
+              return (
+                <S.MenuDetail key={id}>
+                  <S.ThumbnailWrapper>
+                    <S.Thumbnail src={thumbnail} alt={title} />
+                  </S.ThumbnailWrapper>
+                  <S.OrderInfo>
+                    <S.TitleWrapper>
+                      <S.Title>
+                        {title} <S.Amount>{amount}개</S.Amount>
+                      </S.Title>
+                      <S.Price>{finalPrice.toLocaleString()}원</S.Price>
+                    </S.TitleWrapper>
 
-                <S.Options>
-                  <S.Option>이벤트 할인</S.Option>
-                  <S.OptionPrice>-500원</S.OptionPrice>
-                </S.Options>
+                    {discountRate && (
+                      <S.Options>
+                        <S.Option>이벤트 할인</S.Option>
+                        <S.OptionPrice>-{discountPrice.toLocaleString()}원</S.OptionPrice>
+                      </S.Options>
+                    )}
 
-                {/* <S.TotalWrapper>
-                  <S.TotalTitle>합계</S.TotalTitle>
-                  <S.TotalPrice>5,000원</S.TotalPrice>
-                </S.TotalWrapper> */}
-              </S.OrderInfo>
-            </S.MenuDetail>
+                    {/* <S.TotalWrapper>
+                    <S.TotalTitle>합계</S.TotalTitle>
+                    <S.TotalPrice>5,000원</S.TotalPrice>
+                  </S.TotalWrapper> */}
+                  </S.OrderInfo>
+                </S.MenuDetail>
+              );
+            })}
           </S.MenusContainer>
           {/*  */}
         </S.OrderDetailWrapper>
         <S.OrderCalcWrapper>
           <S.TotalOrderPriceWrapper>
             <S.TotalOrderPriceTitle>총 주문 금액</S.TotalOrderPriceTitle>
-            <S.TotalOrderPrice>8,300원</S.TotalOrderPrice>
+            <S.TotalOrderPrice>{formatPrice(originalPrice)}원</S.TotalOrderPrice>
+            <S.TotalOrderPriceTitle>할인금액</S.TotalOrderPriceTitle>
+            <S.TotalOrderPrice>-{formatPrice(discountPrice)}원</S.TotalOrderPrice>
           </S.TotalOrderPriceWrapper>
         </S.OrderCalcWrapper>
         {/*  */}
         <S.PaymentCalcWrapper>
           <S.PaymentPriceWrapper>
             <S.PaymentPriceTitle>결제 금액</S.PaymentPriceTitle>
-            <S.PaymentPrice>8,300원</S.PaymentPrice>
+            <S.PaymentPrice>{cartCtx.total.finalPrice.toLocaleString()}원</S.PaymentPrice>
           </S.PaymentPriceWrapper>
         </S.PaymentCalcWrapper>
         {/*  */}
         <S.PaymentButtonContainer>
-          <S.PaymentButtonWrapper>주문하기</S.PaymentButtonWrapper>
+          <S.PaymentButtonWrapper>주문 결제하기</S.PaymentButtonWrapper>
         </S.PaymentButtonContainer>
         {/*  */}
       </S.BodyPaddingTop>

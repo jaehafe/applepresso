@@ -1,10 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { axiosInstance } from '../constants/axios';
 import { requestLogin } from '../constants/request';
 
 export const LoginContext = createContext();
 
-// localStorage.setItem('banapressoToken', JSON.stringify(res.data.accessToken));
 function LoginContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem('BANA_USER')) || null

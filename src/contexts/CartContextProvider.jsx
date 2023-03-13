@@ -1,7 +1,24 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react';
-import { axiosInstance } from '../constants/axios';
-import { requestLogin } from '../constants/request';
-import CartContext from '../store/CartContext';
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
+import { axiosFirebase } from '../constants/axios';
+import usePostMenu from '../hooks/usePostMenu';
+import { LoginContext } from './LoginContextProvider';
+
+export const CartContext = createContext({
+  items: [],
+  totalAmount: 0,
+  total: {
+    total: 0,
+    totalQty: 0,
+    finalPrice: 0,
+    originalPrices: [],
+    discountPrices: [],
+    discountedPrices: [],
+  },
+  addItem: (item) => {},
+  removeItem: (id) => {},
+  removeCheckedItem: (id) => {},
+  clearCart: () => {},
+});
 
 const defaultCartState = {
   items: [],
@@ -97,9 +114,18 @@ const cartReducer = (state, action) => {
 
     return state;
   }
+
+  if (action.type === 'CLEAR') {
+    return defaultCartState;
+  }
+
+  return defaultCartState;
 };
 
 function CartContextProvider({ children }) {
+  const { currentUser } = useContext(LoginContext);
+  console.log(currentUser);
+  // localStorage.setItem(`${currentUser.user.email}`, JSON.stringify(cartState));
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
   const [total, setTotal] = useState({
     total: 0,
@@ -110,9 +136,28 @@ function CartContextProvider({ children }) {
     discountedPrices: [],
   });
 
-  console.log('cartState', cartState);
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item });
+
+    axiosFirebase
+      .post(`/cart.json`, {
+        user: currentUser.user.email,
+        menu: {
+          id: item.id,
+          title: item.title,
+          amount: item.amount,
+          price: item.price,
+          thumbnail: item.thumbnail,
+          discountRate: item.discountRate,
+          isChecked: item.isChecked,
+        },
+      })
+      .then((res) => {
+        console.log('Menu added to cart successfully!');
+      })
+      .catch((err) => {
+        console.log('Failed to add menu to cart:', err);
+      });
   };
 
   const removeItemFromCartHandler = (id) => {
@@ -140,7 +185,9 @@ function CartContextProvider({ children }) {
       (acc, item) => {
         const qty = item.amount;
         const originalPrice = item.amount * item.price;
-        const discountPrice = (item.amount * item.price) / item.discountRate;
+        const discountPrice =
+          item.amount * item.price -
+          item.amount * item.price * (1 - item.discountRate / 100);
         const discountedPrice = originalPrice - discountPrice;
         const discountedPrices = [...acc.discountedPrices, discountedPrice];
         const finalPrice = discountedPrices.reduce((acc, val) => {
@@ -164,15 +211,6 @@ function CartContextProvider({ children }) {
         discountedPrices: [],
       }
     );
-    // total 상태에 저장
-    // setTotal({
-    //   total: 0,
-    //   totalQty: 0,
-    //   originalPrices: [],
-    //   discountPrices: [],
-    //   discountedPrices: [],
-    //   finalPrice,
-    // });
 
     // useEffect 사용을 위한 return 값
     return {

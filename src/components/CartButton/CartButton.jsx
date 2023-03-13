@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import * as S from './CartButton.style';
 import { useNavigate } from 'react-router-dom';
-import CartContext from '../../store/CartContext';
+import { CartContext } from '../../contexts/CartContextProvider';
 
 function CartIn() {
   const cartCtx = useContext(CartContext);
