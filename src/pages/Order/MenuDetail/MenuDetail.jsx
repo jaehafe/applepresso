@@ -13,7 +13,7 @@ function MenuDetail() {
   const cartCtx = useContext(CartContext);
   const [menuCount, setMenuCount] = useState(1);
   const [detailMenu, setDetailMenu] = useState({});
-  const { data, loading, error } = useGetMenu();
+  const { data, loading, error } = useGetMenu('/menu');
   const { id } = useParams();
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function MenuDetail() {
   };
 
   const handleNavigate = () => {
-    navigate();
+    navigate('/main/order/recommend');
   };
 
   const amountRef = useRef(null);

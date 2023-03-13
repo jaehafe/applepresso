@@ -6,7 +6,7 @@ import RecommendList from '../../../components/RecommendList/RecommendList';
 import useGetMenu from '../../../hooks/useGetMenu';
 
 function Recommend() {
-  const { data, loading, error } = useGetMenu();
+  const { data, loading, error } = useGetMenu('/menu');
 
   const coffeeMenu = data.filter((menu) => menu.tags.includes('coffee'));
   const bestMenu = data.filter((menu) => menu.isBest === true);

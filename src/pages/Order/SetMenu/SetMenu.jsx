@@ -5,7 +5,7 @@ import { menuDatas } from '../../../constants/data/menuDatas';
 import useGetMenu from '../../../hooks/useGetMenu';
 
 function SetMenu() {
-  const { data, loading, error } = useGetMenu();
+  const { data, loading, error } = useGetMenu('/menu');
   const setMenu = data.filter((menu) => menu.tags.includes('setMenu'));
   return (
     <>
