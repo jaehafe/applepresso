@@ -10,5 +10,5 @@ export const axiosInstance = axios.create({
 });
 
 export const axiosFirebase = axios.create({
-  baseURL: `${import.meta.env.VITE_BASE_URL}`,
+  baseURL: `${import.meta.env.VITE_BANA_BASE_URL}`,
 });
