@@ -5,13 +5,17 @@ import { A11y } from 'swiper';
 // import 'swiper/css/pagination';
 import 'swiper/css';
 import RecommendList from '../../../components/RecommendList/RecommendList';
-import { menuDatas } from '../../../constants/data/menuDatas';
-
-const coffeeMenu = menuDatas.filter((menu) => menu.tags.includes('coffee'));
-const bestMenu = menuDatas.filter((menu) => menu.isBest === true);
-const newMenu = menuDatas.filter((menu) => menu.isNew === true);
+import useGetMenu from '../../../hooks/useGetMenu';
 
 function Recommend() {
+  const { data, loading, error } = useGetMenu();
+
+  const coffeeMenu = data.filter((menu) => menu.tags.includes('coffee'));
+  const bestMenu = data.filter((menu) => menu.isBest === true);
+  const newMenu = data.filter((menu) => menu.isNew === true);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
   return (
     <S.Container>
       <S.Wrapper>

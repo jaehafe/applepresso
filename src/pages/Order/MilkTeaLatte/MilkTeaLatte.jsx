@@ -1,11 +1,10 @@
 import React from 'react';
-import { milkTeaLatte as menus } from '../../../constants/data/milkTeaLatte';
 import MenuList from '../../../components/MenuList/MenuList';
-import { menuDatas } from '../../../constants/data/menuDatas';
-
-const milkTeaLatte = menuDatas.filter((menu) => menu.tags.includes('milkTeaLatte'));
+import useGetMenu from '../../../hooks/useGetMenu';
 
 function MilkTeaLatte() {
+  const { data, loading, error } = useGetMenu();
+  const milkTeaLatte = data.filter((menu) => menu.tags.includes('milkTeaLatte'));
   return (
     <>
       <MenuList menus={milkTeaLatte} />

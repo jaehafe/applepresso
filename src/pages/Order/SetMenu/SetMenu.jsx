@@ -2,10 +2,11 @@ import React from 'react';
 import * as S from './SetMenu.style';
 import MenuList from '../../../components/MenuList/MenuList';
 import { menuDatas } from '../../../constants/data/menuDatas';
-
-const setMenu = menuDatas.filter((menu) => menu.tags.includes('setMenu'));
+import useGetMenu from '../../../hooks/useGetMenu';
 
 function SetMenu() {
+  const { data, loading, error } = useGetMenu();
+  const setMenu = data.filter((menu) => menu.tags.includes('setMenu'));
   return (
     <>
       <MenuList menus={setMenu} />
