@@ -1,25 +1,20 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './MenuDetail.style';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { menuDatas } from '../../../constants/data/menuDatas';
 import RecommendList from '../../../components/RecommendList/RecommendList';
 import { A11y } from 'swiper';
 import 'swiper/css';
 import CartButton from '../../../components/CartButton/CartButton';
-import CartContext from '../../../store/CartContext';
 import useGetMenu from '../../../hooks/useGetMenu';
+import { CartContext } from '../../../contexts/CartContextProvider';
 
 function MenuDetail() {
   const navigate = useNavigate();
   const cartCtx = useContext(CartContext);
   const [menuCount, setMenuCount] = useState(1);
-
   const [detailMenu, setDetailMenu] = useState({});
-
   const { data, loading, error } = useGetMenu();
-  console.log('data', data);
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -33,7 +28,6 @@ function MenuDetail() {
   const bestMenu = data.filter((menu) => menu.isBest === true);
   const newMenu = data.filter((menu) => menu.isNew === true);
 
-  console.log('menuDetail', menuDetail);
   // console.log('menuData', menuData);
 
   const {
@@ -49,20 +43,6 @@ function MenuDetail() {
     tags,
     thumbnail,
   } = detailMenu;
-
-  // const {
-  //   title,
-  //   ENTitle,
-  //   desc,
-  //   discountRate,
-  //   isBest,
-  //   isNew,
-  //   isChecked,
-  //   isSoldOut,
-  //   price,
-  //   tags,
-  //   thumbnail,
-  // } = datas;
 
   const handleNavigateToCart = () => {
     navigate('/cart');

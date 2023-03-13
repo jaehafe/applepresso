@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as S from './ConfirmOrder.style';
-import banner1 from '../../assets/homeBanner/banner1.jpeg';
-import CartContext from '../../store/CartContext';
+import { useNavigate } from 'react-router-dom';
 import { formatPrice } from '../../utils/format';
+import { CartContext } from '../../contexts/CartContextProvider';
 
 function ConfirmOrder() {
   const navigate = useNavigate();

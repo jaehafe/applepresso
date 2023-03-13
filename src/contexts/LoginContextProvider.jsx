@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { axiosInstance } from '../constants/axios';
 import { requestLogin } from '../constants/request';
 
 export const LoginContext = createContext();

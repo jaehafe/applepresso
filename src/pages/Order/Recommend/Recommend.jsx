@@ -1,8 +1,6 @@
 import React from 'react';
 import * as S from './Recommend.style';
 import { A11y } from 'swiper';
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css/pagination';
 import 'swiper/css';
 import RecommendList from '../../../components/RecommendList/RecommendList';
 import useGetMenu from '../../../hooks/useGetMenu';

@@ -1,5 +1,25 @@
-import React, { createContext, useEffect, useReducer, useState } from 'react';
-import CartContext from '../store/CartContext';
+import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
+import { axiosFirebase } from '../constants/axios';
+import usePostMenu from '../hooks/usePostMenu';
+
+export const CartContext = createContext({
+  items: [],
+  totalAmount: 0,
+  total: {
+    total: 0,
+    totalQty: 0,
+    finalPrice: 0,
+    originalPrices: [],
+    discountPrices: [],
+    discountedPrices: [],
+  },
+  addItem: (item) => {},
+  removeItem: (id) => {},
+  removeCheckedItem: (id) => {},
+  clearCart: () => {},
+});
+
+// // export default CartContext;
 
 const defaultCartState = {
   items: [],
@@ -104,6 +124,7 @@ const cartReducer = (state, action) => {
 };
 
 function CartContextProvider({ children }) {
+  // const userInfo = useContext(null);
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
   const [total, setTotal] = useState({
     total: 0,
@@ -117,6 +138,23 @@ function CartContextProvider({ children }) {
   console.log('cartState', cartState);
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item });
+
+    // axiosFirebase
+    //   .post('/cart.json', {
+    //     id: item.id,
+    //     title: item.title,
+    //     amount: item.amount,
+    //     price: item.price,
+    //     thumbnail: item.thumbnail,
+    //     discountRate: item.discountRate,
+    //     isChecked: item.isChecked,
+    //   })
+    //   .then((res) => {
+    //     console.log('Menu added to cart successfully!');
+    //   })
+    //   .catch((err) => {
+    //     console.log('Failed to add menu to cart:', err);
+    //   });
   };
 
   const removeItemFromCartHandler = (id) => {
@@ -170,15 +208,6 @@ function CartContextProvider({ children }) {
         discountedPrices: [],
       }
     );
-    // total 상태에 저장
-    // setTotal({
-    //   total: 0,
-    //   totalQty: 0,
-    //   originalPrices: [],
-    //   discountPrices: [],
-    //   discountedPrices: [],
-    //   finalPrice,
-    // });
 
     // useEffect 사용을 위한 return 값
     return {
