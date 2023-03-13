@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { axiosFirebase } from '../constants/axios';
 
-function useGetMenu(url) {
+function useGetMenu() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -11,9 +11,12 @@ function useGetMenu(url) {
       setLoading(true);
       const res = await axiosFirebase.get('/menu.json');
       const menuArr = Object.values(res.data);
+      console.log('menuArr', menuArr);
+
       setData(menuArr);
     } catch (err) {
-      setError(err);
+      console.log(err);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -21,7 +24,7 @@ function useGetMenu(url) {
 
   useEffect(() => {
     fetchMenu();
-  }, [url]);
+  }, []);
 
   return { data, loading, error };
 }
