@@ -1,6 +1,4 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react';
-import { axiosInstance } from '../constants/axios';
-import { requestLogin } from '../constants/request';
 import CartContext from '../store/CartContext';
 
 const defaultCartState = {
