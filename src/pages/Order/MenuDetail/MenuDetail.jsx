@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './MenuDetail.style';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { menuDatas } from '../../../constants/data/menuDatas';
@@ -7,22 +7,34 @@ import { A11y } from 'swiper';
 import 'swiper/css';
 import CartButton from '../../../components/CartButton/CartButton';
 import CartContext from '../../../store/CartContext';
-
-const coffeeMenu = menuDatas.filter((menu) => menu.tags.includes('coffee'));
-const bestMenu = menuDatas.filter((menu) => menu.isBest === true);
-const newMenu = menuDatas.filter((menu) => menu.isNew === true);
+import useGetMenu from '../../../hooks/useGetMenu';
 
 function MenuDetail() {
+  const navigate = useNavigate();
   const cartCtx = useContext(CartContext);
   const [menuCount, setMenuCount] = useState(1);
+  // const [datas, setDatas] = useState({});
+  const [detailMenu, setDetailMenu] = useState({});
 
-  console.log('cartCtx', cartCtx);
-  console.log('cartCtx.items', cartCtx.items);
-
-  const navigate = useNavigate();
+  const { data, loading, error } = useGetMenu();
+  console.log('data', data);
   const { id } = useParams();
+  console.log(id);
 
-  const menuData = menuDatas.find((menu) => menu.id === id);
+  useEffect(() => {
+    if (data.length > 0) {
+      setDetailMenu(data.find((menu) => menu.id === id));
+    }
+  }, [data, id]);
+
+  const menuDetail = data.find((menu) => menu.id === id);
+
+  const coffeeMenu = data.filter((menu) => menu.tags.includes('coffee'));
+  const bestMenu = data.filter((menu) => menu.isBest === true);
+  const newMenu = data.filter((menu) => menu.isNew === true);
+
+  console.log('menuDetail', menuDetail);
+  // console.log('menuData', menuData);
 
   const {
     title,
@@ -36,7 +48,21 @@ function MenuDetail() {
     price,
     tags,
     thumbnail,
-  } = menuData;
+  } = detailMenu;
+
+  // const {
+  //   title,
+  //   ENTitle,
+  //   desc,
+  //   discountRate,
+  //   isBest,
+  //   isNew,
+  //   isChecked,
+  //   isSoldOut,
+  //   price,
+  //   tags,
+  //   thumbnail,
+  // } = datas;
 
   const handleNavigateToCart = () => {
     navigate('/cart');
@@ -78,7 +104,7 @@ function MenuDetail() {
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
             <S.StyledBsArrowLeft onClick={handleNavigate} />
-            <S.HeaderTitle>{menuData.title}</S.HeaderTitle>
+            <S.HeaderTitle>{title}</S.HeaderTitle>
           </S.HeaderTitleWrapper>
           <Link to="/main/order/recommend">
             <S.StyledAiOutlineUnorderedList />
@@ -95,7 +121,7 @@ function MenuDetail() {
           <S.Desc>{desc}</S.Desc>
         </S.MenuInfo>
         <S.MenuDetailInfo>
-          <S.Price>{price.toLocaleString()}원</S.Price>
+          <S.Price>{price?.toLocaleString()}원</S.Price>
           {/* <S.OptionWrapper>
             <S.Option>HOT</S.Option>
             <S.Option>ICE</S.Option>
