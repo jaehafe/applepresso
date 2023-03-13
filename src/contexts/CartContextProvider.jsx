@@ -117,12 +117,16 @@ const cartReducer = (state, action) => {
     return defaultCartState;
   }
 
+  if (action.type === 'INITIALIZE') {
+    return action.cartState;
+  }
+
   return defaultCartState;
 };
 
 function CartContextProvider({ children }) {
   const { currentUser } = useContext(LoginContext);
-  console.log(currentUser);
+  // console.log(currentUser);
   // localStorage.setItem(`${currentUser.user.email}`, JSON.stringify(cartState));
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
   const [total, setTotal] = useState({
@@ -134,6 +138,36 @@ function CartContextProvider({ children }) {
     discountedPrices: [],
   });
 
+  /** localStorage에 cartState를 저장하는 함수 */
+  const saveCartStateToLocalStorage = (cartState, currentUser) => {
+    localStorage.setItem(`${currentUser?.user.email}-cart`, JSON.stringify(cartState));
+  };
+
+  /** localStorage에서 cartState를 불러오는 함수 */
+  const getCartStateFromLocalStorage = (currentUser) => {
+    const cartStateFromLocalStorage = localStorage.getItem(
+      `${currentUser?.user.email}-cart`
+    );
+    if (cartStateFromLocalStorage) {
+      return JSON.parse(cartStateFromLocalStorage);
+    }
+    return defaultCartState;
+  };
+
+  // 페이지 로드시 localStorage에서 cartState를 불러와서 초기화
+  useEffect(() => {
+    const cartStateFromLocalStorage = getCartStateFromLocalStorage(currentUser);
+    dispatchCartAction({ type: 'INITIALIZE', cartState: cartStateFromLocalStorage });
+  }, [currentUser]);
+
+  // cartState가 업데이트 될때마다 localStorage에 저장
+  useEffect(() => {
+    if (currentUser) {
+      saveCartStateToLocalStorage(cartState, currentUser);
+    }
+  }, [cartState, currentUser]);
+
+  //
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item });
   };
@@ -263,3 +297,30 @@ export default CartContextProvider;
 //   .catch((err) => {
 //     console.log('Failed to add menu to cart:', err);
 //   });
+
+// // localStorage에 cartState를 저장하는 함수
+// const saveCartStateToLocalStorage = (cartState) => {
+//   localStorage.setItem(`${currentUser?.user.email}-cart`, JSON.stringify(cartState));
+// };
+
+// // localStorage에서 cartState를 불러오는 함수
+// const getCartStateFromLocalStorage = () => {
+//   const cartStateFromLocalStorage = localStorage.getItem(
+//     `${currentUser?.user.email}-cart`
+//   );
+//   if (cartStateFromLocalStorage) {
+//     return JSON.parse(cartStateFromLocalStorage);
+//   }
+//   return defaultCartState;
+// };
+
+// // 페이지 로드시 localStorage에서 cartState를 불러와서 초기화
+// useEffect(() => {
+//   const cartStateFromLocalStorage = getCartStateFromLocalStorage();
+//   dispatchCartAction({ type: 'INITIALIZE', cartState: cartStateFromLocalStorage });
+// }, []);
+
+// // cartState가 업데이트 될때마다 localStorage에 저장
+// useEffect(() => {
+//   saveCartStateToLocalStorage(cartState);
+// }, [cartState, currentUser]);
