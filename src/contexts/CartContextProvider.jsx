@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import { axiosFirebase } from '../constants/axios';
 import usePostMenu from '../hooks/usePostMenu';
+import { LoginContext } from './LoginContextProvider';
 
 export const CartContext = createContext({
   items: [],
@@ -18,8 +19,6 @@ export const CartContext = createContext({
   removeCheckedItem: (id) => {},
   clearCart: () => {},
 });
-
-// // export default CartContext;
 
 const defaultCartState = {
   items: [],
@@ -124,7 +123,9 @@ const cartReducer = (state, action) => {
 };
 
 function CartContextProvider({ children }) {
-  // const userInfo = useContext(null);
+  const { currentUser } = useContext(LoginContext);
+  console.log(currentUser);
+  // localStorage.setItem(`${currentUser.user.email}`, JSON.stringify(cartState));
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
   const [total, setTotal] = useState({
     total: 0,
@@ -135,26 +136,28 @@ function CartContextProvider({ children }) {
     discountedPrices: [],
   });
 
-  console.log('cartState', cartState);
   const addItemToCartHandler = (item) => {
     dispatchCartAction({ type: 'ADD', item });
 
-    // axiosFirebase
-    //   .post('/cart.json', {
-    //     id: item.id,
-    //     title: item.title,
-    //     amount: item.amount,
-    //     price: item.price,
-    //     thumbnail: item.thumbnail,
-    //     discountRate: item.discountRate,
-    //     isChecked: item.isChecked,
-    //   })
-    //   .then((res) => {
-    //     console.log('Menu added to cart successfully!');
-    //   })
-    //   .catch((err) => {
-    //     console.log('Failed to add menu to cart:', err);
-    //   });
+    axiosFirebase
+      .post(`/cart.json`, {
+        user: currentUser.user.email,
+        menu: {
+          id: item.id,
+          title: item.title,
+          amount: item.amount,
+          price: item.price,
+          thumbnail: item.thumbnail,
+          discountRate: item.discountRate,
+          isChecked: item.isChecked,
+        },
+      })
+      .then((res) => {
+        console.log('Menu added to cart successfully!');
+      })
+      .catch((err) => {
+        console.log('Failed to add menu to cart:', err);
+      });
   };
 
   const removeItemFromCartHandler = (id) => {
