@@ -97,6 +97,12 @@ const cartReducer = (state, action) => {
 
     return state;
   }
+
+  if (action.type === 'CLEAR') {
+    return defaultCartState;
+  }
+
+  return defaultCartState;
 };
 
 function CartContextProvider({ children }) {
