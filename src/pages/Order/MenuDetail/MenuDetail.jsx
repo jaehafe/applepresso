@@ -13,7 +13,7 @@ function MenuDetail() {
   const navigate = useNavigate();
   const cartCtx = useContext(CartContext);
   const [menuCount, setMenuCount] = useState(1);
-  // const [datas, setDatas] = useState({});
+
   const [detailMenu, setDetailMenu] = useState({});
 
   const { data, loading, error } = useGetMenu();
