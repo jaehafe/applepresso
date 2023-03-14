@@ -7,10 +7,12 @@ import 'swiper/css';
 import CartButton from '../../../components/CartButton/CartButton';
 import useGetMenu from '../../../hooks/useGetMenu';
 import { CartContext } from '../../../contexts/CartContextProvider';
+import { EasyOrderContext } from '../../../contexts/EasyOrderContextProvider';
 
 function MenuDetail() {
   const navigate = useNavigate();
   const cartCtx = useContext(CartContext);
+  const easyOrderCtx = useContext(EasyOrderContext);
   const [menuCount, setMenuCount] = useState(1);
   const [detailMenu, setDetailMenu] = useState({});
   const { data, loading, error } = useGetMenu('/menu');
@@ -77,7 +79,17 @@ function MenuDetail() {
     navigate('/confirmOrder');
   };
 
-  const addToEasyOrderHandler = () => {};
+  const addToEasyOrderHandler = () => {
+    easyOrderCtx.addItem({
+      id,
+      title,
+      amount: Number(amountRef.current.innerText),
+      price,
+      thumbnail,
+      discountRate,
+      isChecked,
+    });
+  };
 
   const handleMinusMenuCount = () => {
     if (menuCount > 1) {
@@ -137,7 +149,7 @@ function MenuDetail() {
       <S.OrderButtons>
         <S.AddCartButton onClick={addToCartHandler}>담기</S.AddCartButton>
         <S.AddEasyOrderButton onClick={addToEasyOrderHandler}>
-          간편주문 등록
+          간편주문 추가
         </S.AddEasyOrderButton>
         <S.OrderNowButton onClick={orderNowHandler}>바로 주문하기</S.OrderNowButton>
       </S.OrderButtons>

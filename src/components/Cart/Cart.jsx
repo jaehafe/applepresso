@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './Cart.style';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../../contexts/CartContextProvider';
 
-function Cart() {
+function Cart({ cartCtx }) {
   const navigate = useNavigate();
 
-  const cartCtx = useContext(CartContext);
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
