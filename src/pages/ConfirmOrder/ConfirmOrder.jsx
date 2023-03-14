@@ -7,12 +7,6 @@ import usePostMenu from '../../hooks/usePostMenu';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 const orderDate = new Date().toISOString();
 function ConfirmOrder() {
-  // const [orderDate, setOrderDate] = useState('');
-
-  // useEffect(() => {
-  //   setOrderDate();
-  // }, []);
-
   const { postMenu, error, success } = usePostMenu('/pay');
   const cartCtx = useContext(CartContext);
   const { currentUser } = useContext(LoginContext);

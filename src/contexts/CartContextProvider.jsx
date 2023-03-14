@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useReducer, useState } fro
 import { LoginContext } from './LoginContextProvider';
 
 export const CartContext = createContext({
+  title: 'CART',
   items: [],
   total: {
     total: 0,
@@ -18,6 +19,7 @@ export const CartContext = createContext({
 });
 
 const defaultCartState = {
+  title: 'CART',
   items: [],
   total: {
     total: 0,
@@ -243,6 +245,7 @@ function CartContextProvider({ children }) {
   //
 
   const cartContext = {
+    title: cartState.title,
     items: cartState.items,
     total: {
       total: total.total,

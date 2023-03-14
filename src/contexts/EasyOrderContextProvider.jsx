@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useReducer, useState } fro
 import { LoginContext } from './LoginContextProvider';
 
 export const EasyOrderContext = createContext({
+  title: 'EASYORDER',
   items: [],
   totalAmount: 0,
   total: {
@@ -19,6 +20,7 @@ export const EasyOrderContext = createContext({
 });
 
 const defaultEasyOrderState = {
+  title: 'EASYORDER',
   items: [],
   total: {
     total: 0,
@@ -214,7 +216,7 @@ function EasyOrderContextProvider({ children }) {
         const finalPrice = discountedPrices.reduce((acc, val) => {
           return (acc += val);
         }, 0);
-        console.log('pri', finalPrice);
+
         return {
           total: acc.total + discountedPrice,
           totalQty: acc.totalQty + qty,
@@ -266,6 +268,7 @@ function EasyOrderContextProvider({ children }) {
   //
 
   const easyOrderContext = {
+    title: defaultEasyOrderState.title,
     items: easyOrderState.items,
     totalAmount: easyOrderState.totalAmount,
     total: {

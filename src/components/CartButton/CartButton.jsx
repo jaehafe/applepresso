@@ -18,7 +18,7 @@ function CartIn() {
   };
 
   useEffect(() => {
-    if (cartCtx.total.totalQty === 0 || easyOrderCtx.total.totalQty) return;
+    if (cartCtx.total.totalQty === 0 || easyOrderCtx.total.totalQty === 0) return;
     setBtnIsHighlighted(true);
 
     const timer = setTimeout(() => {
