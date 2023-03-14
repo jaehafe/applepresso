@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './MenuHeader.style';
-import { Pagination, A11y } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { A11y } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NavLists = [
   {
@@ -58,13 +57,6 @@ const NavLists = [
 ];
 
 function MenuHeader() {
-  const [activeNav, setActiveNav] = useState('recommend');
-  const navigate = useNavigate();
-
-  const handleNavigate = (path) => {
-    navigate(path);
-    setActiveNav(path);
-  };
   return (
     <>
       <S.Container>
@@ -85,12 +77,12 @@ function MenuHeader() {
       >
         {NavLists.map((item) => {
           return (
-            <S.NavList
-              style={{ width: 'auto' }}
-              key={item.id}
-              onClick={() => handleNavigate(item.navigate)}
-            >
-              <S.NavTitle $active={item.navigate === activeNav}>{item.name}</S.NavTitle>
+            <S.NavList key={item.id}>
+              <NavLink to={item.navigate}>
+                {({ isActive }) => (
+                  <S.NavTitle $active={isActive}>{item.name}</S.NavTitle>
+                )}
+              </NavLink>
             </S.NavList>
           );
         })}

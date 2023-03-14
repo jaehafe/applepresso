@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './MainNav.style';
-import { BiBook } from 'react-icons/bi';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const ListItem = [
   {
@@ -43,27 +41,19 @@ const ListItem = [
 ];
 
 function MainNav() {
-  const [activeNav, setActiveNav] = useState(1);
-  const navigate = useNavigate();
-
-  // main/order
-  const handleNavigate = (path) => {
-    navigate(path);
-  };
-
   return (
     <S.Container>
       <S.Lists>
         {ListItem.map((item) => (
-          <S.List
-            key={item.id}
-            // active={item.id === activeNav}
-            onClick={() => setActiveNav(item.id)}
-          >
-            <S.ItemWrapper onClick={() => handleNavigate(item.navigate)}>
-              <S.StyledICON as={item.icon} $active={item.id === activeNav} />
-              <S.NavName $active={item.id === activeNav}>{item.name}</S.NavName>
-            </S.ItemWrapper>
+          <S.List key={item.id}>
+            <NavLink to={item.navigate}>
+              {({ isActive }) => (
+                <S.ItemWrapper>
+                  <S.StyledICON as={item.icon} $active={isActive} />
+                  <S.NavName $active={isActive}>{item.name}</S.NavName>
+                </S.ItemWrapper>
+              )}
+            </NavLink>
           </S.List>
         ))}
       </S.Lists>
