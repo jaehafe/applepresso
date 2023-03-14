@@ -5,10 +5,11 @@ import { formatPrice } from '../../utils/format';
 import { CartContext } from '../../contexts/CartContextProvider';
 import usePostMenu from '../../hooks/usePostMenu';
 import { LoginContext } from '../../contexts/LoginContextProvider';
+
 const orderDate = new Date().toISOString();
-function ConfirmOrder() {
+
+function ConfirmOrder({ cartCtx }) {
   const { postMenu, error, success } = usePostMenu('/pay');
-  const cartCtx = useContext(CartContext);
   const { currentUser } = useContext(LoginContext);
 
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function ConfirmOrder() {
       user: currentUser?.user,
       orderDetail: cartCtx.items,
       orderDate,
+      orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
     });
 
     const confirmPayment = window.confirm('주문 완료!');
@@ -38,13 +40,24 @@ function ConfirmOrder() {
     }
   };
 
+  const handlePaymentTitle = () => {
+    if (cartCtx.title === 'EASYORDER') {
+      console.log('간편주문 확인');
+      return '간편주문 확인';
+    } else if (cartCtx.title === 'CART') {
+      console.log('주문확인');
+      return '주문 확인';
+    }
+    return '주문 확인';
+  };
+
   return (
     <S.Container>
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
             <S.StyledBsArrowLeft onClick={handleToBack} />
-            <S.HeaderTitle>주문 확인</S.HeaderTitle>
+            <S.HeaderTitle>{handlePaymentTitle()}</S.HeaderTitle>
           </S.HeaderTitleWrapper>
         </S.HeaderWrapper>
       </S.HeaderContainer>
@@ -222,7 +235,7 @@ function ConfirmOrder() {
         <S.PaymentCalcWrapper>
           <S.PaymentPriceWrapper>
             <S.PaymentPriceTitle>결제 금액</S.PaymentPriceTitle>
-            <S.PaymentPrice>{cartCtx.total.finalPrice.toLocaleString()}원</S.PaymentPrice>
+            <S.PaymentPrice>{formatPrice(cartCtx.total.finalPrice)}원</S.PaymentPrice>
           </S.PaymentPriceWrapper>
         </S.PaymentCalcWrapper>
         {/*  */}

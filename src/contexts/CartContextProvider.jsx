@@ -245,7 +245,7 @@ function CartContextProvider({ children }) {
   //
 
   const cartContext = {
-    title: cartState.title,
+    title: defaultCartState.title,
     items: cartState.items,
     total: {
       total: total.total,

@@ -16,7 +16,11 @@ function Cart({ cartCtx }) {
   };
 
   const navigateToConfirmOrder = () => {
-    navigate('/confirmOrder');
+    if (cartCtx.title === 'EASYORDER') {
+      navigate('/easyOrderConfirm');
+    } else {
+      navigate('/confirmOrder');
+    }
   };
 
   /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
@@ -110,9 +114,8 @@ function Cart({ cartCtx }) {
       return '간편 주문 담기';
     } else if (cartCtx.title === 'CART') {
       return '담기';
-    } else {
-      return '담기';
     }
+    return '담기';
   };
 
   return (
