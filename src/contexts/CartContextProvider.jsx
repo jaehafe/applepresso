@@ -3,7 +3,6 @@ import { LoginContext } from './LoginContextProvider';
 
 export const CartContext = createContext({
   items: [],
-  totalAmount: 0,
   total: {
     total: 0,
     totalQty: 0,
@@ -28,7 +27,6 @@ const defaultCartState = {
     discountPrices: [],
     discountedPrices: [],
   },
-  totalAmount: 0,
 };
 
 const cartReducer = (state, action) => {
@@ -55,12 +53,8 @@ const cartReducer = (state, action) => {
       updatedItems = [...state.items, action.item];
     }
 
-    // 총 가격
-    const updatedTotalAmount = state.totalAmount + action.item.amount * action.item.price;
-
     return {
       items: updatedItems,
-      totalAmount: updatedTotalAmount,
     };
   }
   // REMOVE
@@ -81,12 +75,9 @@ const cartReducer = (state, action) => {
     }
 
     console.log('action.id.price', action.id.price);
-    // 총 가격
-    const updatedTotalAmount = state.totalAmount - 1 * existingItem.price;
 
     return {
       items: updatedItems,
-      totalAmount: updatedTotalAmount,
     };
   }
 
@@ -100,13 +91,8 @@ const cartReducer = (state, action) => {
     if (existingItem) {
       updatedItems = state.items.filter((item) => item.id !== action.id);
 
-      // 총 가격
-      const updatedTotalAmount =
-        state.totalAmount - existingItem.amount * existingItem.price;
-
       return {
         items: updatedItems,
-        totalAmount: updatedTotalAmount,
       };
     }
 
@@ -205,7 +191,7 @@ function CartContextProvider({ children }) {
         const finalPrice = discountedPrices.reduce((acc, val) => {
           return (acc += val);
         }, 0);
-        console.log('pri', finalPrice);
+
         return {
           total: acc.total + discountedPrice,
           totalQty: acc.totalQty + qty,
@@ -258,7 +244,6 @@ function CartContextProvider({ children }) {
 
   const cartContext = {
     items: cartState.items,
-    totalAmount: cartState.totalAmount,
     total: {
       total: total.total,
       totalQty: total.totalQty,

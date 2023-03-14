@@ -18,7 +18,7 @@ export const EasyOrderContext = createContext({
   clearCart: (item) => {},
 });
 
-const defaultCartState = {
+const defaultEasyOrderState = {
   items: [],
   total: {
     total: 0,
@@ -114,21 +114,24 @@ const cartReducer = (state, action) => {
   }
 
   if (action.type === 'CLEAR') {
-    return defaultCartState;
+    return defaultEasyOrderState;
   }
 
   if (action.type === 'INITIALIZE') {
-    return action.cartState;
+    return action.easyOrderState;
   }
 
-  return defaultCartState;
+  return defaultEasyOrderState;
 };
 
 function EasyOrderContextProvider({ children }) {
   const { currentUser } = useContext(LoginContext);
   // console.log(currentUser);
-  // localStorage.setItem(`${currentUser.user.email}`, JSON.stringify(cartState));
-  const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
+  // localStorage.setItem(`${currentUser.user.email}`, JSON.stringify(easyOrderState));
+  const [easyOrderState, dispatchCartAction] = useReducer(
+    cartReducer,
+    defaultEasyOrderState
+  );
   const [total, setTotal] = useState({
     total: 0,
     totalQty: 0,
@@ -138,34 +141,40 @@ function EasyOrderContextProvider({ children }) {
     discountedPrices: [],
   });
 
-  /** localStorage에 cartState를 저장하는 함수 */
-  const saveCartStateToLocalStorage = (cartState, currentUser) => {
-    localStorage.setItem(`${currentUser?.user.email}-cart`, JSON.stringify(cartState));
-  };
-
-  /** localStorage에서 cartState를 불러오는 함수 */
-  const getCartStateFromLocalStorage = (currentUser) => {
-    const cartStateFromLocalStorage = localStorage.getItem(
-      `${currentUser?.user.email}-cart`
+  /** localStorage에 easyOrderState를 저장하는 함수 */
+  const saveEasyOrderStateToLocalStorage = (easyOrderState, currentUser) => {
+    localStorage.setItem(
+      `${currentUser?.user.email}-easyOrder`,
+      JSON.stringify(easyOrderState)
     );
-    if (cartStateFromLocalStorage) {
-      return JSON.parse(cartStateFromLocalStorage);
-    }
-    return defaultCartState;
   };
 
-  // 페이지 로드시 localStorage에서 cartState를 불러와서 초기화
+  /** localStorage에서 easyOrderState를 불러오는 함수 */
+  const getEasyOrderStateFromLocalStorage = (currentUser) => {
+    const easyOrderStateFromLocalStorage = localStorage.getItem(
+      `${currentUser?.user.email}-easyOrder`
+    );
+    if (easyOrderStateFromLocalStorage) {
+      return JSON.parse(easyOrderStateFromLocalStorage);
+    }
+    return defaultEasyOrderState;
+  };
+
+  // 페이지 로드시 localStorage에서 easyOrderState를 불러와서 초기화
   useEffect(() => {
-    const cartStateFromLocalStorage = getCartStateFromLocalStorage(currentUser);
-    dispatchCartAction({ type: 'INITIALIZE', cartState: cartStateFromLocalStorage });
+    const easyOrderStateFromLocalStorage = getEasyOrderStateFromLocalStorage(currentUser);
+    dispatchCartAction({
+      type: 'INITIALIZE',
+      easyOrderState: easyOrderStateFromLocalStorage,
+    });
   }, [currentUser]);
 
-  // cartState가 업데이트 될때마다 localStorage에 저장
+  // easyOrderState가 업데이트 될때마다 localStorage에 저장
   useEffect(() => {
     if (currentUser) {
-      saveCartStateToLocalStorage(cartState, currentUser);
+      saveEasyOrderStateToLocalStorage(easyOrderState, currentUser);
     }
-  }, [cartState, currentUser]);
+  }, [easyOrderState, currentUser]);
 
   //
   const addItemToCartHandler = (item) => {
@@ -193,7 +202,7 @@ function EasyOrderContextProvider({ children }) {
       discountPrices,
       discountedPrices,
       finalPrice,
-    } = cartState.items.reduce(
+    } = easyOrderState.items.reduce(
       (acc, item) => {
         const qty = item.amount;
         const originalPrice = item.amount * item.price;
@@ -252,13 +261,13 @@ function EasyOrderContextProvider({ children }) {
       discountedPrices,
       finalPrice,
     });
-  }, [cartState.items]);
+  }, [easyOrderState.items]);
 
   //
 
   const easyOrderContext = {
-    items: cartState.items,
-    totalAmount: cartState.totalAmount,
+    items: easyOrderState.items,
+    totalAmount: easyOrderState.totalAmount,
     total: {
       total: total.total,
       totalQty: total.totalQty,
