@@ -14,8 +14,10 @@ import CoffeeMenu from './pages/Order/CoffeeMenu/CoffeeMenu';
 import MilkTeaLatte from './pages/Order/MilkTeaLatte/MilkTeaLatte';
 import MenuDetail from './pages/Order/MenuDetail/MenuDetail';
 import CartButton from './components/CartButton/CartButton';
-import Cart from './pages/Cart/Cart';
-import ConfirmOrder from './pages/ConfirmOrder/ConfirmOrder';
+import EasyOrder from './pages/EasyOrder/EasyOrder';
+import CartPage from './pages/CartPage/CartPage';
+import ConfirmOrderPage from './pages/ConfirmOrderPage/ConfirmOrderPage';
+import EasyOrderConfirmPage from './pages/EasyOrderConfirmPage/EasyOrderConfirmPage';
 
 const Layout = () => {
   return (
@@ -41,8 +43,10 @@ const router = createBrowserRouter([
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <Signup /> },
   { path: '/menuDetail/:id', element: <MenuDetail /> },
-  { path: '/cart', element: <Cart /> },
-  { path: '/confirmOrder', element: <ConfirmOrder /> },
+  { path: '/cart', element: <CartPage /> },
+  { path: '/confirmOrder', element: <ConfirmOrderPage /> },
+  { path: '/easyOrderConfirm', element: <EasyOrderConfirmPage /> },
+  { path: '/easyOrder', element: <EasyOrder /> },
   {
     path: '/main',
     element: <Layout />,

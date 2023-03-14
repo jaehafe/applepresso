@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './Cart.style';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../../contexts/CartContextProvider';
 
-function Cart() {
+function Cart({ cartCtx }) {
   const navigate = useNavigate();
-
-  const cartCtx = useContext(CartContext);
+  console.log('cartCtx.title', cartCtx.title);
   const [deleteMenu, setDeleteMenu] = useState(false);
   const [checkedMenus, setCheckedMenus] = useState([]);
   const [cartMenus, setCartMenus] = useState([]);
+
   console.log('cartCtx', cartCtx);
   /** 뒤로가기 */
   const handleToBack = () => {
@@ -17,7 +16,11 @@ function Cart() {
   };
 
   const navigateToConfirmOrder = () => {
-    navigate('/confirmOrder');
+    if (cartCtx.title === 'EASYORDER') {
+      navigate('/easyOrderConfirm');
+    } else {
+      navigate('/confirmOrder');
+    }
   };
 
   /** 휴지통 아이콘 클릭 시 체크박스 보여지게 하기 */
@@ -106,13 +109,24 @@ function Cart() {
     addToCartHandler(infos);
   };
 
+  const handleCartTitle = () => {
+    if (cartCtx.title === 'EASYORDER') {
+      return '간편 주문 담기';
+    } else if (cartCtx.title === 'CART') {
+      return '담기';
+    }
+    return '담기';
+  };
+
   return (
     <S.Container>
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
             <S.StyledBsArrowLeft onClick={handleToBack} />
-            <S.HeaderTitle>담기 ({cartCtx.total.totalQty}개)</S.HeaderTitle>
+            <S.HeaderTitle>
+              {handleCartTitle()} ({cartCtx.total.totalQty}개)
+            </S.HeaderTitle>
           </S.HeaderTitleWrapper>
           <div onClick={handleRemoveMenu}>
             {deleteMenu ? (

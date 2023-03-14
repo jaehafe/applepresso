@@ -14,6 +14,8 @@ function usePostMenu(url) {
       const res = await axiosFirebase.post(`${url}.json`, {
         user: info.user,
         orderDetail: info.orderDetail,
+        orderDate: info.orderDate,
+        orderType: info.orderType,
       });
       setData(res.data);
     } catch (err) {

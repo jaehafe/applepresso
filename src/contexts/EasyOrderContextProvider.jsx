@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useEffect, useReducer, useState } from 'react';
 import { LoginContext } from './LoginContextProvider';
 
-export const CartContext = createContext({
-  title: 'CART',
+export const EasyOrderContext = createContext({
+  title: 'EASYORDER',
   items: [],
+  totalAmount: 0,
   total: {
     total: 0,
     totalQty: 0,
@@ -18,8 +19,8 @@ export const CartContext = createContext({
   clearCart: (item) => {},
 });
 
-const defaultCartState = {
-  title: 'CART',
+const defaultEasyOrderState = {
+  title: 'EASYORDER',
   items: [],
   total: {
     total: 0,
@@ -29,6 +30,7 @@ const defaultCartState = {
     discountPrices: [],
     discountedPrices: [],
   },
+  totalAmount: 0,
 };
 
 const cartReducer = (state, action) => {
@@ -55,8 +57,12 @@ const cartReducer = (state, action) => {
       updatedItems = [...state.items, action.item];
     }
 
+    // 총 가격
+    const updatedTotalAmount = state.totalAmount + action.item.amount * action.item.price;
+
     return {
       items: updatedItems,
+      totalAmount: updatedTotalAmount,
     };
   }
   // REMOVE
@@ -77,9 +83,12 @@ const cartReducer = (state, action) => {
     }
 
     console.log('action.id.price', action.id.price);
+    // 총 가격
+    const updatedTotalAmount = state.totalAmount - 1 * existingItem.price;
 
     return {
       items: updatedItems,
+      totalAmount: updatedTotalAmount,
     };
   }
 
@@ -93,8 +102,13 @@ const cartReducer = (state, action) => {
     if (existingItem) {
       updatedItems = state.items.filter((item) => item.id !== action.id);
 
+      // 총 가격
+      const updatedTotalAmount =
+        state.totalAmount - existingItem.amount * existingItem.price;
+
       return {
         items: updatedItems,
+        totalAmount: updatedTotalAmount,
       };
     }
 
@@ -102,21 +116,24 @@ const cartReducer = (state, action) => {
   }
 
   if (action.type === 'CLEAR') {
-    return defaultCartState;
+    return defaultEasyOrderState;
   }
 
   if (action.type === 'INITIALIZE') {
-    return action.cartState;
+    return action.easyOrderState;
   }
 
-  return defaultCartState;
+  return defaultEasyOrderState;
 };
 
-function CartContextProvider({ children }) {
+function EasyOrderContextProvider({ children }) {
   const { currentUser } = useContext(LoginContext);
   // console.log(currentUser);
-  // localStorage.setItem(`${currentUser.user.email}`, JSON.stringify(cartState));
-  const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState);
+  // localStorage.setItem(`${currentUser.user.email}`, JSON.stringify(easyOrderState));
+  const [easyOrderState, dispatchCartAction] = useReducer(
+    cartReducer,
+    defaultEasyOrderState
+  );
   const [total, setTotal] = useState({
     total: 0,
     totalQty: 0,
@@ -126,34 +143,40 @@ function CartContextProvider({ children }) {
     discountedPrices: [],
   });
 
-  /** localStorage에 cartState를 저장하는 함수 */
-  const saveCartStateToLocalStorage = (cartState, currentUser) => {
-    localStorage.setItem(`${currentUser?.user.email}-cart`, JSON.stringify(cartState));
-  };
-
-  /** localStorage에서 cartState를 불러오는 함수 */
-  const getCartStateFromLocalStorage = (currentUser) => {
-    const cartStateFromLocalStorage = localStorage.getItem(
-      `${currentUser?.user.email}-cart`
+  /** localStorage에 easyOrderState를 저장하는 함수 */
+  const saveEasyOrderStateToLocalStorage = (easyOrderState, currentUser) => {
+    localStorage.setItem(
+      `${currentUser?.user.email}-easyOrder`,
+      JSON.stringify(easyOrderState)
     );
-    if (cartStateFromLocalStorage) {
-      return JSON.parse(cartStateFromLocalStorage);
-    }
-    return defaultCartState;
   };
 
-  // 페이지 로드시 localStorage에서 cartState를 불러와서 초기화
+  /** localStorage에서 easyOrderState를 불러오는 함수 */
+  const getEasyOrderStateFromLocalStorage = (currentUser) => {
+    const easyOrderStateFromLocalStorage = localStorage.getItem(
+      `${currentUser?.user.email}-easyOrder`
+    );
+    if (easyOrderStateFromLocalStorage) {
+      return JSON.parse(easyOrderStateFromLocalStorage);
+    }
+    return defaultEasyOrderState;
+  };
+
+  // 페이지 로드시 localStorage에서 easyOrderState를 불러와서 초기화
   useEffect(() => {
-    const cartStateFromLocalStorage = getCartStateFromLocalStorage(currentUser);
-    dispatchCartAction({ type: 'INITIALIZE', cartState: cartStateFromLocalStorage });
+    const easyOrderStateFromLocalStorage = getEasyOrderStateFromLocalStorage(currentUser);
+    dispatchCartAction({
+      type: 'INITIALIZE',
+      easyOrderState: easyOrderStateFromLocalStorage,
+    });
   }, [currentUser]);
 
-  // cartState가 업데이트 될때마다 localStorage에 저장
+  // easyOrderState가 업데이트 될때마다 localStorage에 저장
   useEffect(() => {
     if (currentUser) {
-      saveCartStateToLocalStorage(cartState, currentUser);
+      saveEasyOrderStateToLocalStorage(easyOrderState, currentUser);
     }
-  }, [cartState, currentUser]);
+  }, [easyOrderState, currentUser]);
 
   //
   const addItemToCartHandler = (item) => {
@@ -181,7 +204,7 @@ function CartContextProvider({ children }) {
       discountPrices,
       discountedPrices,
       finalPrice,
-    } = cartState.items.reduce(
+    } = easyOrderState.items.reduce(
       (acc, item) => {
         const qty = item.amount;
         const originalPrice = item.amount * item.price;
@@ -240,13 +263,14 @@ function CartContextProvider({ children }) {
       discountedPrices,
       finalPrice,
     });
-  }, [cartState.items]);
+  }, [easyOrderState.items]);
 
   //
 
-  const cartContext = {
-    title: defaultCartState.title,
-    items: cartState.items,
+  const easyOrderContext = {
+    title: defaultEasyOrderState.title,
+    items: easyOrderState.items,
+    totalAmount: easyOrderState.totalAmount,
     total: {
       total: total.total,
       totalQty: total.totalQty,
@@ -261,7 +285,11 @@ function CartContextProvider({ children }) {
     clearCart: clearCartHandler,
   };
 
-  return <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>;
+  return (
+    <EasyOrderContext.Provider value={easyOrderContext}>
+      {children}
+    </EasyOrderContext.Provider>
+  );
 }
 
-export default CartContextProvider;
+export default EasyOrderContextProvider;
