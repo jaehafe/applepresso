@@ -11,12 +11,13 @@ export const Container = styled.div`
 
 // banner wrapper
 export const BannerWrapper = styled.div`
-  border: 1px solid;
+  /* border: 1px solid; */
+  padding-top: 1px;
 `;
 
 export const HomeSwiper = styled(Swiper)`
-  border: 1px solid;
-  margin-top: 40px;
+  /* border: 1px solid; */
+  margin-top: 20px;
 `;
 
 export const HomeSwiperSlide = styled(SwiperSlide)`
@@ -33,7 +34,6 @@ export const RecommendNav = styled.ul`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid;
   margin-top: 40px;
 `;
 
@@ -93,9 +93,7 @@ export const EasyOrderTitle = styled.span`
   margin-bottom: 10px;
 `;
 
-export const AddEasyOrderWrapper = styled.div`
-  border: 1px solid;
-`;
+export const AddEasyOrderWrapper = styled.div``;
 
 export const AddEasyOrderLists = styled.ul`
   display: flex;
