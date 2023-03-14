@@ -268,10 +268,12 @@ export const SelectPickupTimeWrapper = styled(Wrapper)`
 `;
 export const SelectPickupTimeHeaderWrapper = styled(SelectHeaderWrapper)``;
 export const SelectPickupTime = styled(SelectTitle)`
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 400;
-  color: var(--main-color);
   margin-bottom: 10px;
+`;
+export const SelectPickupTimeStrong = styled.strong`
+  color: var(--main-color);
 `;
 export const SelectPickupTimeRange = styled.input`
   margin-bottom: 20px;

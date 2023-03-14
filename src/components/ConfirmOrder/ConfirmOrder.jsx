@@ -10,11 +10,23 @@ import { selectPlace, takeoutOptions } from '../../constants/constants';
 const orderDate = new Date().toISOString();
 
 function ConfirmOrder({ cartCtx }) {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [selectedPlace, setSelectedPlace] = useState(null);
-
   const { postMenu, error, success } = usePostMenu('/pay');
   const { currentUser } = useContext(LoginContext);
+  // 테이크 아웃 장소 선택
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  // 포장 선택
+  const [selectedTakeoutOption, setSelectedTakeoutOption] = useState(null);
+  // 픽업 예정시간
+  const [pickupTimeRange, setPickupTimeRange] = useState(0);
+  console.log('pickupTimeRange', pickupTimeRange);
+  const selectTakeoutPlace = (option) => {
+    console.log('place', option);
+    setSelectedPlace(option);
+  };
+  const selectTakeoutOption = (option) => {
+    console.log('takeout', option);
+    setSelectedTakeoutOption(option);
+  };
 
   const navigate = useNavigate();
   const handleToBack = () => {
@@ -51,12 +63,6 @@ function ConfirmOrder({ cartCtx }) {
       return '주문 확인';
     }
     return '주문 확인';
-  };
-
-  const selectTakeoutPlace = (option) => {
-    console.log('place', option);
-    setSelectedOption(option);
-    setSelectedPlace(option.id);
   };
 
   return (
@@ -98,7 +104,7 @@ function ConfirmOrder({ cartCtx }) {
           <S.SelectTakeoutOptionTitle>장소 선택</S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
             {selectPlace.map((option) => {
-              const isActive = selectedOption?.id === option.id;
+              const isActive = selectedPlace?.id === option.id;
               return (
                 <S.TakeOutOptions
                   key={option.id}
@@ -126,8 +132,13 @@ function ConfirmOrder({ cartCtx }) {
           <S.SelectTakeoutOptionTitle>포장 선택</S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
             {takeoutOptions.map((option) => {
+              const isActive = selectedTakeoutOption?.id === option.id;
               return (
-                <S.TakeOutOptions key={option.id}>
+                <S.TakeOutOptions
+                  key={option.id}
+                  $isActive={isActive}
+                  onClick={() => selectTakeoutOption(option)}
+                >
                   <S.TakeOutOptionsTitle>{option.option}</S.TakeOutOptionsTitle>
                   <S.TakeOutOptionsSubTitle>
                     ({option.subOption})
@@ -173,8 +184,26 @@ function ConfirmOrder({ cartCtx }) {
             <S.SelectPointTitleWrapper>픽업 예정시간</S.SelectPointTitleWrapper>
             <S.StyledIoIosArrowDown />
           </S.SelectPickupTimeHeaderWrapper>
-          <S.SelectPickupTime>바로 찾으러 갈게요!</S.SelectPickupTime>
-          <S.SelectPickupTimeRange type="range" />
+          <S.SelectPickupTime>
+            {pickupTimeRange < 5 ? (
+              <S.SelectPickupTimeStrong>바로 찾으러 갈게요!</S.SelectPickupTimeStrong>
+            ) : (
+              <>
+                <S.SelectPickupTimeStrong>
+                  {pickupTimeRange}분 후{' '}
+                </S.SelectPickupTimeStrong>
+                매장도착
+              </>
+            )}
+          </S.SelectPickupTime>
+          <S.SelectPickupTimeRange
+            type="range"
+            min={0}
+            max={30}
+            step={1}
+            value={pickupTimeRange}
+            onChange={(e) => setPickupTimeRange(e.target.value)}
+          />
           <S.SelectPickupTimeTip>
             도착 시간에 맞춰 음료를 제조해 드립니다.
           </S.SelectPickupTimeTip>
