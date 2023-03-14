@@ -16,6 +16,7 @@ import MenuDetail from './pages/Order/MenuDetail/MenuDetail';
 import CartButton from './components/CartButton/CartButton';
 import Cart from './pages/Cart/Cart';
 import ConfirmOrder from './pages/ConfirmOrder/ConfirmOrder';
+import EasyOrder from './pages/EasyOrder/EasyOrder';
 
 const Layout = () => {
   return (
@@ -43,6 +44,7 @@ const router = createBrowserRouter([
   { path: '/menuDetail/:id', element: <MenuDetail /> },
   { path: '/cart', element: <Cart /> },
   { path: '/confirmOrder', element: <ConfirmOrder /> },
+  { path: '/easyOrder', element: <EasyOrder /> },
   {
     path: '/main',
     element: <Layout />,
