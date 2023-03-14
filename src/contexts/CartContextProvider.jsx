@@ -15,7 +15,7 @@ export const CartContext = createContext({
   addItem: (item) => {},
   removeItem: (id) => {},
   removeCheckedItem: (id) => {},
-  clearCart: () => {},
+  clearCart: (item) => {},
 });
 
 const defaultCartState = {
@@ -277,50 +277,3 @@ function CartContextProvider({ children }) {
 }
 
 export default CartContextProvider;
-
-// axiosFirebase
-//   .post(`/cart.json`, {
-//     user: currentUser.user.email,
-//     menu: {
-//       id: item.id,
-//       title: item.title,
-//       amount: item.amount,
-//       price: item.price,
-//       thumbnail: item.thumbnail,
-//       discountRate: item.discountRate,
-//       isChecked: item.isChecked,
-//     },
-//   })
-//   .then((res) => {
-//     console.log('Menu added to cart successfully!');
-//   })
-//   .catch((err) => {
-//     console.log('Failed to add menu to cart:', err);
-//   });
-
-// // localStorage에 cartState를 저장하는 함수
-// const saveCartStateToLocalStorage = (cartState) => {
-//   localStorage.setItem(`${currentUser?.user.email}-cart`, JSON.stringify(cartState));
-// };
-
-// // localStorage에서 cartState를 불러오는 함수
-// const getCartStateFromLocalStorage = () => {
-//   const cartStateFromLocalStorage = localStorage.getItem(
-//     `${currentUser?.user.email}-cart`
-//   );
-//   if (cartStateFromLocalStorage) {
-//     return JSON.parse(cartStateFromLocalStorage);
-//   }
-//   return defaultCartState;
-// };
-
-// // 페이지 로드시 localStorage에서 cartState를 불러와서 초기화
-// useEffect(() => {
-//   const cartStateFromLocalStorage = getCartStateFromLocalStorage();
-//   dispatchCartAction({ type: 'INITIALIZE', cartState: cartStateFromLocalStorage });
-// }, []);
-
-// // cartState가 업데이트 될때마다 localStorage에 저장
-// useEffect(() => {
-//   saveCartStateToLocalStorage(cartState);
-// }, [cartState, currentUser]);
