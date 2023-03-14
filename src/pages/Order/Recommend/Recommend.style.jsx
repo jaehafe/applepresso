@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const Container = styled.div`
   margin: 170px 0 100px;
-  min-height: 100vh;
+  height: auto;
 `;
 
 export const Wrapper = styled.div`
