@@ -65,7 +65,7 @@ export const StyledTbBorderAll = styled(TbBorderAll)`
 
 export const StyledICON = styled.img`
   font-size: 30px;
-  color: ${(props) => (props.$active ? 'var(--main-color)' : '#9a9292')};
+  color: ${(props) => (props.$active ? 'var(--main-color)' : '#000')};
 `;
 
 export const NavName = styled.span`

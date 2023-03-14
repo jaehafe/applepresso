@@ -71,7 +71,7 @@ export const TipsWrapper = styled.div`
   color: var(--subtitle-color);
   font-size: 14px;
   padding: 10px 20px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 `;
 export const StyledBsExclamationCircle = styled(BsExclamationCircle)`
   color: red;
@@ -138,18 +138,27 @@ export const SelectTakeoutOptionTitle = styled(SelectTitle)`
 `;
 export const TakeoutOptionsWrapper = styled(SelectTitle)`
   display: flex;
+  /* justify-content: center; */
   gap: 6px;
   margin-bottom: 10px;
 `;
 export const TakeOutOptions = styled.div`
+  /* border: 1px solid; */
   display: flex;
+  justify-content: center;
+  text-align: center;
   gap: 6px;
   flex-direction: column;
   align-items: center;
-  color: var(--subtitle-color);
+  width: 110px;
+  height: 70px;
+  /* color: var(--subtitle-color); */
   border: 1px solid var(--subtitle-color);
   border-radius: 10px;
   padding: 16px 10px;
+
+  color: ${(props) => (props.$isActive ? '#fff' : 'var(--subtitle-color)')};
+  background-color: ${(props) => (props.$isActive ? 'var(--main-color)' : '')};
 
   &:hover,
   &:active {
@@ -259,10 +268,12 @@ export const SelectPickupTimeWrapper = styled(Wrapper)`
 `;
 export const SelectPickupTimeHeaderWrapper = styled(SelectHeaderWrapper)``;
 export const SelectPickupTime = styled(SelectTitle)`
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 400;
-  color: var(--main-color);
   margin-bottom: 10px;
+`;
+export const SelectPickupTimeStrong = styled.strong`
+  color: var(--main-color);
 `;
 export const SelectPickupTimeRange = styled.input`
   margin-bottom: 20px;

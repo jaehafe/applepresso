@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import * as S from './Home.style';
 import { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,7 +9,8 @@ import banner1 from '../../assets/homeBanner/banner1.jpeg';
 import banner2 from '../../assets/homeBanner/banner2.png';
 import banner3 from '../../assets/homeBanner/banner3.jpeg';
 import banner4 from '../../assets/homeBanner/banner4.jpeg';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { EasyOrderContext } from '../../contexts/EasyOrderContextProvider';
 
 const bannerItem = [
   {
@@ -53,9 +54,14 @@ const HeroInfo = [
 ];
 
 function Home() {
+  const easyOrderCtx = useContext(EasyOrderContext);
   const navigate = useNavigate();
   const handleAddOrder = () => {
     navigate('/main/order/recommend');
+  };
+
+  const navigateToEasyOrder = () => {
+    navigate('/easyOrder');
   };
 
   return (
@@ -100,15 +106,38 @@ function Home() {
       <S.EasyOrderContainer>
         <S.EasyOrderTitle>간편 주문</S.EasyOrderTitle>
         <S.AddEasyOrderWrapper>
-          <S.AddEasyOrderLists>
-            <S.AddEasyOrderList onClick={handleAddOrder}>
-              <S.StyledFaRegHandPointer />
-              <S.AddEasyOrderDesc>나만의 간편 주문을 추가해보세요.</S.AddEasyOrderDesc>
-            </S.AddEasyOrderList>
-            <S.AddEasyOrderExtraListButton onClick={handleAddOrder}>
-              +
-            </S.AddEasyOrderExtraListButton>
-          </S.AddEasyOrderLists>
+          {easyOrderCtx.items.length ? (
+            <S.AddEasyOrderLists>
+              <S.AddEasyOrderListsSwiper
+                modules={[Pagination]}
+                spaceBetween={20}
+                slidesPerView={1.7}
+              >
+                {easyOrderCtx.items.map((item) => {
+                  const { thumbnail, title, id } = item;
+                  return (
+                    <S.AddEasyOrderListSwiperSlide key={id} onClick={navigateToEasyOrder}>
+                      <S.EasyOrderIMGWrapper>
+                        <S.EasyOrderIMG src={thumbnail} alt={title} />
+                      </S.EasyOrderIMGWrapper>
+                      <S.EasyOrderMenuTitle>{title}</S.EasyOrderMenuTitle>
+                    </S.AddEasyOrderListSwiperSlide>
+                  );
+                })}
+              </S.AddEasyOrderListsSwiper>
+            </S.AddEasyOrderLists>
+          ) : (
+            <S.AddEasyOrderButton>
+              <S.AddEasyOrderList onClick={handleAddOrder}>
+                <S.StyledFaRegHandPointer />
+                <S.AddEasyOrderDesc>나만의 간편 주문을 추가해보세요.</S.AddEasyOrderDesc>
+              </S.AddEasyOrderList>
+              <S.AddEasyOrderExtraListButton onClick={handleAddOrder}>
+                +
+              </S.AddEasyOrderExtraListButton>
+            </S.AddEasyOrderButton>
+          )}
+          {/* + 버튼 */}
         </S.AddEasyOrderWrapper>
       </S.EasyOrderContainer>
     </S.Container>

@@ -96,12 +96,14 @@ export const EasyOrderTitle = styled.span`
 export const AddEasyOrderWrapper = styled.div``;
 
 export const AddEasyOrderLists = styled.ul`
-  display: flex;
-  justify-content: flex-start;
   align-items: center;
   gap: 20px;
 `;
-
+export const AddEasyOrderButton = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
 export const AddEasyOrderList = styled.li`
   display: flex;
   gap: 10px;
@@ -115,6 +117,30 @@ export const AddEasyOrderList = styled.li`
   cursor: pointer;
 `;
 
+export const AddEasyOrderListsSwiper = styled(Swiper)`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const AddEasyOrderListSwiperSlide = styled(SwiperSlide)`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 250px;
+  height: 100px;
+  padding: 16px;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+`;
+export const EasyOrderIMGWrapper = styled.div`
+  width: 60px;
+`;
+export const EasyOrderIMG = styled.img``;
+export const EasyOrderMenuTitle = styled.div``;
+
 export const StyledFaRegHandPointer = styled(FaRegHandPointer)`
   color: var(--main-color);
   font-size: 30px;
@@ -125,6 +151,7 @@ export const AddEasyOrderDesc = styled.span`
 `;
 
 export const AddEasyOrderExtraListButton = styled.div`
+  border: 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
