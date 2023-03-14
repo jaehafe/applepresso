@@ -63,6 +63,22 @@ function MenuDetail() {
     });
   };
 
+  const orderNowHandler = () => {
+    cartCtx.addItem({
+      id,
+      title,
+      amount: Number(amountRef.current.innerText),
+      price,
+      thumbnail,
+      discountRate,
+      isChecked,
+    });
+
+    navigate('/confirmOrder');
+  };
+
+  const addToEasyOrderHandler = () => {};
+
   const handleMinusMenuCount = () => {
     if (menuCount > 1) {
       setMenuCount(menuCount - 1);
@@ -120,7 +136,10 @@ function MenuDetail() {
       </S.OrderOptionContainer>
       <S.OrderButtons>
         <S.AddCartButton onClick={addToCartHandler}>담기</S.AddCartButton>
-        <S.OrderNowButton>바로 주문하기</S.OrderNowButton>
+        <S.AddEasyOrderButton onClick={addToEasyOrderHandler}>
+          간편주문 등록
+        </S.AddEasyOrderButton>
+        <S.OrderNowButton onClick={orderNowHandler}>바로 주문하기</S.OrderNowButton>
       </S.OrderButtons>
       {/* 추천메뉴 */}
       <S.Container>
