@@ -180,12 +180,11 @@ export const CountQty = styled.div`
 export const CountPlus = styled(QtyBtn)``;
 
 export const OrderButtons = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
 `;
 export const OrderButton = styled.button`
-  display: grid;
-  grid-template-columns: 1fr;
   padding: 26px 0;
   color: #fff;
   font-size: 23px;
@@ -196,11 +195,12 @@ export const OrderButton = styled.button`
   }
 `;
 export const AddCartButton = styled(OrderButton)`
-  width: 50%;
   background-color: #d3566b;
 `;
+export const AddEasyOrderButton = styled(OrderButton)`
+  background-color: #ca7785;
+`;
 export const OrderNowButton = styled(OrderButton)`
-  width: 50%;
   background-color: var(--main-color);
 `;
 //
