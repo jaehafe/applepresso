@@ -5,10 +5,14 @@ import { formatPrice } from '../../utils/format';
 import { CartContext } from '../../contexts/CartContextProvider';
 import usePostMenu from '../../hooks/usePostMenu';
 import { LoginContext } from '../../contexts/LoginContextProvider';
+import { selectPlace, takeoutOptions } from '../../constants/constants';
 
 const orderDate = new Date().toISOString();
 
 function ConfirmOrder({ cartCtx }) {
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null);
+
   const { postMenu, error, success } = usePostMenu('/pay');
   const { currentUser } = useContext(LoginContext);
 
@@ -42,13 +46,17 @@ function ConfirmOrder({ cartCtx }) {
 
   const handlePaymentTitle = () => {
     if (cartCtx.title === 'EASYORDER') {
-      console.log('간편주문 확인');
       return '간편주문 확인';
     } else if (cartCtx.title === 'CART') {
-      console.log('주문확인');
       return '주문 확인';
     }
     return '주문 확인';
+  };
+
+  const selectTakeoutPlace = (option) => {
+    console.log('place', option);
+    setSelectedOption(option);
+    setSelectedPlace(option.id);
   };
 
   return (
@@ -89,22 +97,21 @@ function ConfirmOrder({ cartCtx }) {
         <S.SelectTakeoutOptionWrapper>
           <S.SelectTakeoutOptionTitle>장소 선택</S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
-            <S.TakeOutOptions>
-              <S.TakeOutOptionsTitle>테이크아웃</S.TakeOutOptionsTitle>
-              <S.TakeOutOptionsSubTitle>(일회용 컵)</S.TakeOutOptionsSubTitle>
-            </S.TakeOutOptions>
-            <S.TakeOutOptions>
-              <S.TakeOutOptionsTitle>매장</S.TakeOutOptionsTitle>
-              <S.TakeOutOptionsSubTitle>(종이컵)</S.TakeOutOptionsSubTitle>
-            </S.TakeOutOptions>
-            <S.TakeOutOptions>
-              <S.TakeOutOptionsTitle>매장 + 테이크아웃</S.TakeOutOptionsTitle>
-              <S.TakeOutOptionsSubTitle>(종이컵)</S.TakeOutOptionsSubTitle>
-            </S.TakeOutOptions>
-            <S.TakeOutOptions>
-              <S.TakeOutOptionsTitle>텀블러</S.TakeOutOptionsTitle>
-              <S.TakeOutOptionsSubTitle>(음료 1잔만 주문 가능)</S.TakeOutOptionsSubTitle>
-            </S.TakeOutOptions>
+            {selectPlace.map((option) => {
+              const isActive = selectedOption?.id === option.id;
+              return (
+                <S.TakeOutOptions
+                  key={option.id}
+                  $isActive={isActive}
+                  onClick={() => selectTakeoutPlace(option)}
+                >
+                  <S.TakeOutOptionsTitle>{option.option}</S.TakeOutOptionsTitle>
+                  <S.TakeOutOptionsSubTitle>
+                    ({option.subOption})
+                  </S.TakeOutOptionsSubTitle>
+                </S.TakeOutOptions>
+              );
+            })}
           </S.TakeoutOptionsWrapper>
           <S.TakeoutTip>
             <S.StyledBsExclamationCircle />
@@ -114,18 +121,20 @@ function ConfirmOrder({ cartCtx }) {
             제조 / 픽업 요청사항 <S.StyledIoIosArrowForward />
           </S.TakeoutRequestMemo>
         </S.SelectTakeoutOptionWrapper>
-        {/* 포잔 선택 */}
+        {/* 포장 선택 */}
         <S.SelectTakeoutOptionWrapper>
           <S.SelectTakeoutOptionTitle>포장 선택</S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
-            <S.TakeOutOptions>
-              <S.TakeOutOptionsTitle>포장 안함</S.TakeOutOptionsTitle>
-              <S.TakeOutOptionsSubTitle>(일회용 컵)</S.TakeOutOptionsSubTitle>
-            </S.TakeOutOptions>
-            <S.TakeOutOptions>
-              <S.TakeOutOptionsTitle>전체 포장</S.TakeOutOptionsTitle>
-              <S.TakeOutOptionsSubTitle>(캐리어)</S.TakeOutOptionsSubTitle>
-            </S.TakeOutOptions>
+            {takeoutOptions.map((option) => {
+              return (
+                <S.TakeOutOptions key={option.id}>
+                  <S.TakeOutOptionsTitle>{option.option}</S.TakeOutOptionsTitle>
+                  <S.TakeOutOptionsSubTitle>
+                    ({option.subOption})
+                  </S.TakeOutOptionsSubTitle>
+                </S.TakeOutOptions>
+              );
+            })}
           </S.TakeoutOptionsWrapper>
         </S.SelectTakeoutOptionWrapper>
         {/* 쿠폰 */}
