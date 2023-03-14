@@ -1,12 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as S from './ConfirmOrder.style';
 import { useNavigate } from 'react-router-dom';
 import { formatPrice } from '../../utils/format';
 import { CartContext } from '../../contexts/CartContextProvider';
 import usePostMenu from '../../hooks/usePostMenu';
 import { LoginContext } from '../../contexts/LoginContextProvider';
-
+const orderDate = new Date().toISOString();
 function ConfirmOrder() {
+  // const [orderDate, setOrderDate] = useState('');
+
+  // useEffect(() => {
+  //   setOrderDate();
+  // }, []);
+
   const { postMenu, error, success } = usePostMenu('/pay');
   const cartCtx = useContext(CartContext);
   const { currentUser } = useContext(LoginContext);
@@ -25,7 +31,11 @@ function ConfirmOrder() {
   }, 0);
 
   const handlePayment = () => {
-    postMenu({ user: currentUser?.user, orderDetail: cartCtx.items });
+    postMenu({
+      user: currentUser?.user,
+      orderDetail: cartCtx.items,
+      orderDate,
+    });
 
     const confirmPayment = window.confirm('주문 완료!');
     if (confirmPayment) {
