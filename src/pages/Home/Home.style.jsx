@@ -93,16 +93,14 @@ export const EasyOrderTitle = styled.span`
   margin-bottom: 10px;
 `;
 
-export const AddEasyOrderWrapper = styled.div`
-  /* display: flex; */
-
-  /* flex-direction: column; */
-`;
+export const AddEasyOrderWrapper = styled.div``;
 
 export const AddEasyOrderLists = styled.ul`
-  border: 1px solid;
-  /* display: flex; */
-
+  align-items: center;
+  gap: 20px;
+`;
+export const AddEasyOrderButton = styled.div`
+  display: flex;
   align-items: center;
   gap: 20px;
 `;
