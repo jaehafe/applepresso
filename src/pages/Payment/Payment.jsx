@@ -21,7 +21,7 @@ function Payment() {
   };
 
   postKakaoPayApprove(kakaoPayApproveData);
-  // localStorage.setItem(`${currentUser?.user.email}-pgToken`, JSON.stringify(pgToken));
+
   return <S.Container>123</S.Container>;
 }
 

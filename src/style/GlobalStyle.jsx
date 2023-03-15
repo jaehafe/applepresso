@@ -19,6 +19,7 @@ export const GlobalStyles = createGlobalStyle`
     0 12px 24px rgb(0 0 0 / 5%);
   --division: rgb(239, 224, 224);
   --subtitle-color: rgb(174, 153, 153);
+  --button-color: rgba(233, 173, 182, 0.8);
   }
   
   *,

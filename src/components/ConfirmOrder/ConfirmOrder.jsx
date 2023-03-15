@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import * as S from './ConfirmOrder.style';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { formatPrice } from '../../utils/format';
 import { CartContext } from '../../contexts/CartContextProvider';
 import usePostMenu from '../../hooks/usePostMenu';
@@ -8,6 +8,7 @@ import { LoginContext } from '../../contexts/LoginContextProvider';
 import { selectPlace, takeoutOptions } from '../../constants/constants';
 import MakingRequestModal from '../Modal/MakingRequestModal';
 import useKakaoPay from '../../hooks/useKakaoPay';
+import SelectPayment from '../SelectPayment/SelectPayment';
 
 const orderDate = new Date().toISOString();
 
@@ -15,6 +16,17 @@ function ConfirmOrder({ cartCtx }) {
   const { postMenu, error, success } = usePostMenu('/pay');
   const { postKakaoPay } = useKakaoPay();
   const { currentUser } = useContext(LoginContext);
+  // 테이크 아웃 장소 선택
+  const [selectedPlace, setSelectedPlace] = useState(null);
+  // 제조 / 픽업 요청사항
+  const [makingRequestModal, setMakingRequestModal] = useState(false);
+  const [makingRequestInput, setMakingRequestInput] = useState(null);
+
+  // 포장 선택
+  const [selectedTakeoutOption, setSelectedTakeoutOption] = useState(null);
+  // 픽업 예정시간
+  const [pickupTimeRange, setPickupTimeRange] = useState(0);
+  const [selectPayment, setSelectPayment] = useState(null);
 
   /** 카카오페이 */
   const kakaoPayData = {
@@ -30,17 +42,6 @@ function ConfirmOrder({ cartCtx }) {
     fail_url: 'http://localhost:5173/payment',
     cancel_url: 'http://localhost:5173/payment',
   };
-
-  // 테이크 아웃 장소 선택
-  const [selectedPlace, setSelectedPlace] = useState(null);
-  // 제조 / 픽업 요청사항
-  const [makingRequestModal, setMakingRequestModal] = useState(false);
-  const [makingRequestInput, setMakingRequestInput] = useState(null);
-
-  // 포장 선택
-  const [selectedTakeoutOption, setSelectedTakeoutOption] = useState(null);
-  // 픽업 예정시간
-  const [pickupTimeRange, setPickupTimeRange] = useState(0);
 
   const selectTakeoutPlace = (option) => {
     setSelectedPlace(option);
@@ -105,6 +106,16 @@ function ConfirmOrder({ cartCtx }) {
   };
 
   useEffect(() => {}, [pickupTimeRange, makingRequestInput]);
+
+  const navigateToSelectPaymentPage = () => {
+    // navigate('/selectPayment');
+    navigate('/selectPayment', { from: 'SelectPaymentWrapper' });
+  };
+
+  const handleConfirm = () => {
+    setSelectPayment('카카오 페이');
+    navigate(-1);
+  };
 
   return (
     <S.Container>
@@ -265,12 +276,12 @@ function ConfirmOrder({ cartCtx }) {
           </S.SelectPickupTimeTip>
         </S.SelectPickupTimeWrapper>
         {/* 결제 정보 (카드 추가 페이지 만들어야 함, 카카오 페이도 대응)*/}
-        <S.SelectPaymentWrapper>
+        <S.SelectPaymentWrapper onClick={navigateToSelectPaymentPage}>
           <S.SelectPaymentHeaderWrapper>
             <S.SelectPaymentTitleWrapper>결제 정보</S.SelectPaymentTitleWrapper>
             <S.StyledIoIosArrowForward />
           </S.SelectPaymentHeaderWrapper>
-          <S.SelectPaymentInfo>신한 (4364-2007-****-7483)</S.SelectPaymentInfo>
+          {selectPayment && <S.SelectPaymentInfo>카카오 페이</S.SelectPaymentInfo>}
         </S.SelectPaymentWrapper>
         {/* 주문메뉴 */}
         <S.OrderDetailWrapper>
