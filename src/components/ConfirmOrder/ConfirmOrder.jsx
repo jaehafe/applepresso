@@ -15,13 +15,12 @@ function ConfirmOrder({ cartCtx }) {
   const { postMenu, error, success } = usePostMenu('/pay');
   const { postKakaoPay } = useKakaoPay();
   const { currentUser } = useContext(LoginContext);
-  // console.log('123', cartCtx.items[0].title);
+
   /** 카카오페이 */
   const kakaoPayData = {
     cid: 'TC0ONETIME',
     partner_order_id: 'partner_order_id',
     partner_user_id: 'partner_user_id',
-    // item_name: '애플프레소',
     item_name: `애플프레소 ${cartCtx?.items[0]?.title} 등 ${cartCtx?.items?.length}개`,
     quantity: cartCtx.total.totalQty,
     total_amount: cartCtx.total.finalPrice,
@@ -43,13 +42,10 @@ function ConfirmOrder({ cartCtx }) {
   // 픽업 예정시간
   const [pickupTimeRange, setPickupTimeRange] = useState(0);
 
-  // console.log('pickupTimeRange', pickupTimeRange);
   const selectTakeoutPlace = (option) => {
-    console.log('place', option);
     setSelectedPlace(option);
   };
   const selectTakeoutOption = (option) => {
-    console.log('takeout', option);
     setSelectedTakeoutOption(option);
   };
 
