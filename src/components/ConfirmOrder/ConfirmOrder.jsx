@@ -7,11 +7,28 @@ import usePostMenu from '../../hooks/usePostMenu';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import { selectPlace, takeoutOptions } from '../../constants/constants';
 import MakingRequestModal from '../Modal/MakingRequestModal';
+import useKakaoPay from '../../hooks/useKakaoPay';
 
 const orderDate = new Date().toISOString();
 
+/** 카카오페이 */
+const kakaoPayData = {
+  cid: 'TC0ONETIME',
+  partner_order_id: 'partner_order_id',
+  partner_user_id: 'partner_user_id',
+  item_name: '초코파이',
+  quantity: 1,
+  total_amount: 2200,
+  vat_amount: 200,
+  tax_free_amount: 0,
+  approval_url: 'http://localhost:5173',
+  fail_url: 'http://localhost:5173',
+  cancel_url: 'http://localhost:5173',
+};
+
 function ConfirmOrder({ cartCtx }) {
   const { postMenu, error, success } = usePostMenu('/pay');
+  const { postKakaoPay } = useKakaoPay();
   const { currentUser } = useContext(LoginContext);
 
   // 테이크 아웃 장소 선택
@@ -63,7 +80,7 @@ function ConfirmOrder({ cartCtx }) {
       orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
       orderRequest,
     });
-
+    postKakaoPay(kakaoPayData);
     const confirmPayment = window.confirm('주문 완료!');
     if (confirmPayment) {
       cartCtx.clearCart();
@@ -88,13 +105,7 @@ function ConfirmOrder({ cartCtx }) {
     setPickupTimeRange(e.target.value);
   };
 
-  useEffect(() => {
-    console.log(pickupTimeRange);
-  }, [pickupTimeRange]);
-
-  useEffect(() => {
-    console.log('makingRequestInput', makingRequestInput);
-  }, [makingRequestInput]);
+  useEffect(() => {}, [pickupTimeRange, makingRequestInput]);
 
   return (
     <S.Container>
