@@ -6,14 +6,20 @@ import { CartContext } from '../../contexts/CartContextProvider';
 import usePostMenu from '../../hooks/usePostMenu';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import { selectPlace, takeoutOptions } from '../../constants/constants';
+import MakingRequestModal from '../Modal/MakingRequestModal';
 
 const orderDate = new Date().toISOString();
 
 function ConfirmOrder({ cartCtx }) {
   const { postMenu, error, success } = usePostMenu('/pay');
   const { currentUser } = useContext(LoginContext);
+
   // 테이크 아웃 장소 선택
   const [selectedPlace, setSelectedPlace] = useState(null);
+  // 제조 / 픽업 요청사항
+  const [makingRequestModal, setMakingRequestModal] = useState(false);
+  const [makingRequestInput, setMakingRequestInput] = useState('');
+  console.log('makingRequestInput', makingRequestInput);
   // 포장 선택
   const [selectedTakeoutOption, setSelectedTakeoutOption] = useState(null);
   // 픽업 예정시간
@@ -40,6 +46,10 @@ function ConfirmOrder({ cartCtx }) {
   const discountPrice = cartCtx.total.discountPrices.reduce((acc, val) => {
     return (acc += val);
   }, 0);
+
+  const handleOpenModal = () => {
+    setMakingRequestModal(!makingRequestModal);
+  };
 
   const handlePayment = () => {
     postMenu({
@@ -123,8 +133,15 @@ function ConfirmOrder({ cartCtx }) {
             <S.StyledBsExclamationCircle />
             <S.Tips>주문 후에는 컵 변경이 불가합니다.</S.Tips>
           </S.TakeoutTip>
-          <S.TakeoutRequestMemo>
+          <S.TakeoutRequestMemo onClick={handleOpenModal}>
             제조 / 픽업 요청사항 <S.StyledIoIosArrowForward />
+            <MakingRequestModal
+              makingRequestModal={makingRequestModal}
+              setMakingRequestModal={setMakingRequestModal}
+              makingRequestInput={makingRequestInput}
+              setMakingRequestInput={setMakingRequestInput}
+            />
+            {makingRequestInput}
           </S.TakeoutRequestMemo>
         </S.SelectTakeoutOptionWrapper>
         {/* 포장 선택 */}

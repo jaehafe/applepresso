@@ -18,6 +18,7 @@ export const StyledHiOutlineTrash = styled(HiOutlineTrash)`
 `;
 
 export const Container = styled.div`
+  position: relative;
   background-color: #fae3eb;
   min-height: 100vh;
 `;
