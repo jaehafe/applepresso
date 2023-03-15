@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useState } from 'react';
 import axios from 'axios';
 import { LoginContext } from '../contexts/LoginContextProvider';
 
-const kakaoPayConfig = {
+export const kakaoPayConfig = {
   headers: {
     Authorization: 'KakaoAK dd30417e021280bcc5ceb5eaf45e2f03',
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',

@@ -18,6 +18,7 @@ import EasyOrder from './pages/EasyOrder/EasyOrder';
 import CartPage from './pages/CartPage/CartPage';
 import ConfirmOrderPage from './pages/ConfirmOrderPage/ConfirmOrderPage';
 import EasyOrderConfirmPage from './pages/EasyOrderConfirmPage/EasyOrderConfirmPage';
+import Payment from './pages/Payment/Payment';
 
 const Layout = () => {
   return (
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
   { path: '/confirmOrder', element: <ConfirmOrderPage /> },
   { path: '/easyOrderConfirm', element: <EasyOrderConfirmPage /> },
   { path: '/easyOrder', element: <EasyOrder /> },
+  { path: '/payment', element: <Payment /> },
   {
     path: '/main',
     element: <Layout />,
