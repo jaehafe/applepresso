@@ -24,7 +24,8 @@ function ConfirmOrder({ cartCtx }) {
   const [selectedTakeoutOption, setSelectedTakeoutOption] = useState(null);
   // 픽업 예정시간
   const [pickupTimeRange, setPickupTimeRange] = useState(0);
-  console.log('pickupTimeRange', pickupTimeRange);
+
+  // console.log('pickupTimeRange', pickupTimeRange);
   const selectTakeoutPlace = (option) => {
     console.log('place', option);
     setSelectedPlace(option);
@@ -46,10 +47,6 @@ function ConfirmOrder({ cartCtx }) {
   const discountPrice = cartCtx.total.discountPrices.reduce((acc, val) => {
     return (acc += val);
   }, 0);
-
-  const handleOpenModal = () => {
-    setMakingRequestModal(!makingRequestModal);
-  };
 
   const handlePayment = () => {
     postMenu({
@@ -74,6 +71,18 @@ function ConfirmOrder({ cartCtx }) {
     }
     return '주문 확인';
   };
+
+  const handleOpenMakingRequestModal = () => {
+    setMakingRequestModal(!makingRequestModal);
+  };
+
+  const handlePickupTimeRangeChange = (e) => {
+    setPickupTimeRange(e.target.value);
+  };
+
+  useEffect(() => {
+    console.log(pickupTimeRange);
+  }, [pickupTimeRange]);
 
   return (
     <S.Container>
@@ -133,15 +142,16 @@ function ConfirmOrder({ cartCtx }) {
             <S.StyledBsExclamationCircle />
             <S.Tips>주문 후에는 컵 변경이 불가합니다.</S.Tips>
           </S.TakeoutTip>
-          <S.TakeoutRequestMemo onClick={handleOpenModal}>
+          <S.TakeoutRequestMemo onClick={handleOpenMakingRequestModal}>
             제조 / 픽업 요청사항 <S.StyledIoIosArrowForward />
+            {/* 요청사항 모달 */}
             <MakingRequestModal
               makingRequestModal={makingRequestModal}
               setMakingRequestModal={setMakingRequestModal}
               makingRequestInput={makingRequestInput}
               setMakingRequestInput={setMakingRequestInput}
             />
-            {makingRequestInput}
+            {/* {makingRequestInput} */}
           </S.TakeoutRequestMemo>
         </S.SelectTakeoutOptionWrapper>
         {/* 포장 선택 */}
@@ -219,7 +229,7 @@ function ConfirmOrder({ cartCtx }) {
             max={30}
             step={1}
             value={pickupTimeRange}
-            onChange={(e) => setPickupTimeRange(e.target.value)}
+            onChange={(e) => handlePickupTimeRangeChange(e)}
           />
           <S.SelectPickupTimeTip>
             도착 시간에 맞춰 음료를 제조해 드립니다.
