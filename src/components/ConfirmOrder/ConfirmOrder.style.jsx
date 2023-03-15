@@ -3,6 +3,7 @@ import { BsArrowLeft } from 'react-icons/bs';
 import { BsExclamationCircle } from 'react-icons/bs';
 import { IoIosArrowForward } from 'react-icons/io';
 import { IoIosArrowDown } from 'react-icons/io';
+import { TbReceipt } from 'react-icons/tb';
 
 import { HiOutlineTrash } from 'react-icons/hi';
 
@@ -185,6 +186,14 @@ export const TakeoutRequestMemo = styled.div`
   justify-content: flex-end;
   color: var(--main-color);
   cursor: pointer;
+  margin-bottom: 10px;
+`;
+export const TakeoutRequestWrapper = styled.div`
+  display: flex;
+`;
+export const StyledTbReceipt = styled(TbReceipt)`
+  color: var(--main-color);
+  margin-right: 6px;
 `;
 
 // 쿠폰

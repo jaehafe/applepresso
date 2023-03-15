@@ -5,6 +5,7 @@ export const ModalContainer = styled.div`
   border: 1px solid;
   position: absolute;
   z-index: ${(props) => (props.$makingRequestModal ? '10' : '-1')};
+  opacity: ${(props) => (props.$makingRequestModal ? '1' : '0')};
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

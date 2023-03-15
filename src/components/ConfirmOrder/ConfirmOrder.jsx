@@ -18,8 +18,8 @@ function ConfirmOrder({ cartCtx }) {
   const [selectedPlace, setSelectedPlace] = useState(null);
   // 제조 / 픽업 요청사항
   const [makingRequestModal, setMakingRequestModal] = useState(false);
-  const [makingRequestInput, setMakingRequestInput] = useState('');
-  console.log('makingRequestInput', makingRequestInput);
+  const [makingRequestInput, setMakingRequestInput] = useState(null);
+
   // 포장 선택
   const [selectedTakeoutOption, setSelectedTakeoutOption] = useState(null);
   // 픽업 예정시간
@@ -83,6 +83,10 @@ function ConfirmOrder({ cartCtx }) {
   useEffect(() => {
     console.log(pickupTimeRange);
   }, [pickupTimeRange]);
+
+  useEffect(() => {
+    console.log('makingRequestInput', makingRequestInput);
+  }, [makingRequestInput]);
 
   return (
     <S.Container>
@@ -151,8 +155,14 @@ function ConfirmOrder({ cartCtx }) {
               makingRequestInput={makingRequestInput}
               setMakingRequestInput={setMakingRequestInput}
             />
-            {/* {makingRequestInput} */}
           </S.TakeoutRequestMemo>
+
+          {makingRequestInput && (
+            <S.TakeoutRequestWrapper>
+              <S.StyledTbReceipt />
+              {makingRequestInput}
+            </S.TakeoutRequestWrapper>
+          )}
         </S.SelectTakeoutOptionWrapper>
         {/* 포장 선택 */}
         <S.SelectTakeoutOptionWrapper>
