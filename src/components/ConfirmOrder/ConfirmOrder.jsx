@@ -149,12 +149,6 @@ function ConfirmOrder({ cartCtx }) {
           <S.TakeoutRequestMemo onClick={handleOpenMakingRequestModal}>
             제조 / 픽업 요청사항 <S.StyledIoIosArrowForward />
             {/* 요청사항 모달 */}
-            <MakingRequestModal
-              makingRequestModal={makingRequestModal}
-              setMakingRequestModal={setMakingRequestModal}
-              makingRequestInput={makingRequestInput}
-              setMakingRequestInput={setMakingRequestInput}
-            />
           </S.TakeoutRequestMemo>
 
           {makingRequestInput && (
@@ -164,6 +158,13 @@ function ConfirmOrder({ cartCtx }) {
             </S.TakeoutRequestWrapper>
           )}
         </S.SelectTakeoutOptionWrapper>
+        {/* 제조/픽업 요청사항 모달창 */}
+        <MakingRequestModal
+          makingRequestModal={makingRequestModal}
+          setMakingRequestModal={setMakingRequestModal}
+          makingRequestInput={makingRequestInput}
+          setMakingRequestInput={setMakingRequestInput}
+        />
         {/* 포장 선택 */}
         <S.SelectTakeoutOptionWrapper>
           <S.SelectTakeoutOptionTitle>포장 선택</S.SelectTakeoutOptionTitle>
