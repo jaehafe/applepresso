@@ -7,12 +7,29 @@ import usePostMenu from '../../hooks/usePostMenu';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import { selectPlace, takeoutOptions } from '../../constants/constants';
 import MakingRequestModal from '../Modal/MakingRequestModal';
+import useKakaoPay from '../../hooks/useKakaoPay';
 
 const orderDate = new Date().toISOString();
 
 function ConfirmOrder({ cartCtx }) {
   const { postMenu, error, success } = usePostMenu('/pay');
+  const { postKakaoPay } = useKakaoPay();
   const { currentUser } = useContext(LoginContext);
+
+  /** 카카오페이 */
+  const kakaoPayData = {
+    cid: 'TC0ONETIME',
+    partner_order_id: 'partner_order_id',
+    partner_user_id: 'partner_user_id',
+    item_name: `애플프레소 ${cartCtx?.items[0]?.title} 등 ${cartCtx?.items?.length}개`,
+    quantity: cartCtx.total.totalQty,
+    total_amount: cartCtx.total.finalPrice,
+    vat_amount: cartCtx.total.finalPrice / 10,
+    tax_free_amount: 0,
+    approval_url: 'http://localhost:5173/payment',
+    fail_url: 'http://localhost:5173/payment',
+    cancel_url: 'http://localhost:5173/payment',
+  };
 
   // 테이크 아웃 장소 선택
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -25,13 +42,10 @@ function ConfirmOrder({ cartCtx }) {
   // 픽업 예정시간
   const [pickupTimeRange, setPickupTimeRange] = useState(0);
 
-  // console.log('pickupTimeRange', pickupTimeRange);
   const selectTakeoutPlace = (option) => {
-    console.log('place', option);
     setSelectedPlace(option);
   };
   const selectTakeoutOption = (option) => {
-    console.log('takeout', option);
     setSelectedTakeoutOption(option);
   };
 
@@ -56,19 +70,21 @@ function ConfirmOrder({ cartCtx }) {
   };
 
   const handlePayment = () => {
-    postMenu({
-      user: currentUser?.user,
-      orderDetail: cartCtx.items,
-      orderDate,
-      orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
-      orderRequest,
-    });
+    const confirmPayment = window.confirm(
+      '정책상 주문 후에는 취소가 불가능합니다. 주문하시겠습니까?'
+    );
 
-    const confirmPayment = window.confirm('주문 완료!');
     if (confirmPayment) {
-      cartCtx.clearCart();
-      navigate('/main/home');
+      postMenu({
+        user: currentUser?.user,
+        orderDetail: cartCtx.items,
+        orderDate,
+        orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
+        orderRequest,
+      });
+      postKakaoPay(kakaoPayData);
     }
+    cartCtx.clearCart();
   };
 
   const handlePaymentTitle = () => {
@@ -88,13 +104,7 @@ function ConfirmOrder({ cartCtx }) {
     setPickupTimeRange(e.target.value);
   };
 
-  useEffect(() => {
-    console.log(pickupTimeRange);
-  }, [pickupTimeRange]);
-
-  useEffect(() => {
-    console.log('makingRequestInput', makingRequestInput);
-  }, [makingRequestInput]);
+  useEffect(() => {}, [pickupTimeRange, makingRequestInput]);
 
   return (
     <S.Container>
