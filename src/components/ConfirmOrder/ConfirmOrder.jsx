@@ -6,19 +6,26 @@ import { CartContext } from '../../contexts/CartContextProvider';
 import usePostMenu from '../../hooks/usePostMenu';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import { selectPlace, takeoutOptions } from '../../constants/constants';
+import MakingRequestModal from '../Modal/MakingRequestModal';
 
 const orderDate = new Date().toISOString();
 
 function ConfirmOrder({ cartCtx }) {
   const { postMenu, error, success } = usePostMenu('/pay');
   const { currentUser } = useContext(LoginContext);
+
   // 테이크 아웃 장소 선택
   const [selectedPlace, setSelectedPlace] = useState(null);
+  // 제조 / 픽업 요청사항
+  const [makingRequestModal, setMakingRequestModal] = useState(false);
+  const [makingRequestInput, setMakingRequestInput] = useState(null);
+
   // 포장 선택
   const [selectedTakeoutOption, setSelectedTakeoutOption] = useState(null);
   // 픽업 예정시간
   const [pickupTimeRange, setPickupTimeRange] = useState(0);
-  console.log('pickupTimeRange', pickupTimeRange);
+
+  // console.log('pickupTimeRange', pickupTimeRange);
   const selectTakeoutPlace = (option) => {
     console.log('place', option);
     setSelectedPlace(option);
@@ -64,6 +71,22 @@ function ConfirmOrder({ cartCtx }) {
     }
     return '주문 확인';
   };
+
+  const handleOpenMakingRequestModal = () => {
+    setMakingRequestModal(!makingRequestModal);
+  };
+
+  const handlePickupTimeRangeChange = (e) => {
+    setPickupTimeRange(e.target.value);
+  };
+
+  useEffect(() => {
+    console.log(pickupTimeRange);
+  }, [pickupTimeRange]);
+
+  useEffect(() => {
+    console.log('makingRequestInput', makingRequestInput);
+  }, [makingRequestInput]);
 
   return (
     <S.Container>
@@ -123,10 +146,25 @@ function ConfirmOrder({ cartCtx }) {
             <S.StyledBsExclamationCircle />
             <S.Tips>주문 후에는 컵 변경이 불가합니다.</S.Tips>
           </S.TakeoutTip>
-          <S.TakeoutRequestMemo>
+          <S.TakeoutRequestMemo onClick={handleOpenMakingRequestModal}>
             제조 / 픽업 요청사항 <S.StyledIoIosArrowForward />
+            {/* 요청사항 모달 */}
           </S.TakeoutRequestMemo>
+
+          {makingRequestInput && (
+            <S.TakeoutRequestWrapper>
+              <S.StyledTbReceipt />
+              {makingRequestInput}
+            </S.TakeoutRequestWrapper>
+          )}
         </S.SelectTakeoutOptionWrapper>
+        {/* 제조/픽업 요청사항 모달창 */}
+        <MakingRequestModal
+          makingRequestModal={makingRequestModal}
+          setMakingRequestModal={setMakingRequestModal}
+          makingRequestInput={makingRequestInput}
+          setMakingRequestInput={setMakingRequestInput}
+        />
         {/* 포장 선택 */}
         <S.SelectTakeoutOptionWrapper>
           <S.SelectTakeoutOptionTitle>포장 선택</S.SelectTakeoutOptionTitle>
@@ -202,7 +240,7 @@ function ConfirmOrder({ cartCtx }) {
             max={30}
             step={1}
             value={pickupTimeRange}
-            onChange={(e) => setPickupTimeRange(e.target.value)}
+            onChange={(e) => handlePickupTimeRangeChange(e)}
           />
           <S.SelectPickupTimeTip>
             도착 시간에 맞춰 음료를 제조해 드립니다.
