@@ -38,7 +38,7 @@ function ConfirmOrder({ cartCtx }) {
     total_amount: cartCtx.total.finalPrice,
     vat_amount: cartCtx.total.finalPrice / 10,
     tax_free_amount: 0,
-    approval_url: 'http://localhost:5173/payment',
+    approval_url: 'http://localhost:5173/main/home',
     fail_url: 'http://localhost:5173/payment',
     cancel_url: 'http://localhost:5173/payment',
   };
