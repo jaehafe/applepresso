@@ -4,7 +4,7 @@ import { LoginContext } from '../contexts/LoginContextProvider';
 
 export const kakaoPayConfig = {
   headers: {
-    Authorization: 'KakaoAK dd30417e021280bcc5ceb5eaf45e2f03',
+    Authorization: `KakaoAK ${import.meta.env.VITE_KAKAO_PAY_ADMIN_KEY}`,
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
   },
 };
