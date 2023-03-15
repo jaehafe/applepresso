@@ -48,12 +48,20 @@ function ConfirmOrder({ cartCtx }) {
     return (acc += val);
   }, 0);
 
+  const orderRequest = {
+    selectedPlace,
+    makingRequestInput,
+    selectedTakeoutOption,
+    pickupTimeRange,
+  };
+
   const handlePayment = () => {
     postMenu({
       user: currentUser?.user,
       orderDetail: cartCtx.items,
       orderDate,
       orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
+      orderRequest,
     });
 
     const confirmPayment = window.confirm('주문 완료!');
