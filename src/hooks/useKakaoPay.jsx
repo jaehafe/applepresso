@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import axios from 'axios';
+import { LoginContext } from '../contexts/LoginContextProvider';
 
-const config = {
+const kakaoPayConfig = {
   headers: {
     Authorization: 'KakaoAK dd30417e021280bcc5ceb5eaf45e2f03',
     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -9,6 +10,7 @@ const config = {
 };
 
 function useKakaoPay() {
+  const { currentUser } = useContext(LoginContext);
   const [kakaoPayErr, setKakaoPayErr] = useState(false);
   const [kakaoPayLoading, setKakaoPayLoading] = useState(false);
   const [kakaoPaySuccess, setKakaoPaySuccess] = useState(false);
@@ -22,9 +24,14 @@ function useKakaoPay() {
       const res = await axios.post(
         'https://kapi.kakao.com/v1/payment/ready',
         params.toString(),
-        config
+        kakaoPayConfig
       );
       setKakaoPayment(res.data);
+      localStorage.setItem(
+        `${currentUser?.user.email}-tid`,
+        JSON.stringify(res.data.tid)
+      );
+      window.location.href = res.data.next_redirect_pc_url;
       console.log(res);
     } catch (err) {
       console.log(err);
