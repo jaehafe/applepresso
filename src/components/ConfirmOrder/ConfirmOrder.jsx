@@ -9,6 +9,7 @@ import { selectPlace, takeoutOptions } from '../../constants/constants';
 import MakingRequestModal from '../Modal/MakingRequestModal';
 import useKakaoPay from '../../hooks/useKakaoPay';
 import SelectPayment from '../SelectPayment/SelectPayment';
+import { notify, toastComponent } from '../../hooks/useToastify';
 
 import kakaopay_small from '../../assets/kakaopay_small.png';
 
@@ -76,7 +77,8 @@ function ConfirmOrder({ cartCtx }) {
 
   const handlePayment = () => {
     if (!selectedPlace) {
-      alert('장소를 선택 해주세요.');
+      notify('장소를 선택 해주세요.');
+
       const rectElement = selectPlaceRef.current.getBoundingClientRect();
       const absoluteTop = rectElement.top + window.pageYOffset;
       window.scrollTo({ top: absoluteTop - 80, behavior: 'smooth' });
@@ -85,7 +87,7 @@ function ConfirmOrder({ cartCtx }) {
     }
 
     if (!selectedTakeoutOption) {
-      alert('포장 방법을 선택 해주세요.');
+      notify('포장 방법을 선택 해주세요.');
       const rectElement = selectTakeoutOptionRef.current.getBoundingClientRect();
       const absoluteTop = rectElement.top + window.pageYOffset;
       window.scrollTo({ top: absoluteTop - 80, behavior: 'smooth' });
@@ -141,6 +143,7 @@ function ConfirmOrder({ cartCtx }) {
 
   return (
     <S.Container>
+      {toastComponent()}
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
