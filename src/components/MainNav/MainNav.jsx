@@ -33,8 +33,8 @@ const ListItem = [
   },
   {
     id: 5,
-    navigate: '/',
-    name: '전체',
+    navigate: '/main/myPage',
+    name: '마이페이지',
     icon: S.StyledTbBorderAll,
     active: false,
   },

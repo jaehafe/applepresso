@@ -21,6 +21,7 @@ import EasyOrderConfirmPage from './pages/EasyOrderConfirmPage/EasyOrderConfirmP
 import Payment from './pages/Payment/Payment';
 import SelectPayment from './components/SelectPayment/SelectPayment';
 import PaymentFail from './pages/Payment/PaymentFail';
+import MyPage from './pages/MyPage/MyPage';
 
 const Layout = () => {
   return (
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: 'home', element: <Home /> },
+      { path: 'myPage', element: <MyPage /> },
       {
         path: 'order',
         element: <OrderLayout />,
