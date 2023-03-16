@@ -158,6 +158,7 @@ export const TakeOutOptions = styled.div`
   border: 1px solid var(--subtitle-color);
   border-radius: 10px;
   padding: 16px 10px;
+  cursor: pointer;
 
   color: ${(props) => (props.$isActive ? '#fff' : 'var(--subtitle-color)')};
   background-color: ${(props) => (props.$isActive ? 'var(--main-color)' : '')};
@@ -301,9 +302,15 @@ export const SelectPaymentHeaderWrapper = styled(SelectHeaderWrapper)`
 `;
 export const SelectPaymentTitleWrapper = styled(SelectTitle)``;
 export const SelectPaymentInfo = styled.div`
+  display: flex;
+  gap: 10px;
   font-size: 20px;
 `;
-
+export const SelectedPaymentIMG = styled.img`
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+`;
 // 주문 내역
 export const OrderDetailWrapper = styled(Wrapper)`
   margin-bottom: 6px;
