@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import * as S from './ConfirmOrder.style';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { formatPrice } from '../../utils/format';
@@ -9,21 +9,28 @@ import { selectPlace, takeoutOptions } from '../../constants/constants';
 import MakingRequestModal from '../Modal/MakingRequestModal';
 import useKakaoPay from '../../hooks/useKakaoPay';
 import SelectPayment from '../SelectPayment/SelectPayment';
+import { notify, toastComponent } from '../../hooks/useToastify';
+
+import kakaopay_small from '../../assets/kakaopay_small.png';
+import useKakaoPayApprove from '../../hooks/useKakaoPayApprove';
 
 const orderDate = new Date().toISOString();
 
 function ConfirmOrder({ cartCtx }) {
+  const navigate = useNavigate();
   const { postMenu, error, success } = usePostMenu('/pay');
   const { postKakaoPay } = useKakaoPay();
   const { currentUser } = useContext(LoginContext);
   // 테이크 아웃 장소 선택
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const selectPlaceRef = useRef();
   // 제조 / 픽업 요청사항
   const [makingRequestModal, setMakingRequestModal] = useState(false);
   const [makingRequestInput, setMakingRequestInput] = useState(null);
 
   // 포장 선택
   const [selectedTakeoutOption, setSelectedTakeoutOption] = useState(null);
+  const selectTakeoutOptionRef = useRef();
   // 픽업 예정시간
   const [pickupTimeRange, setPickupTimeRange] = useState(0);
   const [selectPayment, setSelectPayment] = useState(null);
@@ -38,9 +45,9 @@ function ConfirmOrder({ cartCtx }) {
     total_amount: cartCtx.total.finalPrice,
     vat_amount: cartCtx.total.finalPrice / 10,
     tax_free_amount: 0,
-    approval_url: 'http://localhost:5173/main/home',
-    fail_url: 'http://localhost:5173/payment',
-    cancel_url: 'http://localhost:5173/payment',
+    approval_url: 'http://localhost:5173/payment',
+    fail_url: 'http://localhost:5173/paymentFail',
+    cancel_url: 'http://localhost:5173/paymentFail',
   };
 
   const selectTakeoutPlace = (option) => {
@@ -50,7 +57,6 @@ function ConfirmOrder({ cartCtx }) {
     setSelectedTakeoutOption(option);
   };
 
-  const navigate = useNavigate();
   const handleToBack = () => {
     navigate(-1);
   };
@@ -70,12 +76,43 @@ function ConfirmOrder({ cartCtx }) {
     pickupTimeRange,
   };
 
+  const handleClientRect = (optionState, optionRef, message) => {
+    if (!optionState) {
+      const rectElement = optionRef.current.getBoundingClientRect();
+      const absoluteTop = rectElement.top + window.pageYOffset;
+      window.scrollTo({ top: absoluteTop - 80, behavior: 'smooth' });
+      optionRef.current.focus();
+      setTimeout(() => {
+        notify(message);
+      }, 500);
+      return false;
+    }
+    return true;
+  };
+
   const handlePayment = () => {
+    const isPlaceSelected = handleClientRect(
+      selectedPlace,
+      selectPlaceRef,
+      '장소를 선택해주세요.'
+    );
+    const isTakeoutOptionSelected = handleClientRect(
+      selectedTakeoutOption,
+      selectTakeoutOptionRef,
+      '포장 방법을 선택해주세요.'
+    );
+
+    if (!isPlaceSelected || !isTakeoutOptionSelected) {
+      return;
+    }
+
     const confirmPayment = window.confirm(
       '정책상 주문 후에는 취소가 불가능합니다. 주문하시겠습니까?'
     );
 
     if (confirmPayment) {
+      postKakaoPay(kakaoPayData);
+
       postMenu({
         user: currentUser?.user,
         orderDetail: cartCtx.items,
@@ -83,9 +120,9 @@ function ConfirmOrder({ cartCtx }) {
         orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
         orderRequest,
       });
-      postKakaoPay(kakaoPayData);
+
+      cartCtx.clearCart();
     }
-    cartCtx.clearCart();
   };
 
   const handlePaymentTitle = () => {
@@ -119,6 +156,7 @@ function ConfirmOrder({ cartCtx }) {
 
   return (
     <S.Container>
+      {toastComponent()}
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
@@ -153,7 +191,9 @@ function ConfirmOrder({ cartCtx }) {
         </S.SelectShopWrapper>
         {/* 테이크 아웃 장소 선택 */}
         <S.SelectTakeoutOptionWrapper>
-          <S.SelectTakeoutOptionTitle>장소 선택</S.SelectTakeoutOptionTitle>
+          <S.SelectTakeoutOptionTitle ref={selectPlaceRef}>
+            장소 선택
+          </S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
             {selectPlace.map((option) => {
               const isActive = selectedPlace?.id === option.id;
@@ -196,7 +236,9 @@ function ConfirmOrder({ cartCtx }) {
         />
         {/* 포장 선택 */}
         <S.SelectTakeoutOptionWrapper>
-          <S.SelectTakeoutOptionTitle>포장 선택</S.SelectTakeoutOptionTitle>
+          <S.SelectTakeoutOptionTitle ref={selectTakeoutOptionRef}>
+            포장 선택
+          </S.SelectTakeoutOptionTitle>
           <S.TakeoutOptionsWrapper>
             {takeoutOptions.map((option) => {
               const isActive = selectedTakeoutOption?.id === option.id;
@@ -281,7 +323,10 @@ function ConfirmOrder({ cartCtx }) {
             <S.SelectPaymentTitleWrapper>결제 정보</S.SelectPaymentTitleWrapper>
             <S.StyledIoIosArrowForward />
           </S.SelectPaymentHeaderWrapper>
-          {selectPayment && <S.SelectPaymentInfo>카카오 페이</S.SelectPaymentInfo>}
+          <S.SelectPaymentInfo>
+            <S.SelectedPaymentIMG src={kakaopay_small} />
+            카카오 페이
+          </S.SelectPaymentInfo>
         </S.SelectPaymentWrapper>
         {/* 주문메뉴 */}
         <S.OrderDetailWrapper>

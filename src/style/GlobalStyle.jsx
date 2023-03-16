@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
   --division: rgb(239, 224, 224);
   --subtitle-color: rgb(174, 153, 153);
   --button-color: rgba(233, 173, 182, 0.8);
+  --background-color: #FAE3EB;
   }
   
   *,
