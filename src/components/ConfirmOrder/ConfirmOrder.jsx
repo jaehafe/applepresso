@@ -20,7 +20,6 @@ function ConfirmOrder({ cartCtx }) {
   const navigate = useNavigate();
   const { postMenu, error, success } = usePostMenu('/pay');
   const { postKakaoPay } = useKakaoPay();
-  const { kakaoPayApproveSuccess } = useKakaoPayApprove();
   const { currentUser } = useContext(LoginContext);
   // 테이크 아웃 장소 선택
   const [selectedPlace, setSelectedPlace] = useState(null);
