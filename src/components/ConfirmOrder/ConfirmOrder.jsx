@@ -44,9 +44,9 @@ function ConfirmOrder({ cartCtx }) {
     total_amount: cartCtx.total.finalPrice,
     vat_amount: cartCtx.total.finalPrice / 10,
     tax_free_amount: 0,
-    approval_url: 'http://localhost:5173/main/home',
-    fail_url: 'http://localhost:5173/payment',
-    cancel_url: 'http://localhost:5173/payment',
+    approval_url: 'http://localhost:5173/payment',
+    fail_url: 'http://localhost:5173/paymentFail',
+    cancel_url: 'http://localhost:5173/paymentFail',
   };
 
   const selectTakeoutPlace = (option) => {
@@ -75,23 +75,33 @@ function ConfirmOrder({ cartCtx }) {
     pickupTimeRange,
   };
 
-  const handlePayment = () => {
-    if (!selectedPlace) {
-      notify('장소를 선택 해주세요.');
-
-      const rectElement = selectPlaceRef.current.getBoundingClientRect();
+  const handleClientRect = (optionState, optionRef, message) => {
+    if (!optionState) {
+      const rectElement = optionRef.current.getBoundingClientRect();
       const absoluteTop = rectElement.top + window.pageYOffset;
       window.scrollTo({ top: absoluteTop - 80, behavior: 'smooth' });
-      selectPlaceRef.current.focus();
-      return;
+      optionRef.current.focus();
+      setTimeout(() => {
+        notify(message);
+      }, 500);
+      return false;
     }
+    return true;
+  };
 
-    if (!selectedTakeoutOption) {
-      notify('포장 방법을 선택 해주세요.');
-      const rectElement = selectTakeoutOptionRef.current.getBoundingClientRect();
-      const absoluteTop = rectElement.top + window.pageYOffset;
-      window.scrollTo({ top: absoluteTop - 80, behavior: 'smooth' });
-      selectTakeoutOptionRef.current.focus();
+  const handlePayment = () => {
+    const isPlaceSelected = handleClientRect(
+      selectedPlace,
+      selectPlaceRef,
+      '장소를 선택해주세요.'
+    );
+    const isTakeoutOptionSelected = handleClientRect(
+      selectedTakeoutOption,
+      selectTakeoutOptionRef,
+      '포장 방법을 선택해주세요.'
+    );
+
+    if (!isPlaceSelected || !isTakeoutOptionSelected) {
       return;
     }
 
@@ -100,13 +110,13 @@ function ConfirmOrder({ cartCtx }) {
     );
 
     if (confirmPayment) {
-      postMenu({
-        user: currentUser?.user,
-        orderDetail: cartCtx.items,
-        orderDate,
-        orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
-        orderRequest,
-      });
+      // postMenu({
+      //   user: currentUser?.user,
+      //   orderDetail: cartCtx.items,
+      //   orderDate,
+      //   orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
+      //   orderRequest,
+      // });
       postKakaoPay(kakaoPayData);
     }
     cartCtx.clearCart();
