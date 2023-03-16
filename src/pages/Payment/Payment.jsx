@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import useKakaoPayApprove from '../../hooks/useKakaoPayApprove';
@@ -21,11 +21,13 @@ function Payment() {
     pg_token,
   };
 
-  postKakaoPayApprove(kakaoPayApproveData);
+  useEffect(() => {
+    postKakaoPayApprove(kakaoPayApproveData);
+  }, []);
 
   return (
     <S.Container>
-      결제 완료!<Link to="/main/home">홈으로 돌아가기</Link>
+      결제 완료!<Link to="/main/home">주문 내역 가기</Link>
     </S.Container>
   );
 }

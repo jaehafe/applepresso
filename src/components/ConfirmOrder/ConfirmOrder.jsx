@@ -12,6 +12,7 @@ import SelectPayment from '../SelectPayment/SelectPayment';
 import { notify, toastComponent } from '../../hooks/useToastify';
 
 import kakaopay_small from '../../assets/kakaopay_small.png';
+import useKakaoPayApprove from '../../hooks/useKakaoPayApprove';
 
 const orderDate = new Date().toISOString();
 
@@ -19,6 +20,7 @@ function ConfirmOrder({ cartCtx }) {
   const navigate = useNavigate();
   const { postMenu, error, success } = usePostMenu('/pay');
   const { postKakaoPay } = useKakaoPay();
+  const { kakaoPayApproveSuccess } = useKakaoPayApprove();
   const { currentUser } = useContext(LoginContext);
   // 테이크 아웃 장소 선택
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -110,16 +112,18 @@ function ConfirmOrder({ cartCtx }) {
     );
 
     if (confirmPayment) {
-      // postMenu({
-      //   user: currentUser?.user,
-      //   orderDetail: cartCtx.items,
-      //   orderDate,
-      //   orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
-      //   orderRequest,
-      // });
       postKakaoPay(kakaoPayData);
+
+      postMenu({
+        user: currentUser?.user,
+        orderDetail: cartCtx.items,
+        orderDate,
+        orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
+        orderRequest,
+      });
+
+      cartCtx.clearCart();
     }
-    cartCtx.clearCart();
   };
 
   const handlePaymentTitle = () => {
