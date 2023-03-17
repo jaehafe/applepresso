@@ -4,7 +4,7 @@ import { LoginContext } from '../../contexts/LoginContextProvider';
 import { Link, useNavigate } from 'react-router-dom';
 
 const HeaderNav = [
-  { title: '카드 관리', navigate: '/main/home', icons: <S.StyledBsCreditCard /> },
+  { title: '카드 관리', navigate: '/selectPayment', icons: <S.StyledBsCreditCard /> },
   { title: '설정', navigate: '/main/home', icons: <S.StyledRiListSettingsLine /> },
   { title: '알림', navigate: '/main/home', icons: <S.StyledBiBell /> },
   { title: '1:1 문의', navigate: '/main/home', icons: <S.StyledBsChatDots /> },
@@ -13,13 +13,13 @@ const HeaderNav = [
 const HeroNav = [
   {
     title: '간편주문',
-    navigate: '/main/home',
+    navigate: '/easyOrder',
     icons: <S.StyledFiBook />,
     directionIcon: <S.StyledIoIosArrowForward />,
   },
   {
     title: '주문내역',
-    navigate: '/main/home',
+    navigate: '/orderDetail',
     icons: <S.StyledIoReceiptOutline />,
     directionIcon: <S.StyledIoIosArrowForward />,
   },

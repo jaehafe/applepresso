@@ -23,6 +23,7 @@ import SelectPayment from './components/SelectPayment/SelectPayment';
 import PaymentFail from './pages/Payment/PaymentFail';
 import MyPage from './pages/MyPage/MyPage';
 import PaymentWaiting from './pages/Payment/PaymentWaiting';
+import OrderHistory from './pages/OrderHistory/OrderHistory';
 
 const Layout = () => {
   return (
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
   { path: '/selectPayment', element: <SelectPayment /> },
   { path: '/paymentFail', element: <PaymentFail /> },
   { path: '/paymentWaiting', element: <PaymentWaiting /> },
+  { path: '/orderHistory', element: <OrderHistory /> },
   {
     path: '/main',
     element: <Layout />,
