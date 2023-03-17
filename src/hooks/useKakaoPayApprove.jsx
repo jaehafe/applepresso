@@ -31,9 +31,6 @@ function useKakaoPayApprove() {
       setKakaoPayApproveSuccess(true);
     }
   };
-  //
-
-  //
 
   return {
     postKakaoPayApprove,

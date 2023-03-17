@@ -1,12 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as S from './PaymentFail.style';
+import PayRedirect from '../../components/PayRedirect/PayRedirect';
+import fail from '../../assets/fail.json';
+
+const Props = {
+  title: '결제 실패',
+  aniName: fail,
+  message: '주문 내역 가기',
+};
 
 function PaymentFail() {
   return (
-    <S.Container>
-      결제 실패<Link to="/main/home">홈으로 돌아가기</Link>
-    </S.Container>
+    <>
+      <PayRedirect {...Props} />;
+    </>
   );
 }
 
