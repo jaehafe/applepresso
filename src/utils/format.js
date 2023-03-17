@@ -18,3 +18,5 @@ const formatPrice = (target) => {
 };
 
 export { formatDate, formatPrice };
+
+export const orderDate = new Date().toISOString();
