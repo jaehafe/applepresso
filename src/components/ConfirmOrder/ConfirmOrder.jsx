@@ -10,15 +10,15 @@ import MakingRequestModal from '../Modal/MakingRequestModal';
 import useKakaoPay from '../../hooks/useKakaoPay';
 import SelectPayment from '../SelectPayment/SelectPayment';
 import { notify, toastComponent } from '../../hooks/useToastify';
+import { orderDate } from '../../utils/format';
 
 import kakaopay_small from '../../assets/kakaopay_small.png';
-import useKakaoPayApprove from '../../hooks/useKakaoPayApprove';
-
-const orderDate = new Date().toISOString();
+import ConfirmOrderModal from '../Modal/ConfirmOrderModal';
 
 function ConfirmOrder({ cartCtx }) {
   const navigate = useNavigate();
   const { postMenu, error, success } = usePostMenu('/pay');
+
   const { postKakaoPay } = useKakaoPay();
   const { currentUser } = useContext(LoginContext);
   // 테이크 아웃 장소 선택
@@ -34,6 +34,8 @@ function ConfirmOrder({ cartCtx }) {
   // 픽업 예정시간
   const [pickupTimeRange, setPickupTimeRange] = useState(0);
   const [selectPayment, setSelectPayment] = useState(null);
+  // confirm modal
+  const [isOpenConfirmModal, setIsOpenConfirmModal] = useState(false);
 
   /** 카카오페이 */
   const kakaoPayData = {
@@ -90,6 +92,19 @@ function ConfirmOrder({ cartCtx }) {
     return true;
   };
 
+  const openConfirmModal = () => {
+    console.log('123');
+    setIsOpenConfirmModal(!isOpenConfirmModal);
+  };
+
+  const handleClosePaymentModal = () => {
+    setIsOpenConfirmModal(false);
+  };
+
+  const handleOpenPaymentModal = () => {
+    setIsOpenConfirmModal(true);
+  };
+
   const handlePayment = () => {
     const isPlaceSelected = handleClientRect(
       selectedPlace,
@@ -101,28 +116,25 @@ function ConfirmOrder({ cartCtx }) {
       selectTakeoutOptionRef,
       '포장 방법을 선택해주세요.'
     );
-
     if (!isPlaceSelected || !isTakeoutOptionSelected) {
       return;
     }
 
-    const confirmPayment = window.confirm(
-      '정책상 주문 후에는 취소가 불가능합니다. 주문하시겠습니까?'
-    );
-
-    if (confirmPayment) {
-      postKakaoPay(kakaoPayData);
-
-      postMenu({
-        user: currentUser?.user,
-        orderDetail: cartCtx.items,
-        orderDate,
-        orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
-        orderRequest,
-      });
-
-      cartCtx.clearCart();
+    if (isPlaceSelected && isTakeoutOptionSelected) {
+      setIsOpenConfirmModal(true);
     }
+  };
+
+  const handleFinalPayment = () => {
+    postKakaoPay(kakaoPayData);
+    postMenu({
+      user: currentUser?.user,
+      orderDetail: cartCtx.items,
+      orderDate,
+      orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
+      orderRequest,
+    });
+    cartCtx.clearCart();
   };
 
   const handlePaymentTitle = () => {
@@ -145,13 +157,7 @@ function ConfirmOrder({ cartCtx }) {
   useEffect(() => {}, [pickupTimeRange, makingRequestInput]);
 
   const navigateToSelectPaymentPage = () => {
-    // navigate('/selectPayment');
     navigate('/selectPayment', { from: 'SelectPaymentWrapper' });
-  };
-
-  const handleConfirm = () => {
-    setSelectPayment('카카오 페이');
-    navigate(-1);
   };
 
   return (
@@ -394,6 +400,13 @@ function ConfirmOrder({ cartCtx }) {
             주문 결제하기
           </S.PaymentButtonWrapper>
         </S.PaymentButtonContainer>
+        {isOpenConfirmModal && (
+          <ConfirmOrderModal
+            onCloseModal={handleClosePaymentModal}
+            handlePayment={handlePayment}
+            handleFinalPayment={handleFinalPayment}
+          />
+        )}
         {/*  */}
       </S.BodyPaddingTop>
     </S.Container>
