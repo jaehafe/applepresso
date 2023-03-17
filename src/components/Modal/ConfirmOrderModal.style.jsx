@@ -1,11 +1,28 @@
 import styled from 'styled-components';
+
+// export const Container = styled.div`
+//   margin-top: 300px;
+//   position: fixed;
+//   z-index: 10;
+//   border: 1px solid;
+//   background-color: #fff;
+//   width: 300px;
+//   height: 300px;
+// `;
+// export const Wrapper = styled.div``;
+// export const CloseButton = styled.div``;
+// export const Content = styled.div``;
+// export const Title = styled.div``;
+// export const ButtonWrapper = styled.div``;
+// export const Button = styled.button``;
+
 import { BsExclamationCircle } from 'react-icons/bs';
 
 export const ModalContainer = styled.div`
+  z-index: 10;
   border: 1px solid;
-  position: absolute;
-  z-index: ${(props) => (props.$makingRequestModal ? '10' : '-1')};
-  opacity: ${(props) => (props.$makingRequestModal ? '1' : '0')};
+  position: fixed;
+
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -45,6 +62,7 @@ export const Tips = styled.div`
   margin-bottom: 45px;
 `;
 export const ButtonWrapper = styled.div`
+  margin-top: 80px;
   border-top: 1px solid var(--division);
   padding-top: 20px;
   display: grid;
