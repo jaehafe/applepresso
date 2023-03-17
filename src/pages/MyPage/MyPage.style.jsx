@@ -12,6 +12,7 @@ import {
   FiLogOut,
   BsShieldCheck,
   BiStoreAlt,
+  FiLogIn,
 } from 'react-icons/all';
 
 export const Container = styled.div`
@@ -48,6 +49,11 @@ export const UserName = styled.h1``;
 export const UserHi = styled.h1``;
 export const StyledFiLogOut = styled(FiLogOut)`
   font-size: 40px;
+  cursor: pointer;
+`;
+export const StyledFiLogIn = styled(FiLogIn)`
+  font-size: 40px;
+  cursor: pointer;
 `;
 
 export const CardContainer = styled.div`

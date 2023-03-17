@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import * as S from './MyPage.style';
 import { LoginContext } from '../../contexts/LoginContextProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const HeaderNav = [
   { title: '카드 관리', navigate: '/main/home', icons: <S.StyledBsCreditCard /> },
@@ -38,25 +38,39 @@ const HeroNav = [
 ];
 
 function MyPage() {
-  const { currentUser } = useContext(LoginContext);
-  const {
-    accessToken,
-    user: { email, displayName, profileImg },
-  } = JSON.parse(localStorage.getItem('BANA_USER'));
+  const navigate = useNavigate();
+  const { currentUser, logout } = useContext(LoginContext);
 
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    logout();
+  };
+
+  const navigateToLoginPage = () => {
+    navigate('/');
+  };
 
   return (
     <S.Container>
       <S.HeaderWrapper>
         <S.HeaderLeft>
-          <S.ProfileIMG src={profileImg} />
-          <S.UsernameWrapper>
-            <S.UserName>{displayName}님,</S.UserName>
-            <S.UserHi>안녕하세요!</S.UserHi>
-          </S.UsernameWrapper>
+          {currentUser ? (
+            <>
+              <S.ProfileIMG src={currentUser.user.profileImg} />
+              <S.UsernameWrapper>
+                <S.UserName>{currentUser.user.displayName}님,</S.UserName>
+                <S.UserHi>안녕하세요!</S.UserHi>
+              </S.UsernameWrapper>
+            </>
+          ) : (
+            <S.UserHi>로그인 후 이용하실 수 있습니다.</S.UserHi>
+          )}
         </S.HeaderLeft>
-        <S.StyledFiLogOut onClick={handleLogout} />
+
+        {currentUser ? (
+          <S.StyledFiLogOut onClick={handleLogout} />
+        ) : (
+          <S.StyledFiLogIn onClick={navigateToLoginPage} />
+        )}
       </S.HeaderWrapper>
       <S.HeaderNav>
         {HeaderNav.map((items) => {
