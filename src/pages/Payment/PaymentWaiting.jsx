@@ -1,12 +1,19 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import PayRedirect from '../../components/PayRedirect/PayRedirect';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import useKakaoPayApprove from '../../hooks/useKakaoPayApprove';
-import * as S from './Payment.style';
+import loading_payment from '../../assets/loading_payment.json';
 
-function Payment() {
+const Props = {
+  title: '결제 진행중...',
+  aniName: loading_payment,
+};
+
+function PaymentWaiting() {
+  const navigate = useNavigate();
   const { currentUser } = useContext(LoginContext);
-  const { postKakaoPayApprove } = useKakaoPayApprove();
+  const { postKakaoPayApprove, kakaoPayApproveSuccess } = useKakaoPayApprove();
   const searchParams = new URLSearchParams(window.location.search);
   const pg_token = searchParams.get('pg_token');
   const tid = JSON.parse(localStorage.getItem(`${currentUser?.user.email}-tid`));
@@ -25,11 +32,19 @@ function Payment() {
     postKakaoPayApprove(kakaoPayApproveData);
   }, []);
 
+  useEffect(() => {
+    if (kakaoPayApproveSuccess) {
+      setTimeout(() => {
+        navigate('/paymentSuccess');
+      }, 3000);
+    }
+  }, [kakaoPayApproveSuccess]);
+
   return (
-    <S.Container>
-      결제 완료!<Link to="/main/home">주문 내역 가기</Link>
-    </S.Container>
+    <>
+      <PayRedirect {...Props} />;
+    </>
   );
 }
 
-export default Payment;
+export default PaymentWaiting;

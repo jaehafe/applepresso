@@ -18,10 +18,11 @@ import EasyOrder from './pages/EasyOrder/EasyOrder';
 import CartPage from './pages/CartPage/CartPage';
 import ConfirmOrderPage from './pages/ConfirmOrderPage/ConfirmOrderPage';
 import EasyOrderConfirmPage from './pages/EasyOrderConfirmPage/EasyOrderConfirmPage';
-import Payment from './pages/Payment/Payment';
+import PaymentSuccess from './pages/Payment/PaymentSuccess';
 import SelectPayment from './components/SelectPayment/SelectPayment';
 import PaymentFail from './pages/Payment/PaymentFail';
 import MyPage from './pages/MyPage/MyPage';
+import PaymentWaiting from './pages/Payment/PaymentWaiting';
 
 const Layout = () => {
   return (
@@ -51,9 +52,10 @@ const router = createBrowserRouter([
   { path: '/confirmOrder', element: <ConfirmOrderPage /> },
   { path: '/easyOrderConfirm', element: <EasyOrderConfirmPage /> },
   { path: '/easyOrder', element: <EasyOrder /> },
-  { path: '/payment', element: <Payment /> },
+  { path: '/paymentSuccess', element: <PaymentSuccess /> },
   { path: '/selectPayment', element: <SelectPayment /> },
   { path: '/paymentFail', element: <PaymentFail /> },
+  { path: '/paymentWaiting', element: <PaymentWaiting /> },
   {
     path: '/main',
     element: <Layout />,
