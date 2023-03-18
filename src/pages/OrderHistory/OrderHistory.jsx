@@ -9,9 +9,25 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Calendar from '../../components/Calendar/Calendar';
 
-function OrderHistory() {
-  const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
+const getSevenDaysAgoDate = () => {
+  const date = new Date();
+  date.setDate(date.getDate() - 7);
+  return date;
+};
 
+function OrderHistory() {
+  // DatePicker
+  const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
+  const [startDate, setStartDate] = useState(getSevenDaysAgoDate());
+  console.log('startDate', startDate);
+  const [endDate, setEndDate] = useState(new Date());
+
+  const handleDateChange = (dates) => {
+    const [start, end] = dates;
+    setStartDate(start);
+    setEndDate(end);
+  };
+  //
   const { data, error, loading } = useGetOrderedMenu('/pay');
 
   const navigate = useNavigate();
@@ -42,12 +58,23 @@ function OrderHistory() {
         <S.SetDateContainer>
           <S.DateWrapper>
             <S.StyledAiOutlineCalendar />
-            <S.Date>2023</S.Date>
+            <S.Date>
+              {startDate?.toLocaleDateString()} ~ {endDate?.toLocaleDateString()}
+            </S.Date>
           </S.DateWrapper>
           <S.SetDateButton onClick={handleOpenDatePicker}>기간 설정</S.SetDateButton>
         </S.SetDateContainer>
       </S.SelectContainer>
-      {isOpenDatePicker && <Calendar setIsOpenDatePicker={setIsOpenDatePicker} />}
+      {isOpenDatePicker && (
+        <Calendar
+          setIsOpenDatePicker={setIsOpenDatePicker}
+          startDate={startDate}
+          setStartDate={setStartDate}
+          endDate={endDate}
+          setEndDate={setEndDate}
+          onChange={handleDateChange}
+        />
+      )}
       {/*  */}
       <S.OrderContainer>
         {data?.map((items) => {
