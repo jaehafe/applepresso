@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as S from './OrderHistory.style';
 import { Link, useNavigate } from 'react-router-dom';
 import banner1 from '../../assets/homeBanner/banner1.jpeg';
 import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 import { formatDate, formatPrice } from '../../utils/format';
+import Loading from '../../components/Loading.jsx/Loading';
 
 function OrderHistory() {
   const { data, error, loading } = useGetOrderedMenu('/pay');
+
   const navigate = useNavigate();
-  console.log(data);
 
   const handleToBack = () => {
     navigate(-1);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <S.Container>
       <S.HeaderContainer>
