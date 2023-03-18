@@ -42,7 +42,7 @@ function OrderHistory() {
         <S.SetDateContainer>
           <S.DateWrapper>
             <S.StyledAiOutlineCalendar />
-            <S.Date>2023.02.18 ~ 2023.03.18</S.Date>
+            <S.Date>2023</S.Date>
           </S.DateWrapper>
           <S.SetDateButton onClick={handleOpenDatePicker}>기간 설정</S.SetDateButton>
         </S.SetDateContainer>
