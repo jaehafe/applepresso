@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import ResetCss from './style/ResetCss';
+import './main.css'; // 추가
 import { GlobalStyles } from './style/GlobalStyle';
 import LoginContextProvider from './contexts/LoginContextProvider';
 import CartContextProvider from './contexts/CartContextProvider';

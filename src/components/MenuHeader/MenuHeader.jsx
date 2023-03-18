@@ -68,7 +68,7 @@ function MenuHeader() {
       <S.HeaderNav
         modules={[A11y]}
         spaceBetween={20}
-        slidesPerView={4}
+        slidesPerView={4.3}
         pagination={{
           clickable: true,
           draggable: true,
