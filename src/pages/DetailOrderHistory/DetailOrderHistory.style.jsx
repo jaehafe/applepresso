@@ -61,11 +61,14 @@ export const OrderInfoContainer = styled.div`
 `;
 export const OrderInfoWrapper = styled.h2`
   display: flex;
+  align-items: center;
   gap: 10px;
   font-size: 20px;
 `;
 export const OrderInfoTitle = styled.div``;
-export const OrderInfoNumber = styled.div``;
+export const OrderInfoNumber = styled.div`
+  font-size: 14px;
+`;
 export const OrderInfoOrderedDate = styled.div`
   color: var(--main-color);
 `;
