@@ -142,22 +142,3 @@ export const PaidAmount = styled.div`
   font-weight: 900;
   font-size: 20px;
 `;
-
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
-// export const div = styled.div``;
