@@ -17,7 +17,6 @@ function OrderHistory() {
   // DatePicker
   const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
   const [startDate, setStartDate] = useState(getSevenDaysAgoDate());
-  console.log('startDate', startDate);
   const [endDate, setEndDate] = useState(new Date());
 
   const handleDateChange = (dates) => {
@@ -27,6 +26,11 @@ function OrderHistory() {
   };
   //
   const { data, error, loading } = useGetOrderedMenu('/pay');
+
+  const filteredDate = data.filter((item) => {
+    const orderDate = new Date(item.value.orderDate);
+    return orderDate >= startDate && orderDate <= endDate;
+  });
 
   const navigate = useNavigate();
 
@@ -74,7 +78,7 @@ function OrderHistory() {
         />
       )}
       {/*  */}
-      <OrderHistoryMenu data={data} />
+      <OrderHistoryMenu filteredDate={filteredDate} />
     </S.Container>
   );
 }

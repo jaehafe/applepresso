@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { formatDate, formatPrice } from '../../utils/format';
 import * as S from './OrderHistoryMenu.style';
 
-function OrderHistoryMenu({ data }) {
+function OrderHistoryMenu({ filteredDate }) {
   return (
     <S.OrderContainer>
-      {data?.map((items) => {
+      {filteredDate?.map((items) => {
         const { id, value } = items;
 
         const finalPrices = value.orderDetail.map((item) => {
