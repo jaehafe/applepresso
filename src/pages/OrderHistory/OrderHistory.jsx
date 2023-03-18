@@ -54,7 +54,7 @@ function OrderHistory() {
 
           return (
             <S.OrderWrapper key={id}>
-              <Link>
+              <Link to={`/orderHistory/${id}`}>
                 <S.OrderInfoWrapper>
                   <S.OrderInfoLeft>
                     <S.Thumbnail
