@@ -19,7 +19,7 @@ const HeroNav = [
   },
   {
     title: '주문내역',
-    navigate: '/orderDetail',
+    navigate: '/orderHistory',
     icons: <S.StyledIoReceiptOutline />,
     directionIcon: <S.StyledIoIosArrowForward />,
   },
