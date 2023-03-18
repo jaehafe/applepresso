@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import * as S from './OrderHistory.style';
 import { Link, useNavigate } from 'react-router-dom';
-import banner1 from '../../assets/homeBanner/banner1.jpeg';
 import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 import { formatDate, formatPrice } from '../../utils/format';
 import Loading from '../../components/Loading.jsx/Loading';
 
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import Calendar from '../../components/Calendar/Calendar';
+
 function OrderHistory() {
+  const [isOpenDatePicker, setIsOpenDatePicker] = useState(false);
+
   const { data, error, loading } = useGetOrderedMenu('/pay');
 
   const navigate = useNavigate();
@@ -18,6 +23,9 @@ function OrderHistory() {
   if (loading) {
     return <Loading />;
   }
+  const handleOpenDatePicker = () => {
+    setIsOpenDatePicker(true);
+  };
 
   return (
     <S.Container>
@@ -36,9 +44,10 @@ function OrderHistory() {
             <S.StyledAiOutlineCalendar />
             <S.Date>2023.02.18 ~ 2023.03.18</S.Date>
           </S.DateWrapper>
-          <S.SetDateButton>기간 설정</S.SetDateButton>
+          <S.SetDateButton onClick={handleOpenDatePicker}>기간 설정</S.SetDateButton>
         </S.SetDateContainer>
       </S.SelectContainer>
+      {isOpenDatePicker && <Calendar setIsOpenDatePicker={setIsOpenDatePicker} />}
       {/*  */}
       <S.OrderContainer>
         {data?.map((items) => {
