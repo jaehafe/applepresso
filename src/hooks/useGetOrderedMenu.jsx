@@ -27,7 +27,7 @@ function useGetOrderedMenu(url = '') {
       const sortedOrders = currentUserOrder.sort(
         (a, b) => new Date(b.value.orderDate) - new Date(a.value.orderDate)
       );
-      console.log(sortedOrders);
+
       setData(sortedOrders);
     } catch (err) {
       console.log(err);
