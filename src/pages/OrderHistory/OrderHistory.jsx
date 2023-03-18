@@ -11,8 +11,8 @@ function OrderHistory() {
 
   const navigate = useNavigate();
 
-  const handleToBack = () => {
-    navigate(-1);
+  const navigateToMyPage = () => {
+    navigate('/main/myPage');
   };
 
   if (loading) {
@@ -24,7 +24,7 @@ function OrderHistory() {
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
-            <S.StyledBsArrowLeft onClick={handleToBack} />
+            <S.StyledBsArrowLeft onClick={navigateToMyPage} />
             <S.HeaderTitle>주문내역</S.HeaderTitle>
           </S.HeaderTitleWrapper>
         </S.HeaderWrapper>
