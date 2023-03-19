@@ -70,7 +70,7 @@ export const HeroSubtitle = styled.div`
   color: var(--subtitle-color);
   font-size: 18px;
 `;
-export const HeroMap = styled.div`
+export const HeroMap = styled.a`
   display: flex;
   justify-content: space-between;
   color: grey;

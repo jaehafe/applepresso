@@ -7,22 +7,32 @@ import DetailStoreModal from '../DetailStoreModal/DetailStoreModal';
 
 function NearbyStores() {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [selectedStore, setSelectedStore] = useState({});
 
   const { data } = useGetStoreInfo('/store');
 
-  const handleOpenDetailStoreModal = () => {
+  const handleOpenDetailStoreModal = (store) => {
     setIsOpenModal(true);
+    setSelectedStore(store);
   };
 
   return (
     <S.Container>
-      {isOpenModal && (
-        <DetailStoreModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+      {isOpenModal && selectedStore && (
+        <DetailStoreModal
+          isOpenModal={isOpenModal}
+          setIsOpenModal={setIsOpenModal}
+          store={selectedStore}
+        />
       )}
-      {data.map((item) => {
+      {data.map((store) => {
         return (
-          <div key={item.id} onClick={handleOpenDetailStoreModal}>
-            <StoreInfoContainer item={item} />
+          <div key={store.id} onClick={() => handleOpenDetailStoreModal(store)}>
+            <StoreInfoContainer
+              store={store}
+              isOpenModal={isOpenModal}
+              setIsOpenModal={setIsOpenModal}
+            />
           </div>
         );
       })}
