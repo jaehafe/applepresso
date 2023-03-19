@@ -1,0 +1,112 @@
+[
+  {
+    "id": "회기역사거리점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/%ED%9A%8C%EC%82%AC1.jpg",
+    "name": "회기역사거리점",
+    "delivery_available": true,
+    "address": "서울 동대문구 회기로 176 (회기동81)",
+    "open_time": "10:00 - 22:00",
+    "company_owned": false,
+    "distance": "0.5km",
+    "kakao_map": "http://kko.to/kU7nGg7nTB"
+  },
+  {
+    "id": "경희대점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/kh.jpg",
+    "name": "경희대점",
+    "delivery_available": false,
+    "address": "서울 동대문구 경희대로4길 1",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "1.2km",
+    "kakao_map": "http://naver.me/GoOlal9z"
+  },
+  {
+    "id": "미아사거리역점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/IMG_3899-HDR.jpg",
+    "name": "미아사거리역점",
+    "delivery_available": true,
+    "address": "서울시 강북구 미아동 60-5",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "1.7km",
+    "kakao_map": "http://naver.me/FbRIOjSN"
+  },
+  {
+    "id": "건대역점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_%EA%B1%B4%EB%8C%80%EC%97%AD%EC%A0%901.jpg",
+    "name": "건대역점",
+    "delivery_available": true,
+    "address": "서울 광진구 아차산로 221 (화양동 7-4)",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "1.9km",
+    "kakao_map": "http://naver.me/xL1scuov"
+  },
+  {
+    "id": "뚝섬역점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/%EB%9A%9D%EC%84%AC%EC%97%AD%EC%A0%901.jpg",
+    "name": "뚝섬역점",
+    "delivery_available": true,
+    "address": "서울시 성동구 성수동1가 13-164",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "1.7km",
+    "kakao_map": "http://naver.me/5Am0TR1m"
+  },
+  {
+    "id": "길동역점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_DSC05005_1.jpg",
+    "name": "길동역점",
+    "delivery_available": true,
+    "address": "서울 강동구 양재대로 1490 (길동 366-5)",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "2.0km",
+    "kakao_map": "http://naver.me/xaPgP2di"
+  },
+  {
+    "id": "강동역점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/kdkd.PNG",
+    "name": "강동역점",
+    "delivery_available": true,
+    "address": "서울 강동구 천호동 447",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "1.7km",
+    "kakao_map": "http://naver.me/GBf3NMNA"
+  },
+  {
+    "id": "약수역점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_20221027_201129.jpg",
+    "name": "약수역점",
+    "delivery_available": true,
+    "address": "서울시 중구 신당동 369-9",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "2.4km",
+    "kakao_map": "https://naver.me/5oiiju3u"
+  },
+  {
+    "id": "충무로점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_%EB%B0%94%EB%82%98%ED%94%84%EB%A0%88%EC%86%8C_%EC%B6%A9%EB%AC%B4%EB%A1%9C%EC%A0%90%20(3).jpg",
+    "name": "충무로점",
+    "delivery_available": true,
+    "address": "서울특별시 중구 필동2가 21-1",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "1.7km",
+    "kakao_map": "https://naver.me/IgN8ei30"
+  },
+  {
+    "id": "파인에비뉴점",
+    "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ppo%EB%B0%94%EB%82%98%ED%94%84%EB%A0%88%EC%86%8C_%ED%8C%8C%EC%9D%B8%EC%97%90%EB%B9%84%EB%89%B4%EC%A0%90%20(4).jpg",
+    "name": "파인에비뉴점",
+    "delivery_available": true,
+    "address": "서울시 중구 을지로2가 203",
+    "open_time": "07:00 ~ 23:00",
+    "company_owned": true,
+    "distance": "3.7km",
+    "kakao_map": "http://naver.me/5ZO1iZly"
+  }
+]

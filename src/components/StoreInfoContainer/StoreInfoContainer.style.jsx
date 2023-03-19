@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const StoreWrapper = styled.div`
-  border: 1px solid;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -28,7 +27,7 @@ export const StoreInfoHero = styled.div`
 export const StoreThumbnail = styled.img`
   width: 100px;
   height: 100px;
-  object-fit: contain;
+  object-fit: cover;
 `;
 export const StoreInfosHeader = styled.div`
   display: flex;
