@@ -3,7 +3,7 @@ import { MenuStatus } from '../../../components/Menu/Menu.style';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const Container = styled.div`
-  margin: 170px 0 100px;
+  margin: 200px 0 100px;
   height: auto;
 `;
 
