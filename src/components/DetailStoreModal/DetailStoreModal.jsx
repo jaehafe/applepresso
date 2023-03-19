@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import * as S from './DetailStoreModal.style';
 import ReactDOM from 'react-dom';
 import storeThumbnail from '../../assets/storeThumbnail.jpeg';
+import { SelectedStoreContext } from '../../contexts/SelectedStoreProvider';
 
 function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
+  const { handleSelectedStore } = useContext(SelectedStoreContext);
   const {
     id,
     image,
@@ -64,7 +66,7 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
         </S.ModalHeroContainer>
         <S.ButtonWrapper>
           <S.CancelButton onClick={handleCloseModal}>취소</S.CancelButton>
-          <S.SelectButton>선택</S.SelectButton>
+          <S.SelectButton onClick={() => handleSelectedStore(name)}>선택</S.SelectButton>
         </S.ButtonWrapper>
         <S.KakaoMapSearch onClick={handleKaokaoMap}>
           <S.StyledMdOutlineGpsFixed />

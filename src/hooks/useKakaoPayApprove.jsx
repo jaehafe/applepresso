@@ -20,8 +20,6 @@ function useKakaoPayApprove() {
       );
       console.log(res);
       console.log(res.data);
-      localStorage.setItem('res.data', JSON.stringify(res.data));
-      // window.location.href = '/success'
       setApproveData(res.data);
     } catch (err) {
       console.log(err);

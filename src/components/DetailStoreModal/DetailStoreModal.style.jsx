@@ -134,6 +134,10 @@ export const KakaoMapSearch = styled.div`
   align-items: center;
   cursor: pointer;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+  }
 `;
 export const StyledMdOutlineGpsFixed = styled(MdOutlineGpsFixed)`
   font-size: 26px;
