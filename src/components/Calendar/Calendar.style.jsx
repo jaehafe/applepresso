@@ -7,5 +7,5 @@ export const Backdrop = styled.div`
   width: 100%;
   height: 100%;
   z-index: 11;
-  background-color: rgba(0, 0, 0, 0.5); // 여기서 배경색과 투명도를 변경할 수 있습니다.
+  background-color: rgba(0, 0, 0, 0.5);
 `;

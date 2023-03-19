@@ -14,7 +14,7 @@ function StoreInfoContainer({ item }) {
     distance,
     kakao_map,
   } = item;
-  // const{} = store
+
   return (
     <S.StoreWrapper>
       <S.StoreInfoHeader>
