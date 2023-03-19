@@ -1,5 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 
+import { notify, toastComponent } from '../hooks/useToastify';
+
 export const SelectedStoreContext = createContext({
   handleSelectedStore: () => {},
 });
@@ -14,12 +16,19 @@ function SelectedStoreProvider({ children }) {
   }, [currentStore]);
 
   const handleSelectedStore = (name) => {
+    if (name === currentStore) {
+      notify(`${name}를 이미 선택했습니다.`);
+      return;
+    }
+
+    notify(`${name}을 선택했습니다.`);
     console.log('123');
-    setCurrentStore({ name });
+    setCurrentStore(name);
   };
   // { setCurrentShop, currentShop, handleStoreSelectedShop }
   return (
     <SelectedStoreContext.Provider value={{ handleSelectedStore }}>
+      {toastComponent()}
       {children}
     </SelectedStoreContext.Provider>
   );

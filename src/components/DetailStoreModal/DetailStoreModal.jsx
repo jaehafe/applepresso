@@ -37,6 +37,11 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
     };
   }, [isOpenModal]);
 
+  const handleSelectStore = () => {
+    handleSelectedStore(name);
+    setIsOpenModal(false);
+  };
+
   return ReactDOM.createPortal(
     <>
       <S.Backdrop onClick={handleCloseModal} />
@@ -66,7 +71,7 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
         </S.ModalHeroContainer>
         <S.ButtonWrapper>
           <S.CancelButton onClick={handleCloseModal}>취소</S.CancelButton>
-          <S.SelectButton onClick={() => handleSelectedStore(name)}>선택</S.SelectButton>
+          <S.SelectButton onClick={handleSelectStore}>선택</S.SelectButton>
         </S.ButtonWrapper>
         <S.KakaoMapSearch onClick={handleKaokaoMap}>
           <S.StyledMdOutlineGpsFixed />
