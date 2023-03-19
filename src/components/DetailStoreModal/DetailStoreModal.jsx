@@ -4,9 +4,6 @@ import ReactDOM from 'react-dom';
 import storeThumbnail from '../../assets/storeThumbnail.jpeg';
 
 function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
-  const handleCloseModal = () => {
-    setIsOpenModal(false);
-  };
   const {
     id,
     image,
@@ -18,6 +15,13 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
     distance,
     kakao_map,
   } = store;
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false);
+  };
+  const handleKaokaoMap = () => {
+    console.log('123');
+  };
 
   useEffect(() => {
     if (isOpenModal) {
@@ -62,6 +66,9 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
           <S.CancelButton onClick={handleCloseModal}>취소</S.CancelButton>
           <S.SelectButton>선택</S.SelectButton>
         </S.ButtonWrapper>
+        <S.KakaoMapSearch onClick={handleKaokaoMap}>
+          <S.StyledMdOutlineGpsFixed />
+        </S.KakaoMapSearch>
       </S.Container>
     </>,
     document.getElementById('overlay-root')

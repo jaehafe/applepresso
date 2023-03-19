@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { AiOutlineClockCircle, IoIosArrowForward, FiMapPin } from 'react-icons/all';
+import {
+  AiOutlineClockCircle,
+  IoIosArrowForward,
+  FiMapPin,
+  MdOutlineGpsFixed,
+} from 'react-icons/all';
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -114,4 +119,22 @@ export const SelectButton = styled.button`
   justify-content: center;
   align-items: center;
   color: red;
+`;
+
+export const KakaoMapSearch = styled.div`
+  position: absolute;
+  right: 20px;
+  top: 280px;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+`;
+export const StyledMdOutlineGpsFixed = styled(MdOutlineGpsFixed)`
+  font-size: 26px;
 `;
