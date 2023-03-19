@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding-top: 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid;
+  min-height: 50vh;
 `;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding-top: 180px;
+  padding: 180px 20px;
 `;

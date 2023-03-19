@@ -19,6 +19,7 @@ export const StyledFiSearch = styled(FiSearch)`
 export const Container = styled.div`
   background-color: var(--background-color);
   min-height: 100vh;
+  padding: 180px 20px 100px;
 `;
 
 export const HeaderContainer = styled.div`
