@@ -11,7 +11,6 @@ function NearbyStores() {
   const { data } = useGetStoreInfo('/store');
 
   const handleOpenDetailStoreModal = () => {
-    console.log('123');
     setIsOpenModal(true);
   };
 
