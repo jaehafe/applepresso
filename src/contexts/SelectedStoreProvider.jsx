@@ -22,15 +22,15 @@ function SelectedStoreProvider({ children }) {
     );
   }, [currentStore]);
 
-  const handleSelectedStore = (name) => {
-    if (name === currentStore) {
+  const handleSelectedStore = (props) => {
+    if (props.name === currentStore) {
       notify(`${name}를 이미 선택했습니다.`);
       return;
     }
 
-    notify(`${name}을 선택했습니다.`);
+    notify(`${props.name}을 선택했습니다.`);
     console.log('123');
-    setCurrentStore(name);
+    setCurrentStore(props);
   };
   // { setCurrentShop, currentShop, handleStoreSelectedShop }
   return (

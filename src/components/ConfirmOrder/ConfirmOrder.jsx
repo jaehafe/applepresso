@@ -14,12 +14,14 @@ import { orderDate } from '../../utils/format';
 
 import kakaopay_small from '../../assets/kakaopay_small.png';
 import ConfirmOrderModal from '../Modal/ConfirmOrderModal';
+import { SelectedStoreContext } from '../../contexts/SelectedStoreProvider';
 
 function ConfirmOrder({ cartCtx }) {
   const navigate = useNavigate();
   const { postMenu, error, success } = usePostMenu('/pay');
 
   const { postKakaoPay } = useKakaoPay();
+  const { currentStore } = useContext(SelectedStoreContext);
   const { currentUser } = useContext(LoginContext);
   // 테이크 아웃 장소 선택
   const [selectedPlace, setSelectedPlace] = useState(null);
@@ -61,6 +63,9 @@ function ConfirmOrder({ cartCtx }) {
 
   const handleToBack = () => {
     navigate(-1);
+  };
+  const navigateToSelectShopPage = () => {
+    navigate('/storeInfo');
   };
 
   const originalPrice = cartCtx.total.originalPrices.reduce((acc, val) => {
@@ -133,6 +138,11 @@ function ConfirmOrder({ cartCtx }) {
       orderDate,
       orderType: cartCtx.title === 'EASYORDER' ? 'EASY_ORDER' : 'REGULAR_ORDER',
       orderRequest,
+      orderShop: {
+        name: currentStore.name,
+        address: currentStore.address,
+        company_owned: currentStore.company_owned,
+      },
     });
     cartCtx.clearCart();
   };
@@ -181,19 +191,25 @@ function ConfirmOrder({ cartCtx }) {
           </S.Tips>
         </S.TipsWrapper>
         {/* 주문매장 */}
-        <S.SelectShopWrapper>
+        <S.SelectShopWrapper onClick={navigateToSelectShopPage}>
           <S.SelectShopTitleWrapper>
             <S.SelectShopTitle>주문 매장</S.SelectShopTitle>
             <S.StyledIoIosArrowForward />
           </S.SelectShopTitleWrapper>
           <S.SelectedShopWrapper>
-            <S.SelectedShopTitle>회기역사거리점</S.SelectedShopTitle>
+            <S.SelectedShopTitle>{currentStore.name}</S.SelectedShopTitle>
             <S.SelectedShopInfos>
-              <S.ShopInfo>배달 가능점</S.ShopInfo>
-              <S.ShopInfo>직영점</S.ShopInfo>
+              {currentStore.delivery_available === true ? (
+                <S.ShopInfo>배달 가능점</S.ShopInfo>
+              ) : (
+                ''
+              )}
+              <S.ShopInfo>
+                {currentStore.company_owned === true ? '직영점' : '가맹점'}
+              </S.ShopInfo>
             </S.SelectedShopInfos>
           </S.SelectedShopWrapper>
-          <S.SelectedShopAddress>서울특별시 동대문구 회기로 176</S.SelectedShopAddress>
+          <S.SelectedShopAddress>{currentStore.address}</S.SelectedShopAddress>
         </S.SelectShopWrapper>
         {/* 테이크 아웃 장소 선택 */}
         <S.SelectTakeoutOptionWrapper>

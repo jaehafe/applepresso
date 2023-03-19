@@ -38,7 +38,7 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
   }, [isOpenModal]);
 
   const handleSelectStore = () => {
-    handleSelectedStore(name);
+    handleSelectedStore({ name, address, delivery_available, company_owned });
     setIsOpenModal(false);
   };
 

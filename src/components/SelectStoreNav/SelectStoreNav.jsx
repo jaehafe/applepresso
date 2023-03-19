@@ -16,7 +16,7 @@ function SelectStoreNav() {
         <>
           <S.StoreTitleWrapper>
             <S.StyledFiMapPin />
-            <S.StoreTitle>{currentStore}</S.StoreTitle>
+            <S.StoreTitle>{currentStore.name}</S.StoreTitle>
             <S.StoreDesc>메뉴를 표시 중입니다.</S.StoreDesc>
           </S.StoreTitleWrapper>
           <S.ChangeStoreButton onClick={navigateToSelectStore}>변경</S.ChangeStoreButton>
