@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import * as S from './MenuHeader.style';
 import { A11y } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
 import { NavLink } from 'react-router-dom';
-import { SelectedStoreContext } from '../../contexts/SelectedStoreProvider';
+import SelectStoreNav from '../SelectStoreNav/SelectStoreNav';
 
 const NavLists = [
   {
@@ -58,8 +58,6 @@ const NavLists = [
 ];
 
 function MenuHeader() {
-  const { currentStore } = useContext(SelectedStoreContext);
-
   return (
     <>
       <S.Container>
@@ -90,14 +88,7 @@ function MenuHeader() {
           );
         })}
       </S.HeaderNav>
-      <S.CurrentStoreContainer>
-        <S.StoreTitleWrapper>
-          <S.StyledFiMapPin />
-          <S.StoreTitle>회기역사거리점</S.StoreTitle>
-          <S.StoreDesc>메뉴를 표시 중입니다.</S.StoreDesc>
-        </S.StoreTitleWrapper>
-        <S.ChangeStoreButton>변경</S.ChangeStoreButton>
-      </S.CurrentStoreContainer>
+      <SelectStoreNav />
     </>
   );
 }

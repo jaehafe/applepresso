@@ -1,18 +1,25 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import { notify, toastComponent } from '../hooks/useToastify';
+import { LoginContext } from './LoginContextProvider';
 
 export const SelectedStoreContext = createContext({
   handleSelectedStore: () => {},
 });
 
 function SelectedStoreProvider({ children }) {
+  const { currentUser } = useContext(LoginContext);
   const [currentStore, setCurrentStore] = useState(
-    JSON.parse(localStorage.getItem('current_selected_store')) || null
+    JSON.parse(
+      localStorage.getItem(`${currentUser.user.email}-current_selected_store`)
+    ) || null
   );
 
   useEffect(() => {
-    localStorage.setItem('current_selected_shop', JSON.stringify(currentStore));
+    localStorage.setItem(
+      `${currentUser.user.email}-current_selected_store`,
+      JSON.stringify(currentStore)
+    );
   }, [currentStore]);
 
   const handleSelectedStore = (name) => {
@@ -27,7 +34,7 @@ function SelectedStoreProvider({ children }) {
   };
   // { setCurrentShop, currentShop, handleStoreSelectedShop }
   return (
-    <SelectedStoreContext.Provider value={{ handleSelectedStore }}>
+    <SelectedStoreContext.Provider value={{ currentStore, handleSelectedStore }}>
       {toastComponent()}
       {children}
     </SelectedStoreContext.Provider>
