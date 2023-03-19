@@ -97,6 +97,7 @@ export const SelectShopWrapper = styled(Wrapper)`
   background-color: #fff;
   padding: 30px 20px;
   margin-bottom: 6px;
+  cursor: pointer;
 `;
 
 export const StyledIoIosArrowForward = styled(IoIosArrowForward)`

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FiMapPin } from 'react-icons/all';
 
 export const OrderContainer = styled.div`
   display: flex;
@@ -31,6 +32,13 @@ export const OrderInfoLeftWrapper = styled.div`
   flex-direction: column;
   gap: 20px;
 `;
+export const OrderShopInfoWrapper = styled.div`
+  display: flex;
+  gap: 6px;
+  color: var(--subtitle-color);
+`;
+export const OrderShopInfoName = styled.div``;
+export const StyledFiMapPin = styled(FiMapPin)``;
 export const OrderTitle = styled.div`
   font-size: 20px;
   font-weight: 700;

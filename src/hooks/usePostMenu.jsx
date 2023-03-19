@@ -17,6 +17,7 @@ function usePostMenu(url) {
         orderDate: info.orderDate,
         orderType: info.orderType,
         orderRequest: info.orderRequest,
+        orderShop: info.orderShop,
       });
       setData(res.data);
     } catch (err) {

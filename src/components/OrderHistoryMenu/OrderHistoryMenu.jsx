@@ -27,6 +27,10 @@ function OrderHistoryMenu({ filteredDate }) {
                     alt={value.orderDetail[0].title}
                   />
                   <S.OrderInfoLeftWrapper>
+                    <S.OrderShopInfoWrapper>
+                      <S.StyledFiMapPin />
+                      <S.OrderShopInfoName>{value.orderShop.name}</S.OrderShopInfoName>
+                    </S.OrderShopInfoWrapper>
                     <S.OrderTitle>
                       {value.orderDetail[0].title} 등 {value.orderDetail.length}개
                     </S.OrderTitle>

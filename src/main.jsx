@@ -7,17 +7,20 @@ import { GlobalStyles } from './style/GlobalStyle';
 import LoginContextProvider from './contexts/LoginContextProvider';
 import CartContextProvider from './contexts/CartContextProvider';
 import EasyOrderContextProvider from './contexts/EasyOrderContextProvider';
+import SelectedStoreProvider from './contexts/SelectedStoreProvider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <LoginContextProvider>
-    <EasyOrderContextProvider>
-      <CartContextProvider>
-        <ResetCss />
-        <GlobalStyles />
-        <App />
-      </CartContextProvider>
-    </EasyOrderContextProvider>
+    <SelectedStoreProvider>
+      <EasyOrderContextProvider>
+        <CartContextProvider>
+          <ResetCss />
+          <GlobalStyles />
+          <App />
+        </CartContextProvider>
+      </EasyOrderContextProvider>
+    </SelectedStoreProvider>
   </LoginContextProvider>
   // </React.StrictMode>
 );

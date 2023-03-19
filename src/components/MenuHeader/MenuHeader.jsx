@@ -4,6 +4,7 @@ import { A11y } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
 import { NavLink } from 'react-router-dom';
+import SelectStoreNav from '../SelectStoreNav/SelectStoreNav';
 
 const NavLists = [
   {
@@ -87,6 +88,7 @@ function MenuHeader() {
           );
         })}
       </S.HeaderNav>
+      <SelectStoreNav />
     </>
   );
 }

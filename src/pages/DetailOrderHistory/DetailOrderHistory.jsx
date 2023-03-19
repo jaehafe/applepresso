@@ -25,11 +25,13 @@ function DetailOrderHistory() {
     return <Loading />;
   }
 
-  const { orderDate, orderDetail, orderRequest } = detailOrderHistory?.value;
+  const { orderDate, orderDetail, orderRequest, orderShop } = detailOrderHistory?.value;
+  console.log('orderShop', orderShop);
 
   const { makingRequestInput, pickupTimeRange } = orderRequest;
   const { option: selectedPlaceOption } = orderRequest.selectedPlace;
   const { option: selectedTakeoutOption } = orderRequest.selectedTakeoutOption;
+  const { address, name, company_owned } = orderShop;
 
   const orderedPriceArr = orderDetail.map((item) => {
     return item.price * item.amount;
@@ -70,10 +72,10 @@ function DetailOrderHistory() {
           <S.OrderedShop>
             <S.OrderShopTitle>주문 매장</S.OrderShopTitle>
             <S.OrderedShopWrapper>
-              <S.OrderedShopTitle>회기역 사거리점</S.OrderedShopTitle>
-              <S.ShopInfo>직영점</S.ShopInfo>
+              <S.OrderedShopTitle>{name}</S.OrderedShopTitle>
+              {company_owned ? <S.ShopInfo>직영점</S.ShopInfo> : ''}
             </S.OrderedShopWrapper>
-            <S.OrderedShopAddress>서울특별시 동대문구 회기로 176</S.OrderedShopAddress>
+            <S.OrderedShopAddress>{address}</S.OrderedShopAddress>
           </S.OrderedShop>
         </S.BodyContainer>
         <S.BodyContainer>

@@ -6,6 +6,7 @@ export const StoreWrapper = styled.div`
   flex-direction: column;
   background-color: #fff;
   overflow: hidden;
+  cursor: pointer;
 `;
 export const StoreInfoHeader = styled.div`
   display: flex;

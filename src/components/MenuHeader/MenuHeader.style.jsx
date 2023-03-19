@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FiSearch } from 'react-icons/fi';
+import { FiSearch, FiMapPin } from 'react-icons/all';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const Container = styled.div`
@@ -41,7 +41,7 @@ export const HeaderNav = styled(Swiper)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #ae9999;
+  border-bottom: 1px solid var(--division);
   background-color: #fff;
 `;
 
@@ -54,3 +54,5 @@ export const NavTitle = styled.span`
   color: ${(props) => (props.$active ? '#000' : '#ae9999')};
   font-weight: ${(props) => (props.$active ? '700' : '400')};
 `;
+
+//
