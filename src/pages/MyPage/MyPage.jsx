@@ -31,7 +31,7 @@ const HeroNav = [
   },
   {
     title: '매장 정보',
-    navigate: '/main/home',
+    navigate: '/storeInfo',
     icons: <S.StyledBiStoreAlt />,
     directionIcon: <S.StyledIoIosArrowForward />,
   },

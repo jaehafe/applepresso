@@ -25,6 +25,7 @@ import MyPage from './pages/MyPage/MyPage';
 import PaymentWaiting from './pages/Payment/PaymentWaiting';
 import OrderHistory from './pages/OrderHistory/OrderHistory';
 import DetailOrderHistory from './pages/DetailOrderHistory/DetailOrderHistory';
+import StoreInfo from './pages/StoreInfo/StoreInfo';
 
 const Layout = () => {
   return (
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
   { path: '/paymentWaiting', element: <PaymentWaiting /> },
   { path: '/orderHistory', element: <OrderHistory /> },
   { path: '/orderHistory/:id', element: <DetailOrderHistory /> },
+  { path: '/storeInfo', element: <StoreInfo /> },
   {
     path: '/main',
     element: <Layout />,
