@@ -83,15 +83,15 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
         <S.KakaoMapSearch onClick={handleKaokaoMap}>
           <S.StyledMdOutlineGpsFixed />
         </S.KakaoMapSearch>
-        {isOpenMapModal && (
-          <KakaoMapPage
-            title={name}
-            Lat={Lat}
-            Lng={Lng}
-            setIsOpenMapModal={setIsOpenMapModal}
-          />
-        )}
       </S.Container>
+      {isOpenMapModal && (
+        <KakaoMapPage
+          title={name}
+          Lat={Lat}
+          Lng={Lng}
+          setIsOpenMapModal={setIsOpenMapModal}
+        />
+      )}
     </>,
     document.getElementById('overlay-root')
   );

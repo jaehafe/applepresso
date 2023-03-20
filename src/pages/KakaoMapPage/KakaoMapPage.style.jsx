@@ -20,7 +20,7 @@ export const Container = styled.div`
   transform: translate(-50%, -50%);
 
   width: 500px;
-  height: 100%;
+  height: 80%;
   border-radius: 20px;
   background-color: #fff;
 `;

@@ -64,7 +64,7 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
-            <S.StyledBsArrowLeft onClick={handleToBack} />
+            {/* <S.StyledBsArrowLeft onClick={handleToBack} /> */}
             <S.HeaderTitle>{title}</S.HeaderTitle>
           </S.HeaderTitleWrapper>
           <S.IconWrapper>
