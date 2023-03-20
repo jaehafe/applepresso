@@ -9,6 +9,7 @@ import myPageBanner4 from '../../assets/myPageBanner/myPageBanner4.jpeg';
 import myPageBanner5 from '../../assets/myPageBanner/myPageBanner5.jpeg';
 import myPageBanner6 from '../../assets/myPageBanner/myPageBanner6.jpeg';
 import SimpleOrderHistory from '../../components/SimpleOrderHistory/SimpleOrderHistory';
+import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 
 const HeaderNav = [
   { title: '카드 관리', navigate: '/selectPayment', icons: <S.StyledBsCreditCard /> },

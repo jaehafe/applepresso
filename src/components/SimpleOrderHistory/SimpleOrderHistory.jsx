@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './SimpleOrderHistory.style';
 import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
+import Loading from '../Loading.jsx/Loading';
+import useGetMenu from '../../hooks/useGetMenu';
 
 function SimpleOrderHistory() {
-  const [frequentMenus, setFrequentMenus] = useState([]);
-  const { data } = useGetOrderedMenu('/pay');
+  const { data, loading, error, refetchData } = useGetOrderedMenu('/pay');
+  const { data: menuData } = useGetMenu('/menu');
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return (
+      <div style={{ cursor: 'pointer' }} onClick={() => refetchData()}>
+        다시 시도하기
+      </div>
+    );
+  }
 
-  useEffect(() => {
-    if (data) {
-      const values = data.map((item) => {
-        return item.value.orderDetail;
-      });
-      const updatedFrequentMenus = values.map((item) => {
-        const { amount, id, thumbnail, title } = item;
-        return { amount, id, thumbnail, title };
-      });
-      setFrequentMenus(updatedFrequentMenus);
-    }
-  }, [data]);
+  const values = data.map((item) => {
+    return item.value.orderDetail;
+  });
+  console.log('values', values);
+  // 1. values 배열에서 각 메뉴의 amount 값을 추출하여 새로운 배열을 만듦
 
-  console.log('frequentMenus', frequentMenus);
+  // 2. 가장 많이 팔린 메뉴의 amount 값을 구함
+  // console.log('Object.values(amountsById)', Object.values(amountsById));
 
   return (
     <S.AddEasyOrderButton>
