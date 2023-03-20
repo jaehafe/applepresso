@@ -11,18 +11,14 @@ export const Container = styled.div`
 
 // banner wrapper
 export const BannerWrapper = styled.div`
-  /* border: 1px solid; */
   padding-top: 1px;
 `;
 
 export const HomeSwiper = styled(Swiper)`
-  /* border: 1px solid; */
   margin-top: 20px;
 `;
 
-export const HomeSwiperSlide = styled(SwiperSlide)`
-  border: 1px solid;
-`;
+export const HomeSwiperSlide = styled(SwiperSlide)``;
 
 export const BannerIMG = styled.img`
   width: 300px;
@@ -151,7 +147,6 @@ export const AddEasyOrderDesc = styled.span`
 `;
 
 export const AddEasyOrderExtraListButton = styled.div`
-  border: 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -76,10 +76,10 @@ function OrderHistory() {
         />
       )}
       {/*  */}
-      {filteredData.length < 1 ? (
-        <NoResult />
-      ) : (
+      {filteredData.length > 0 ? (
         <OrderHistoryMenu filteredData={filteredData} />
+      ) : (
+        <NoResult />
       )}
     </S.Container>
   );

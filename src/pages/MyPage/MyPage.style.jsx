@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BsGithub, FaRegHandPointer } from 'react-icons/all';
 
 import {
   IoReceiptOutline,
@@ -17,8 +18,8 @@ import {
 
 export const Container = styled.div`
   background-color: var(--background-color);
-  height: 100vh;
-  padding: 50px 20px;
+  min-height: 100vh;
+  padding: 50px 20px 100px;
   display: flex;
   flex-direction: column;
   gap: 26px;
@@ -120,5 +121,65 @@ export const StyledBiStoreAlt = styled(BiStoreAlt)`
 `;
 export const HeroTitle = styled.h3``;
 
-// export const UserName = styled.div``;
-// export const UserName = styled.div``;
+// 배너 슬라이드 이미지
+export const BannerIMGContainer = styled.div``;
+export const BannerSlides = styled.div`
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+
+  ::-webkit-scrollbar {
+    /* width: 10px; */
+    height: 10px;
+  }
+
+  /* ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  } */
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+  }
+
+  /* ::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  } */
+`;
+export const BannerIMG = styled.img`
+  scroll-snap-align: start;
+  width: 400px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 20px;
+`;
+
+// github
+export const GithubInfoContainer = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 16px;
+`;
+export const GithubInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+`;
+export const StyledBsGithub = styled(BsGithub)`
+  font-size: 20px;
+`;
+
+// 주문 내역
+export const ShortOrderHistoryContainer = styled.div`
+  margin-top: 10px;
+`;
+export const ShortOrderHistoryTitle = styled.h4`
+  margin-bottom: 10px;
+  font-size: 20px;
+`;

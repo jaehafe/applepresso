@@ -11,7 +11,6 @@ function useGetStoreInfo(url = '') {
       setLoading(true);
       const res = await axiosFirebase.get(`${url}.json`);
       const StoreArr = Object.values(res.data);
-      console.log('StoreArr', StoreArr);
 
       setData(StoreArr);
     } catch (err) {

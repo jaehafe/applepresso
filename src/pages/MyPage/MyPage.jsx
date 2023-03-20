@@ -1,7 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import * as S from './MyPage.style';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import myPageBanner1 from '../../assets/myPageBanner/myPageBanner1.jpeg';
+import myPageBanner2 from '../../assets/myPageBanner/myPageBanner2.jpeg';
+import myPageBanner3 from '../../assets/myPageBanner/myPageBanner3.jpeg';
+import myPageBanner4 from '../../assets/myPageBanner/myPageBanner4.jpeg';
+import myPageBanner5 from '../../assets/myPageBanner/myPageBanner5.jpeg';
+import myPageBanner6 from '../../assets/myPageBanner/myPageBanner6.jpeg';
+import SimpleOrderHistory from '../../components/SimpleOrderHistory/SimpleOrderHistory';
 
 const HeaderNav = [
   { title: '카드 관리', navigate: '/selectPayment', icons: <S.StyledBsCreditCard /> },
@@ -35,6 +42,15 @@ const HeroNav = [
     icons: <S.StyledBiStoreAlt />,
     directionIcon: <S.StyledIoIosArrowForward />,
   },
+];
+
+const MyPageBannerItem = [
+  { img: myPageBanner1, name: myPageBanner1 },
+  { img: myPageBanner2, name: myPageBanner2 },
+  { img: myPageBanner3, name: myPageBanner3 },
+  { img: myPageBanner4, name: myPageBanner4 },
+  { img: myPageBanner5, name: myPageBanner5 },
+  { img: myPageBanner6, name: myPageBanner6 },
 ];
 
 function MyPage() {
@@ -101,18 +117,32 @@ function MyPage() {
           );
         })}
       </S.HeroNav>
-      <S.CardContainer>123</S.CardContainer>
-      <S.CardContainer>123</S.CardContainer>
-      <S.CardContainer>123</S.CardContainer>
+      <S.BannerIMGContainer>
+        <S.BannerSlides>
+          {MyPageBannerItem.map((item) => {
+            return <S.BannerIMG key={item.name} src={item.img} />;
+          })}
+        </S.BannerSlides>
+      </S.BannerIMGContainer>
+      {/* 간단한 주문내역 표시 */}
+      <S.ShortOrderHistoryContainer>
+        <S.ShortOrderHistoryTitle>내가 가장 많이 주문한 메뉴</S.ShortOrderHistoryTitle>
+        <SimpleOrderHistory />
+      </S.ShortOrderHistoryContainer>
+      {/* 깃헙 */}
+      <S.GithubInfoContainer
+        href="https://github.com/jaehafe/applepresso"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <S.GithubInfoWrapper>
+          <S.StyledBsGithub />
+          애플프레소 깃허브
+        </S.GithubInfoWrapper>
+        <S.StyledIoIosArrowForward />
+      </S.GithubInfoContainer>
     </S.Container>
   );
 }
 
 export default MyPage;
-
-{
-  /* <S.HeaderList>
-          <S.StyledBsCreditCard />
-          <S.HeaderListTitle>카드 관리</S.HeaderListTitle>
-        </S.HeaderList> */
-}
