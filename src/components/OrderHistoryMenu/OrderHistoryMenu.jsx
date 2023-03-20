@@ -1,9 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 import { formatDate, formatPrice } from '../../utils/format';
+import Loading from '../Loading.jsx/Loading';
 import * as S from './OrderHistoryMenu.style';
 
 function OrderHistoryMenu({ filteredDate }) {
+  const { loading } = useGetOrderedMenu('/pay');
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <S.OrderContainer>
       {filteredDate?.map((items) => {
