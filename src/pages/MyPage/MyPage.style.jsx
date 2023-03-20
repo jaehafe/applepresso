@@ -120,5 +120,19 @@ export const StyledBiStoreAlt = styled(BiStoreAlt)`
 `;
 export const HeroTitle = styled.h3``;
 
-// export const UserName = styled.div``;
-// export const UserName = styled.div``;
+// 배너 슬라이드 이미지
+export const BannerIMGContainer = styled.div``;
+export const BannerSlides = styled.div`
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  gap: 20px;
+  overflow-x: scroll;
+`;
+export const BannerIMG = styled.img`
+  scroll-snap-align: start;
+  width: 400px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 20px;
+`;

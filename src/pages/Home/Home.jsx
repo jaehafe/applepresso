@@ -13,44 +13,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { EasyOrderContext } from '../../contexts/EasyOrderContextProvider';
 
 const bannerItem = [
-  {
-    id: 1,
-    img: banner1,
-    name: banner1,
-  },
-  {
-    id: 2,
-    img: banner2,
-    name: banner2,
-  },
-  {
-    id: 3,
-    img: banner3,
-    name: banner3,
-  },
-  {
-    id: 4,
-    img: banner4,
-    name: banner4,
-  },
+  { img: banner1, name: banner1 },
+  { img: banner2, name: banner2 },
+  { img: banner3, name: banner3 },
+  { img: banner4, name: banner4 },
 ];
 
 const HeroInfo = [
-  {
-    id: 'stamp',
-    count: 0,
-    name: '스탬프',
-  },
-  {
-    id: 'coupon',
-    count: 1,
-    name: '쿠폰',
-  },
-  {
-    id: 'point',
-    count: 0,
-    name: '포인트',
-  },
+  { id: 'stamp', count: 0, name: '스탬프' },
+  { id: 'coupon', count: 1, name: '쿠폰' },
+  { id: 'point', count: 0, name: '포인트' },
 ];
 
 function Home() {
@@ -80,7 +52,7 @@ function Home() {
         >
           {bannerItem.map((item) => {
             return (
-              <SwiperSlide key={item.id}>
+              <SwiperSlide key={item.name}>
                 <S.BannerIMG src={item.img} alt={item.name} />
               </SwiperSlide>
             );

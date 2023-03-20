@@ -2,6 +2,12 @@ import React, { useContext } from 'react';
 import * as S from './MyPage.style';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import myPageBanner1 from '../../assets/myPageBanner/myPageBanner1.jpeg';
+import myPageBanner2 from '../../assets/myPageBanner/myPageBanner2.jpeg';
+import myPageBanner3 from '../../assets/myPageBanner/myPageBanner3.jpeg';
+import myPageBanner4 from '../../assets/myPageBanner/myPageBanner4.jpeg';
+import myPageBanner5 from '../../assets/myPageBanner/myPageBanner5.jpeg';
+import myPageBanner6 from '../../assets/myPageBanner/myPageBanner6.jpeg';
 
 const HeaderNav = [
   { title: '카드 관리', navigate: '/selectPayment', icons: <S.StyledBsCreditCard /> },
@@ -35,6 +41,15 @@ const HeroNav = [
     icons: <S.StyledBiStoreAlt />,
     directionIcon: <S.StyledIoIosArrowForward />,
   },
+];
+
+const MyPageBannerItem = [
+  { img: myPageBanner1, name: myPageBanner1 },
+  { img: myPageBanner2, name: myPageBanner2 },
+  { img: myPageBanner3, name: myPageBanner3 },
+  { img: myPageBanner4, name: myPageBanner4 },
+  { img: myPageBanner5, name: myPageBanner5 },
+  { img: myPageBanner6, name: myPageBanner6 },
 ];
 
 function MyPage() {
@@ -101,7 +116,13 @@ function MyPage() {
           );
         })}
       </S.HeroNav>
-      <S.CardContainer>123</S.CardContainer>
+      <S.BannerIMGContainer>
+        <S.BannerSlides>
+          {MyPageBannerItem.map((item) => {
+            return <S.BannerIMG key={item.name} src={item.img} />;
+          })}
+        </S.BannerSlides>
+      </S.BannerIMGContainer>
       <S.CardContainer>123</S.CardContainer>
       <S.CardContainer>123</S.CardContainer>
     </S.Container>
@@ -109,10 +130,3 @@ function MyPage() {
 }
 
 export default MyPage;
-
-{
-  /* <S.HeaderList>
-          <S.StyledBsCreditCard />
-          <S.HeaderListTitle>카드 관리</S.HeaderListTitle>
-        </S.HeaderList> */
-}
