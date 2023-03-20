@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './SimpleOrderHistory.style';
 import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
+import Loading from '../Loading.jsx/Loading';
 
 function SimpleOrderHistory() {
-  const [frequentMenus, setFrequentMenus] = useState([]);
-  const { data } = useGetOrderedMenu('/pay');
+  const { data, loading, error, refetchData } = useGetOrderedMenu('/pay123');
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return (
+      <div style={{ cursor: 'pointer' }} onClick={() => refetchData()}>
+        다시 시도하기
+      </div>
+    );
+  }
+  const values = data.map((item) => {
+    return item.value.orderDetail;
+  });
+  const updatedFrequentMenus = values.map((item) => {
+    // const { amount, id, thumbnail, title } = item;
+    return { item: item.amount };
+  });
 
-  useEffect(() => {
-    if (data) {
-      const values = data.map((item) => {
-        return item.value.orderDetail;
-      });
-      const updatedFrequentMenus = values.map((item) => {
-        const { amount, id, thumbnail, title } = item;
-        return { amount, id, thumbnail, title };
-      });
-      setFrequentMenus(updatedFrequentMenus);
-    }
-  }, [data]);
-
-  console.log('frequentMenus', frequentMenus);
+  console.log('updatedFrequentMenus', updatedFrequentMenus);
 
   return (
     <S.AddEasyOrderButton>

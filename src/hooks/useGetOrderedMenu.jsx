@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { axiosFirebase } from '../constants/axios';
 import { LoginContext } from '../contexts/LoginContextProvider';
 
@@ -42,7 +42,11 @@ function useGetOrderedMenu(url = '') {
     fetchOrderedMenu();
   }, [url]);
 
-  return { data, loading, error };
+  const refetchData = useCallback(() => {
+    fetchOrderedMenu();
+  }, [fetchOrderedMenu]);
+
+  return { data, loading, error, refetchData };
 }
 
 export default useGetOrderedMenu;
