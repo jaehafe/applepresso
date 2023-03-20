@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react';
-import LoginAlertModal from '../components/LoginAlertModal/LoginAlertModal';
 import { requestLogin, requestLogout } from '../constants/request';
 
 export const LoginContext = createContext(null);

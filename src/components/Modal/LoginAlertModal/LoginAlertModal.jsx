@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import * as S from './LoginAlertModal.style';
 import ReactDOM from 'react-dom';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function LoginAlertModal({ isOpenLoginModal, setIsOpenLoginModal }) {
   const navigate = useNavigate();
