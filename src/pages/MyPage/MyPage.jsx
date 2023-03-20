@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import * as S from './MyPage.style';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import { Link, useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import myPageBanner3 from '../../assets/myPageBanner/myPageBanner3.jpeg';
 import myPageBanner4 from '../../assets/myPageBanner/myPageBanner4.jpeg';
 import myPageBanner5 from '../../assets/myPageBanner/myPageBanner5.jpeg';
 import myPageBanner6 from '../../assets/myPageBanner/myPageBanner6.jpeg';
+import SimpleOrderHistory from '../../components/SimpleOrderHistory/SimpleOrderHistory';
 
 const HeaderNav = [
   { title: '카드 관리', navigate: '/selectPayment', icons: <S.StyledBsCreditCard /> },
@@ -123,6 +124,12 @@ function MyPage() {
           })}
         </S.BannerSlides>
       </S.BannerIMGContainer>
+      {/* 간단한 주문내역 표시 */}
+      <S.ShortOrderHistoryContainer>
+        <S.ShortOrderHistoryTitle>내가 가장 많이 주문한 메뉴</S.ShortOrderHistoryTitle>
+        <SimpleOrderHistory />
+      </S.ShortOrderHistoryContainer>
+      {/* 깃헙 */}
       <S.GithubInfoContainer
         href="https://github.com/jaehafe/applepresso"
         target="_blank"
@@ -134,7 +141,6 @@ function MyPage() {
         </S.GithubInfoWrapper>
         <S.StyledIoIosArrowForward />
       </S.GithubInfoContainer>
-      <S.CardContainer>123</S.CardContainer>
     </S.Container>
   );
 }
