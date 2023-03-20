@@ -1,7 +1,5 @@
 import React from 'react';
 import * as S from './StoreInfoContainer.style';
-import banner from '../../assets/homeBanner/banner1.jpeg';
-import DetailStoreModal from '../DetailStoreModal/DetailStoreModal';
 
 function StoreInfoContainer({ store, isOpenModal, setIsOpenModal }) {
   const {

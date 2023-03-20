@@ -1,0 +1,999 @@
+{
+  "menu": [
+    {
+      "ENTitle": "Hexamericano",
+      "desc": "[4 shot] 6가지 원두를 블렌딩해 만든, 고소 & 상큼한 풍미의 밸러스가 좋은 4shot의 진한 아메리카노",
+      "discountRate": 10,
+      "id": "Hexamericano",
+      "isBest": true,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 3000,
+      "tags": ["coffee"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_350a5a914a51.png",
+      "title": "헥사메리카노"
+    },
+    {
+      "ENTitle": "ZeroSugar Americano",
+      "desc": "스테비아가 첨가 된 아메리카노로 칼로리 걱정없이, 당 걱정없는 달콤한 아메리카노",
+      "discountRate": 10,
+      "id": "ZeroSugarAmericano",
+      "isBest": true,
+      "isChecked": false,
+      "isNew": false,
+      "isSoldOut": false,
+      "price": 3300,
+      "tags": ["coffee"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_c02fe040d0ad.png",
+      "title": "제로슈가 아메리카노"
+    },
+    {
+      "ENTitle": "Hazelnut Americano",
+      "desc": "고소한 아메리카노에 헤이즐넛을 더해 달콤 고소한 풍미를 살린 아메리카노",
+      "discountRate": 10,
+      "id": "HazelnutAmericano",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 3500,
+      "tags": ["coffee"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_dd9bbc721a56.png",
+      "title": "헤이즐넛 아메리카노"
+    },
+    {
+      "ENTitle": "Cafe Mocha",
+      "desc": "초콜릿 풍미에 에스프레소를 더한 달콤하면서도 쌉싸름한 맛의 커피",
+      "discountRate": 10,
+      "id": "CafeMocha",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": false,
+      "isSoldOut": false,
+      "price": 3500,
+      "tags": ["coffee"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1418e586eccc.png",
+      "title": "카페모카"
+    },
+    {
+      "ENTitle": "Signature Americano",
+      "desc": "은은한 과일향의 부담없는 산미와 카라멜의 단맛, 견과의 풍미가 어우러진 감칠맛이 가득한 커피",
+      "discountRate": 10,
+      "id": "SignatureAmericano",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 2900,
+      "tags": ["coffee"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_e1983f793ad7.png",
+      "title": "시그니처 아메리카노"
+    },
+    {
+      "ENTitle": "EarlGrey Milk Tea",
+      "desc": "향긋한 얼그레이 홍차와 부드러운 우유의 하모니가 돋보이는 클래식한 맛의 밀크티",
+      "discountRate": 20,
+      "id": "EarlGreyMilkTea",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": false,
+      "isSoldOut": false,
+      "price": 3800,
+      "tags": ["milkTeaLatte"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_0c08e273cd8b.png",
+      "title": "얼그레이 밀크티"
+    },
+    {
+      "ENTitle": "Earl Grey Bubble Tea",
+      "desc": "향긋한 얼그레이 밀크티에 쫀득한 타피오카 펄을 더해 식감을 UP시킨 버블 밀크티",
+      "discountRate": 20,
+      "id": "EarlGreyBubbleTea",
+      "isBest": true,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 4500,
+      "tags": ["milkTeaLatte"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_148da6d88b38.png",
+      "title": "얼그레이 버블티"
+    },
+    {
+      "ENTitle": "Black sugar Milk tea",
+      "desc": "달콤한 흑당시럽에 고소한 우유를 더해 만든 달콤한 흑당밀크티",
+      "discountRate": 20,
+      "id": "BlacksugarMilktea",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": false,
+      "isSoldOut": false,
+      "price": 3800,
+      "tags": ["milkTeaLatte"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_57320507b3f8.png",
+      "title": "흑당밀크티"
+    },
+    {
+      "ENTitle": "Black sugar Bubble Tea",
+      "desc": "흑당시럽+쫀득한 타피오카 펄+고소한 우유의 환상적인 조합. 비주얼부터 식감, 극강의 달콤함까지 모두 잡았다. 달콤한 흑당버블티",
+      "discountRate": 20,
+      "id": "BlacksugarBubbleTea",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": false,
+      "isSoldOut": false,
+      "price": 4300,
+      "tags": ["milkTeaLatte"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_8bdbff00aa9b.png",
+      "title": "흑당버블티"
+    },
+    {
+      "ENTitle": "Strawberry Creamy Latte",
+      "desc": "크리미한 우유에 딸기를 듬뿍 담아 새콤달콤한 맛과 부드러운 풍미가 조화로운 딸기크리미라떼",
+      "discountRate": 20,
+      "id": "StrawberryCreamyLatte",
+      "isBest": true,
+      "isChecked": false,
+      "isNew": false,
+      "isSoldOut": false,
+      "price": 3800,
+      "tags": ["milkTeaLatte"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1a7763176701.png",
+      "title": "딸기크리미라떼"
+    },
+    {
+      "ENTitle": "Strawberry Choux Cream Latte",
+      "desc": "향긋한 얼그레이 홍차와 부드러운 우유의 하모니가 돋보이는 클래식한 맛의 밀크티",
+      "discountRate": 20,
+      "id": "StrawberryChouxCreamLatte",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 4500,
+      "tags": ["milkTeaLatte"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_cc75fbe039e4.png",
+      "title": "딸기슈크림라떼"
+    },
+    {
+      "ENTitle": "Toffee Nut Latte",
+      "desc": "고소한 견과류를 넣어만든 부드러운 라떼 위에 서양식 달고나 아몬드 브리틀 올린 달콤고소한 라떼",
+      "discountRate": 10,
+      "id": "ToffeeNutLatte",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": false,
+      "isSoldOut": false,
+      "price": 3800,
+      "tags": ["milkTeaLatte"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_7b8ed53d7eea.png",
+      "title": "토피넛라떼"
+    },
+    {
+      "ENTitle": "Butter Bagel Set",
+      "desc": "바나만의 고소한 소금 통베이글과 향긋한 커피를 즐겨보세요",
+      "discountRate": 10,
+      "id": "ButterBagelSet",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": false,
+      "isSoldOut": false,
+      "price": 5000,
+      "tags": ["setMenu"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1bc944779832.png",
+      "title": "버터베이글 세트"
+    },
+    {
+      "ENTitle": "Plain Bagel set",
+      "desc": "향긋한 바나프레소의 커피를 담백하고 건강한 플레인베이글과 즐겨보세요",
+      "discountRate": 10,
+      "id": "PlainBagelset",
+      "isBest": true,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 3900,
+      "tags": ["setMenu"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_8056a362b1db.png",
+      "title": "플레인베이글 세트"
+    },
+    {
+      "ENTitle": "Onion Bagel set",
+      "desc": "향긋한 바나프레소의 커피를 담백하고 건강한 어니언베이글과 즐겨보세요",
+      "discountRate": 10,
+      "id": "OnionBagelset",
+      "isBest": true,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 3900,
+      "tags": ["setMenu"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_8fe58258594a.png",
+      "title": "어니언베이글 세트"
+    },
+    {
+      "ENTitle": "Custard Donut set",
+      "desc": "향긋한 바나프레소의 커피를 달콤한 도넛과 즐겨보세요",
+      "discountRate": 10,
+      "id": "CustardDonutset",
+      "isBest": true,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 3900,
+      "tags": ["setMenu"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_a3e906d7ce75.png",
+      "title": "커스터드도넛 세트"
+    },
+    {
+      "ENTitle": "Ham & Cheese Muffin set",
+      "desc": "주문즉시 매장에서 바로 만든, 따뜻한 햄치즈머핀 & 고소한 아메리카노 SET",
+      "discountRate": 10,
+      "id": "HamCheeseMuffinset",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 5200,
+      "tags": ["setMenu"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_c10fb425379e.png",
+      "title": "햄치즈머핀 세트"
+    },
+    {
+      "ENTitle": "Hot Chicken Panini set",
+      "desc": "세가지 치즈가 믹스 된 베이스에 매콤한 치킨과 갈릭마요소스가 만나 더욱더 풍부한 맛을 느낄 수 있는 따뜻한 그릴드 치즈 파니니",
+      "discountRate": 20,
+      "id": "HotChickenPaniniset",
+      "isBest": false,
+      "isChecked": false,
+      "isNew": true,
+      "isSoldOut": false,
+      "price": 5900,
+      "tags": ["setMenu"],
+      "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_abdb2fae97c8.png",
+      "title": "핫치킨파니니 세트"
+    }
+  ],
+  "pay": {
+    "-NQvY9AxFptDEipg7FuW": {
+      "orderDate": "2023-03-19T20:12:01.097Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "StrawberryCreamyLatte",
+          "isChecked": false,
+          "price": 3800,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1a7763176701.png",
+          "title": "딸기크리미라떼"
+        },
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "CafeMocha",
+          "isChecked": false,
+          "price": 3500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1418e586eccc.png",
+          "title": "카페모카"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "30분 후에 가지러 갈게요",
+        "pickupTimeRange": "30",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "ALL_TAKEOUT",
+          "option": "전체 포장",
+          "subOption": "캐리어"
+        }
+      },
+      "orderShop": {
+        "address": "서울시 강북구 미아동 60-5",
+        "company_owned": true,
+        "name": "미아사거리역점"
+      },
+      "orderType": "REGULAR_ORDER",
+      "user": {
+        "displayName": "12bana",
+        "email": "12bana@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vWy7UZY9Ywv032528.png"
+      }
+    },
+    "-NQvYQj1mFnshoMRlcWw": {
+      "orderDate": "2023-03-19T20:26:10.253Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "EarlGreyBubbleTea",
+          "isChecked": false,
+          "price": 4500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_148da6d88b38.png",
+          "title": "얼그레이 버블티"
+        },
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "StrawberryChouxCreamLatte",
+          "isChecked": false,
+          "price": 4500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_cc75fbe039e4.png",
+          "title": "딸기슈크림라떼"
+        },
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "PlainBagelset",
+          "isChecked": false,
+          "price": 3900,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_8056a362b1db.png",
+          "title": "플레인베이글 세트"
+        },
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "StrawberryCreamyLatte",
+          "isChecked": false,
+          "price": 3800,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1a7763176701.png",
+          "title": "딸기크리미라떼"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "건대역점 맞죠?",
+        "pickupTimeRange": "9",
+        "selectedPlace": {
+          "id": "TAKEOUT_INSHOP",
+          "option": "매장 + 테이크아웃",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "NO_TAEKOUT",
+          "option": "포장 안함",
+          "subOption": "일회용 컵"
+        }
+      },
+      "orderShop": {
+        "address": "서울 광진구 아차산로 221 (화양동 7-4)",
+        "company_owned": true,
+        "name": "건대역점"
+      },
+      "orderType": "EASY_ORDER",
+      "user": {
+        "displayName": "12bana",
+        "email": "12bana@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vWy7UZY9Ywv032528.png"
+      }
+    },
+    "-NQxMBP87BlAa6bnuJhf": {
+      "orderDate": "2023-03-20T04:51:57.820Z",
+      "orderDetail": [
+        {
+          "amount": 4,
+          "discountRate": 10,
+          "id": "ButterBagelSet",
+          "isChecked": false,
+          "price": 5000,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1bc944779832.png",
+          "title": "버터베이글 세트"
+        },
+        {
+          "amount": 6,
+          "discountRate": 20,
+          "id": "EarlGreyBubbleTea",
+          "isChecked": false,
+          "price": 4500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_148da6d88b38.png",
+          "title": "얼그레이 버블티"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "리액트",
+        "pickupTimeRange": "12",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "ALL_TAKEOUT",
+          "option": "전체 포장",
+          "subOption": "캐리어"
+        }
+      },
+      "orderShop": {
+        "address": "서울특별시 중구 필동2가 21-1",
+        "company_owned": true,
+        "name": "충무로점"
+      },
+      "orderType": "REGULAR_ORDER",
+      "user": {
+        "displayName": "test99",
+        "email": "test99@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vs-t8lRp7Xv162716.png"
+      }
+    },
+    "-NQxMUgLckL2uz3ekYjE": {
+      "orderDate": "2023-03-20T04:53:43.419Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "EarlGreyBubbleTea",
+          "isChecked": false,
+          "price": 4500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_148da6d88b38.png",
+          "title": "얼그레이 버블티"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "리액트 테스트",
+        "pickupTimeRange": "14",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "NO_TAEKOUT",
+          "option": "포장 안함",
+          "subOption": "일회용 컵"
+        }
+      },
+      "orderShop": {
+        "address": "서울 광진구 아차산로 221 (화양동 7-4)",
+        "company_owned": true,
+        "name": "건대역점"
+      },
+      "orderType": "REGULAR_ORDER",
+      "user": {
+        "displayName": "12bana",
+        "email": "12bana@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vWy7UZY9Ywv032528.png"
+      }
+    },
+    "-NQxNLCViN9YgDptIDDp": {
+      "orderDate": "2023-03-20T04:56:30.808Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "StrawberryCreamyLatte",
+          "isChecked": false,
+          "price": 3800,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1a7763176701.png",
+          "title": "딸기크리미라떼"
+        },
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "PlainBagelset",
+          "isChecked": false,
+          "price": 3900,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_8056a362b1db.png",
+          "title": "플레인베이글 세트"
+        },
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "StrawberryChouxCreamLatte",
+          "isChecked": false,
+          "price": 4500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_cc75fbe039e4.png",
+          "title": "딸기슈크림라떼"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "카카오 페이 테스트",
+        "pickupTimeRange": "13",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "ALL_TAKEOUT",
+          "option": "전체 포장",
+          "subOption": "캐리어"
+        }
+      },
+      "orderShop": {
+        "address": "서울 강동구 천호동 447",
+        "company_owned": true,
+        "name": "강동역점"
+      },
+      "orderType": "REGULAR_ORDER",
+      "user": {
+        "displayName": "bana",
+        "email": "bana123@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vuhzKsPcIdv052003.png"
+      }
+    },
+    "-NQxWkTsPNpseG51nQBN": {
+      "orderDate": "2023-03-20T05:36:36.895Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "HamCheeseMuffinset",
+          "isChecked": false,
+          "price": 5200,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_c10fb425379e.png",
+          "title": "햄치즈머핀 세트"
+        },
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "OnionBagelset",
+          "isChecked": false,
+          "price": 3900,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_8fe58258594a.png",
+          "title": "어니언베이글 세트"
+        }
+      ],
+      "orderRequest": {
+        "pickupTimeRange": "15",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "NO_TAEKOUT",
+          "option": "포장 안함",
+          "subOption": "일회용 컵"
+        }
+      },
+      "orderShop": {
+        "address": "서울 광진구 아차산로 221 (화양동 7-4)",
+        "company_owned": true,
+        "name": "건대역점"
+      },
+      "orderType": "REGULAR_ORDER",
+      "user": {
+        "displayName": "bana",
+        "email": "bana123@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vuhzKsPcIdv052003.png"
+      }
+    },
+    "-NQx_RHdrS1hWuPJDFJ-": {
+      "orderDate": "2023-03-20T05:53:16.976Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "CustardDonutset",
+          "isChecked": false,
+          "price": 3900,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_a3e906d7ce75.png",
+          "title": "커스터드도넛 세트"
+        }
+      ],
+      "orderRequest": {
+        "pickupTimeRange": "11",
+        "selectedPlace": {
+          "id": "TUMBLER",
+          "option": "텀블러",
+          "subOption": "음료 1잔만 주문 가능"
+        },
+        "selectedTakeoutOption": {
+          "id": "NO_TAEKOUT",
+          "option": "포장 안함",
+          "subOption": "일회용 컵"
+        }
+      },
+      "orderShop": {
+        "address": "서울 동대문구 회기로 176 (회기동81)",
+        "company_owned": false,
+        "name": "회기역사거리점"
+      },
+      "orderType": "REGULAR_ORDER",
+      "user": {
+        "displayName": "bana",
+        "email": "bana123@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vuhzKsPcIdv052003.png"
+      }
+    },
+    "-NQxaHRoiL1c-qayUcFZ": {
+      "orderDate": "2023-03-20T05:55:24.141Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "CafeMocha",
+          "isChecked": false,
+          "price": 3500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1418e586eccc.png",
+          "title": "카페모카"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "빨리요",
+        "pickupTimeRange": "13",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "ALL_TAKEOUT",
+          "option": "전체 포장",
+          "subOption": "캐리어"
+        }
+      },
+      "orderShop": {
+        "address": "서울시 강북구 미아동 60-5",
+        "company_owned": true,
+        "name": "미아사거리역점"
+      },
+      "orderType": "REGULAR_ORDER",
+      "user": {
+        "displayName": "bana",
+        "email": "bana123@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vuhzKsPcIdv052003.png"
+      }
+    },
+    "-NQxgwXXm4dyMFeaLoEV": {
+      "orderDate": "2023-03-20T06:27:12.042Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "ZeroSugarAmericano",
+          "isChecked": false,
+          "price": 3300,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_c02fe040d0ad.png",
+          "title": "제로슈가 아메리카노"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "???",
+        "pickupTimeRange": "18",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "ALL_TAKEOUT",
+          "option": "전체 포장",
+          "subOption": "캐리어"
+        }
+      },
+      "orderShop": {
+        "address": "서울 동대문구 회기로 176 (회기동81)",
+        "company_owned": false,
+        "name": "회기역사거리점"
+      },
+      "orderType": "EASY_ORDER"
+    },
+    "-NQy1lmrmtCLDtXPs5lU": {
+      "orderDate": "2023-03-20T08:02:14.774Z",
+      "orderDetail": [
+        {
+          "amount": 3,
+          "discountRate": 20,
+          "id": "EarlGreyBubbleTea",
+          "isChecked": false,
+          "price": 4500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_148da6d88b38.png",
+          "title": "얼그레이 버블티"
+        },
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "StrawberryCreamyLatte",
+          "isChecked": false,
+          "price": 3800,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1a7763176701.png",
+          "title": "딸기크리미라떼"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "테스트",
+        "pickupTimeRange": "9",
+        "selectedPlace": {
+          "id": "TAKEOUT_INSHOP",
+          "option": "매장 + 테이크아웃",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "ALL_TAKEOUT",
+          "option": "전체 포장",
+          "subOption": "캐리어"
+        }
+      },
+      "orderShop": {
+        "address": "서울 동대문구 경희대로4길 1",
+        "company_owned": true,
+        "name": "경희대점"
+      },
+      "orderType": "REGULAR_ORDER",
+      "user": {
+        "displayName": "bana",
+        "email": "bana123@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vuhzKsPcIdv052003.png"
+      }
+    },
+    "-NQy2qr6TL9NYbYhqA1h": {
+      "orderDate": "2023-03-20T08:05:46.572Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "EarlGreyBubbleTea",
+          "isChecked": false,
+          "price": 4500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_148da6d88b38.png",
+          "title": "얼그레이 버블티"
+        },
+        {
+          "amount": 4,
+          "discountRate": 20,
+          "id": "StrawberryCreamyLatte",
+          "isChecked": false,
+          "price": 3800,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1a7763176701.png",
+          "title": "딸기크리미라떼"
+        }
+      ],
+      "orderRequest": {
+        "pickupTimeRange": "9",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "ALL_TAKEOUT",
+          "option": "전체 포장",
+          "subOption": "캐리어"
+        }
+      },
+      "orderShop": {
+        "address": "서울 광진구 아차산로 221 (화양동 7-4)",
+        "company_owned": true,
+        "name": "건대역점"
+      },
+      "orderType": "EASY_ORDER",
+      "user": {
+        "displayName": "bana",
+        "email": "bana123@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vuhzKsPcIdv052003.png"
+      }
+    },
+    "-NQy4o3fOgcFNkNUwjhc": {
+      "orderDate": "2023-03-20T08:14:29.109Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 10,
+          "id": "HazelnutAmericano",
+          "isChecked": false,
+          "price": 3500,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_dd9bbc721a56.png",
+          "title": "헤이즐넛 아메리카노"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "asdasd",
+        "pickupTimeRange": "10",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "ALL_TAKEOUT",
+          "option": "전체 포장",
+          "subOption": "캐리어"
+        }
+      },
+      "orderShop": {
+        "address": "서울 동대문구 회기로 176 (회기동81)",
+        "company_owned": false,
+        "name": "회기역사거리점"
+      },
+      "orderType": "EASY_ORDER",
+      "user": {
+        "displayName": "12bana",
+        "email": "12bana@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vWy7UZY9Ywv032528.png"
+      }
+    },
+    "-NQzfVe0UBiFOi0P2Zrr": {
+      "orderDate": "2023-03-20T15:34:43.498Z",
+      "orderDetail": [
+        {
+          "amount": 5,
+          "discountRate": 20,
+          "id": "BlacksugarBubbleTea",
+          "isChecked": false,
+          "price": 4300,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_8bdbff00aa9b.png",
+          "title": "흑당버블티"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "소금 뿌려주세요",
+        "pickupTimeRange": "13",
+        "selectedPlace": {
+          "id": "TAKEOUT_INSHOP",
+          "option": "매장 + 테이크아웃",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "NO_TAEKOUT",
+          "option": "포장 안함",
+          "subOption": "일회용 컵"
+        }
+      },
+      "orderShop": {
+        "address": "서울 동대문구 경희대로4길 1",
+        "company_owned": true,
+        "name": "경희대점"
+      },
+      "orderType": "EASY_ORDER",
+      "user": {
+        "displayName": "bana",
+        "email": "bana123@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vuhzKsPcIdv052003.png"
+      }
+    },
+    "-NQzlxGJswo14i8ZU1kn": {
+      "orderDate": "2023-03-20T16:07:20.706Z",
+      "orderDetail": [
+        {
+          "amount": 1,
+          "discountRate": 20,
+          "id": "StrawberryCreamyLatte",
+          "isChecked": false,
+          "price": 3800,
+          "thumbnail": "https://www.banapresso.com/from_open_storage?ws=fprocess&file=banapresso/menu/img_1a7763176701.png",
+          "title": "딸기크리미라떼"
+        }
+      ],
+      "orderRequest": {
+        "makingRequestInput": "asdasdasdasd",
+        "pickupTimeRange": "19",
+        "selectedPlace": {
+          "id": "INSHOP",
+          "option": "매장",
+          "subOption": "종이컵"
+        },
+        "selectedTakeoutOption": {
+          "id": "NO_TAEKOUT",
+          "option": "포장 안함",
+          "subOption": "일회용 컵"
+        }
+      },
+      "orderShop": {
+        "address": "서울 동대문구 회기로 176 (회기동81)",
+        "company_owned": false,
+        "name": "회기역사거리점"
+      },
+      "orderType": "EASY_ORDER",
+      "user": {
+        "displayName": "bana",
+        "email": "bana123@test.com",
+        "profileImg": "https://storage.googleapis.com/heropy-api/vuhzKsPcIdv052003.png"
+      }
+    }
+  },
+  "store": [
+    {
+      "address": "서울 동대문구 회기로 176 (회기동81)",
+      "company_owned": false,
+      "delivery_available": true,
+      "distance": "0.5km",
+      "id": "회기역사거리점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/%ED%9A%8C%EC%82%AC1.jpg",
+      "kakao_map": "http://kko.to/kU7nGg7nTB",
+      "name": "회기역사거리점",
+      "open_time": "10:00 - 22:00",
+      "LatLng": { "Lat": "37.5900707", "Lng": "127.0553692" }
+    },
+    {
+      "address": "서울 동대문구 경희대로4길 1",
+      "company_owned": true,
+      "delivery_available": false,
+      "distance": "1.2km",
+      "id": "경희대점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/kh.jpg",
+      "kakao_map": "http://naver.me/GoOlal9z",
+      "name": "경희대점",
+      "open_time": "07:00 ~ 23:00"
+    },
+    {
+      "address": "서울시 강북구 미아동 60-5",
+      "company_owned": true,
+      "delivery_available": true,
+      "distance": "1.7km",
+      "id": "미아사거리역점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/IMG_3899-HDR.jpg",
+      "kakao_map": "http://naver.me/FbRIOjSN",
+      "name": "미아사거리역점",
+      "open_time": "07:00 ~ 23:00"
+    },
+    {
+      "address": "서울 광진구 아차산로 221 (화양동 7-4)",
+      "company_owned": true,
+      "delivery_available": true,
+      "distance": "1.9km",
+      "id": "건대역점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_%EA%B1%B4%EB%8C%80%EC%97%AD%EC%A0%901.jpg",
+      "kakao_map": "http://naver.me/xL1scuov",
+      "name": "건대역점",
+      "open_time": "07:00 ~ 23:00"
+    },
+    {
+      "address": "서울시 성동구 성수동1가 13-164",
+      "company_owned": true,
+      "delivery_available": true,
+      "distance": "1.7km",
+      "id": "뚝섬역점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/%EB%9A%9D%EC%84%AC%EC%97%AD%EC%A0%901.jpg",
+      "kakao_map": "http://naver.me/5Am0TR1m",
+      "name": "뚝섬역점",
+      "open_time": "07:00 ~ 23:00"
+    },
+    {
+      "address": "서울 강동구 양재대로 1490 (길동 366-5)",
+      "company_owned": true,
+      "delivery_available": true,
+      "distance": "2.0km",
+      "id": "길동역점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_DSC05005_1.jpg",
+      "kakao_map": "http://naver.me/xaPgP2di",
+      "name": "길동역점",
+      "open_time": "07:00 ~ 23:00"
+    },
+    {
+      "address": "서울 강동구 천호동 447",
+      "company_owned": true,
+      "delivery_available": true,
+      "distance": "1.7km",
+      "id": "강동역점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/kdkd.PNG",
+      "kakao_map": "http://naver.me/GBf3NMNA",
+      "name": "강동역점",
+      "open_time": "07:00 ~ 23:00"
+    },
+    {
+      "address": "서울시 중구 신당동 369-9",
+      "company_owned": true,
+      "delivery_available": true,
+      "distance": "2.4km",
+      "id": "약수역점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_20221027_201129.jpg",
+      "kakao_map": "https://naver.me/5oiiju3u",
+      "name": "약수역점",
+      "open_time": "07:00 ~ 23:00"
+    },
+    {
+      "address": "서울특별시 중구 필동2가 21-1",
+      "company_owned": true,
+      "delivery_available": true,
+      "distance": "1.7km",
+      "id": "충무로점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_%EB%B0%94%EB%82%98%ED%94%84%EB%A0%88%EC%86%8C_%EC%B6%A9%EB%AC%B4%EB%A1%9C%EC%A0%90%20(3).jpg",
+      "kakao_map": "https://naver.me/IgN8ei30",
+      "name": "충무로점",
+      "open_time": "07:00 ~ 23:00"
+    },
+    {
+      "address": "서울시 중구 을지로2가 203",
+      "company_owned": true,
+      "delivery_available": true,
+      "distance": "3.7km",
+      "id": "파인에비뉴점",
+      "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ppo%EB%B0%94%EB%82%98%ED%94%84%EB%A0%88%EC%86%8C_%ED%8C%8C%EC%9D%B8%EC%97%90%EB%B9%84%EB%89%B4%EC%A0%90%20(4).jpg",
+      "kakao_map": "http://naver.me/5ZO1iZly",
+      "name": "파인에비뉴점",
+      "open_time": "07:00 ~ 23:00"
+    }
+  ]
+}
