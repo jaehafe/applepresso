@@ -11,13 +11,13 @@ function SelectedStoreProvider({ children }) {
   const { currentUser } = useContext(LoginContext);
   const [currentStore, setCurrentStore] = useState(
     JSON.parse(
-      localStorage.getItem(`${currentUser.user.email}-current_selected_store`)
+      localStorage.getItem(`${currentUser?.user.email}-current_selected_store`)
     ) || null
   );
 
   useEffect(() => {
     localStorage.setItem(
-      `${currentUser.user.email}-current_selected_store`,
+      `${currentUser?.user.email}-current_selected_store`,
       JSON.stringify(currentStore)
     );
   }, [currentStore]);

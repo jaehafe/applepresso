@@ -113,6 +113,11 @@ export const SelectedShopWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
+export const NonSelectedShopTitle = styled.div`
+  font-size: 23px;
+  margin-right: 10px;
+  color: var(--subtitle-color);
+`;
 export const SelectedShopTitle = styled.div`
   font-size: 23px;
   margin-right: 10px;

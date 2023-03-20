@@ -6,6 +6,7 @@ import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 import Loading from '../../components/Loading.jsx/Loading';
 import Calendar from '../../components/Calendar/Calendar';
 import OrderHistoryMenu from '../../components/OrderHistoryMenu/OrderHistoryMenu';
+import NoResult from '../../components/NoResult/NoResult';
 
 const getSevenDaysAgoDate = () => {
   const date = new Date();
@@ -38,9 +39,6 @@ function OrderHistory() {
     navigate('/main/myPage');
   };
 
-  if (loading) {
-    return <Loading />;
-  }
   const handleOpenDatePicker = () => {
     setIsOpenDatePicker(true);
   };
@@ -78,7 +76,11 @@ function OrderHistory() {
         />
       )}
       {/*  */}
-      <OrderHistoryMenu filteredDate={filteredDate} />
+      {filteredDate.length < 1 ? (
+        <NoResult />
+      ) : (
+        <OrderHistoryMenu filteredDate={filteredDate} />
+      )}
     </S.Container>
   );
 }

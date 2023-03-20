@@ -12,7 +12,7 @@ function PayRedirect(props) {
       </S.HeroIMG>
       {props.message && (
         <S.Button>
-          <Link to="/main/myPage">{props.message}</Link>
+          <Link to={props.navigate}>{props.message}</Link>
         </S.Button>
       )}
     </S.Container>

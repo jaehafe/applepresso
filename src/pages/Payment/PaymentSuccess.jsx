@@ -6,6 +6,7 @@ const Props = {
   title: '결제 완료!',
   aniName: success,
   message: '주문 내역 가기',
+  navigate: '/orderHistory',
 };
 
 function Payment() {

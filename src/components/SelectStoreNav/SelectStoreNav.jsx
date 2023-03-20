@@ -26,7 +26,7 @@ function SelectStoreNav() {
           <S.StoreTitleWrapper>
             <S.StyledFiMapPin />
             <S.StoreTitle>매장 선택 후</S.StoreTitle>
-            <S.StoreDesc>메뉴가격이 표시됩니다</S.StoreDesc>
+            <S.StoreDesc>메뉴주문이 가능합니다</S.StoreDesc>
           </S.StoreTitleWrapper>
           <S.ChangeStoreButton onClick={navigateToSelectStore}>선택</S.ChangeStoreButton>
         </>

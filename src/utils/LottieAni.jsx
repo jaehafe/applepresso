@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import lottie from 'lottie-web';
-// import loginAni from '../assets/login-ani-01.json';
 
 const LottieAni = ({ aniName }) => {
   const container = useRef(null);

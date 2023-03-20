@@ -8,8 +8,12 @@ import CartButton from '../../../components/CartButton/CartButton';
 import useGetMenu from '../../../hooks/useGetMenu';
 import { CartContext } from '../../../contexts/CartContextProvider';
 import { EasyOrderContext } from '../../../contexts/EasyOrderContextProvider';
+import { LoginContext } from '../../../contexts/LoginContextProvider';
+import LoginAlertModal from '../../../components/LoginAlertModal/LoginAlertModal';
 
 function MenuDetail() {
+  const { currentUser, handleOpenLoginModal, isOpenLoginModal, setIsOpenLoginModal } =
+    useContext(LoginContext);
   const navigate = useNavigate();
   const cartCtx = useContext(CartContext);
   const easyOrderCtx = useContext(EasyOrderContext);
@@ -54,6 +58,10 @@ function MenuDetail() {
   console.log('amountRef', amountRef);
 
   const addToCartHandler = () => {
+    if (!currentUser) {
+      handleOpenLoginModal();
+      return;
+    }
     cartCtx.addItem({
       id,
       title,
@@ -66,6 +74,11 @@ function MenuDetail() {
   };
 
   const orderNowHandler = () => {
+    if (!currentUser) {
+      handleOpenLoginModal();
+      return;
+    }
+
     cartCtx.addItem({
       id,
       title,
@@ -80,6 +93,10 @@ function MenuDetail() {
   };
 
   const addToEasyOrderHandler = () => {
+    if (!currentUser) {
+      handleOpenLoginModal();
+      return;
+    }
     easyOrderCtx.addItem({
       id,
       title,
@@ -103,6 +120,12 @@ function MenuDetail() {
 
   return (
     <>
+      {isOpenLoginModal && (
+        <LoginAlertModal
+          isOpenLoginModal={isOpenLoginModal}
+          setIsOpenLoginModal={setIsOpenLoginModal}
+        />
+      )}
       <CartButton onClick={handleNavigateToCart} />
       <S.HeaderContainer>
         <S.HeaderWrapper>
