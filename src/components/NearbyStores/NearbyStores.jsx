@@ -3,7 +3,7 @@ import * as S from './NearbyStores.style';
 
 import StoreInfoContainer from '../StoreInfoContainer/StoreInfoContainer';
 import useGetStoreInfo from '../../hooks/useGetStoreInfo';
-import DetailStoreModal from '../DetailStoreModal/DetailStoreModal';
+import DetailStoreModal from '../Modal/DetailStoreModal/DetailStoreModal';
 
 function NearbyStores() {
   const [isOpenModal, setIsOpenModal] = useState(false);

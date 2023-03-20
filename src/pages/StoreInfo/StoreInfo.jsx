@@ -21,7 +21,6 @@ const StoreInfoNavItem = [
 
 function StoreInfo() {
   const [activeNav, setActiveNav] = useState('nearbyStore');
-  const [data, setData] = useState({});
 
   const navigate = useNavigate();
   const handleToBack = () => {
