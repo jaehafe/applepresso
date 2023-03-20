@@ -5,7 +5,7 @@ import { formatDate, formatPrice } from '../../utils/format';
 import Loading from '../Loading.jsx/Loading';
 import * as S from './OrderHistoryMenu.style';
 
-function OrderHistoryMenu({ filteredDate }) {
+function OrderHistoryMenu({ filteredData }) {
   const { loading } = useGetOrderedMenu('/pay');
 
   if (loading) {
@@ -13,7 +13,7 @@ function OrderHistoryMenu({ filteredDate }) {
   }
   return (
     <S.OrderContainer>
-      {filteredDate?.map((items) => {
+      {filteredData?.map((items) => {
         const { id, value } = items;
 
         const finalPrices = value.orderDetail.map((item) => {

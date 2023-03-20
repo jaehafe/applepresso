@@ -28,7 +28,7 @@ function OrderHistory() {
   //
   const { data, error, loading } = useGetOrderedMenu('/pay');
 
-  const filteredDate = data.filter((item) => {
+  const filteredData = data.filter((item) => {
     const orderDate = new Date(item.value.orderDate);
     return orderDate >= startDate && orderDate <= endDate;
   });
@@ -76,10 +76,10 @@ function OrderHistory() {
         />
       )}
       {/*  */}
-      {filteredDate.length < 1 ? (
+      {filteredData.length < 1 ? (
         <NoResult />
       ) : (
-        <OrderHistoryMenu filteredDate={filteredDate} />
+        <OrderHistoryMenu filteredData={filteredData} />
       )}
     </S.Container>
   );
