@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { BsGithub } from 'react-icons/all';
 
 import {
   IoReceiptOutline,
@@ -135,4 +136,23 @@ export const BannerIMG = styled.img`
   height: 140px;
   object-fit: cover;
   border-radius: 20px;
+`;
+
+// github
+export const GithubInfoContainer = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 16px;
+`;
+export const GithubInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+`;
+export const StyledBsGithub = styled(BsGithub)`
+  font-size: 20px;
 `;

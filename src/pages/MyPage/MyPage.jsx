@@ -123,7 +123,17 @@ function MyPage() {
           })}
         </S.BannerSlides>
       </S.BannerIMGContainer>
-      <S.CardContainer>123</S.CardContainer>
+      <S.GithubInfoContainer
+        href="https://github.com/jaehafe/applepresso"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <S.GithubInfoWrapper>
+          <S.StyledBsGithub />
+          애플프레소 깃허브
+        </S.GithubInfoWrapper>
+        <S.StyledIoIosArrowForward />
+      </S.GithubInfoContainer>
       <S.CardContainer>123</S.CardContainer>
     </S.Container>
   );
