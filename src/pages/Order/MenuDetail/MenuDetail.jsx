@@ -9,7 +9,7 @@ import useGetMenu from '../../../hooks/useGetMenu';
 import { CartContext } from '../../../contexts/CartContextProvider';
 import { EasyOrderContext } from '../../../contexts/EasyOrderContextProvider';
 import { LoginContext } from '../../../contexts/LoginContextProvider';
-import LoginAlertModal from '../../../components/LoginAlertModal/LoginAlertModal';
+import LoginAlertModal from '../../../components/Modal/LoginAlertModal/LoginAlertModal';
 
 function MenuDetail() {
   const { currentUser, handleOpenLoginModal, isOpenLoginModal, setIsOpenLoginModal } =

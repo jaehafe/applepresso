@@ -20,8 +20,9 @@ function useGetOrderedMenu(url = '') {
 
       /** 현재 로그인한 유저가 주문한 메뉴 */
       const currentUserOrder = menuArr.filter(
-        (items) => items.value.user.email === currentUser.user.email
+        (items) => items.value?.user?.email === currentUser?.user?.email
       );
+      console.log('currentUserOrder', currentUserOrder);
 
       /** 최근순으로 정렬 */
       const sortedOrders = currentUserOrder.sort(
