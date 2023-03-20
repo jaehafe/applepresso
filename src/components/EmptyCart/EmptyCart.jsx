@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom';
 function EmptyCart() {
   return (
     <S.Container>
-      <S.Title>담긴 메뉴가 없네요.</S.Title>
+      <S.Title>간편 주문에 담긴 </S.Title>
+      <S.Title>메뉴가 없네요.</S.Title>
       <S.HeroIMG>
         <LottieAni aniName={emptyCart} />
       </S.HeroIMG>
