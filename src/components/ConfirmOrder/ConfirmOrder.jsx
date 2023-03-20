@@ -197,19 +197,19 @@ function ConfirmOrder({ cartCtx }) {
             <S.StyledIoIosArrowForward />
           </S.SelectShopTitleWrapper>
           <S.SelectedShopWrapper>
-            <S.SelectedShopTitle>{currentStore.name}</S.SelectedShopTitle>
+            <S.SelectedShopTitle>{currentStore?.name}</S.SelectedShopTitle>
             <S.SelectedShopInfos>
-              {currentStore.delivery_available === true ? (
+              {currentStore?.delivery_available === true ? (
                 <S.ShopInfo>배달 가능점</S.ShopInfo>
               ) : (
                 ''
               )}
               <S.ShopInfo>
-                {currentStore.company_owned === true ? '직영점' : '가맹점'}
+                {currentStore?.company_owned === true ? '직영점' : '가맹점'}
               </S.ShopInfo>
             </S.SelectedShopInfos>
           </S.SelectedShopWrapper>
-          <S.SelectedShopAddress>{currentStore.address}</S.SelectedShopAddress>
+          <S.SelectedShopAddress>{currentStore?.address}</S.SelectedShopAddress>
         </S.SelectShopWrapper>
         {/* 테이크 아웃 장소 선택 */}
         <S.SelectTakeoutOptionWrapper>
