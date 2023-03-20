@@ -23,9 +23,11 @@ function ConfirmOrder({ cartCtx }) {
   const { postKakaoPay } = useKakaoPay();
   const { currentStore } = useContext(SelectedStoreContext);
   const { currentUser } = useContext(LoginContext);
+  // 주문 매장 선택
+  const selectedShopRef = useRef(null);
   // 테이크 아웃 장소 선택
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const selectPlaceRef = useRef();
+  const selectPlaceRef = useRef(null);
   // 제조 / 픽업 요청사항
   const [makingRequestModal, setMakingRequestModal] = useState(false);
   const [makingRequestInput, setMakingRequestInput] = useState(null);
@@ -97,20 +99,16 @@ function ConfirmOrder({ cartCtx }) {
     return true;
   };
 
-  const openConfirmModal = () => {
-    console.log('123');
-    setIsOpenConfirmModal(!isOpenConfirmModal);
-  };
-
   const handleClosePaymentModal = () => {
     setIsOpenConfirmModal(false);
   };
 
-  const handleOpenPaymentModal = () => {
-    setIsOpenConfirmModal(true);
-  };
-
   const handlePayment = () => {
+    const isShopSelected = handleClientRect(
+      currentStore,
+      selectedShopRef,
+      '주문할 매장을 선택해주세요.'
+    );
     const isPlaceSelected = handleClientRect(
       selectedPlace,
       selectPlaceRef,
@@ -121,11 +119,11 @@ function ConfirmOrder({ cartCtx }) {
       selectTakeoutOptionRef,
       '포장 방법을 선택해주세요.'
     );
-    if (!isPlaceSelected || !isTakeoutOptionSelected) {
+    if (!isPlaceSelected || !isTakeoutOptionSelected || !isShopSelected) {
       return;
     }
 
-    if (isPlaceSelected && isTakeoutOptionSelected) {
+    if (isPlaceSelected && isTakeoutOptionSelected && isShopSelected) {
       setIsOpenConfirmModal(true);
     }
   };
@@ -193,21 +191,33 @@ function ConfirmOrder({ cartCtx }) {
         {/* 주문매장 */}
         <S.SelectShopWrapper onClick={navigateToSelectShopPage}>
           <S.SelectShopTitleWrapper>
-            <S.SelectShopTitle>주문 매장</S.SelectShopTitle>
+            <S.SelectShopTitle ref={selectedShopRef}>주문 매장</S.SelectShopTitle>
             <S.StyledIoIosArrowForward />
           </S.SelectShopTitleWrapper>
           <S.SelectedShopWrapper>
-            <S.SelectedShopTitle>{currentStore?.name}</S.SelectedShopTitle>
-            <S.SelectedShopInfos>
-              {currentStore?.delivery_available === true ? (
-                <S.ShopInfo>배달 가능점</S.ShopInfo>
-              ) : (
-                ''
-              )}
-              <S.ShopInfo>
-                {currentStore?.company_owned === true ? '직영점' : '가맹점'}
-              </S.ShopInfo>
-            </S.SelectedShopInfos>
+            {currentStore ? (
+              <>
+                <S.SelectedShopTitle>{currentStore.name}</S.SelectedShopTitle>
+                <S.SelectedShopInfos>
+                  {currentStore.delivery_available === true ? (
+                    <S.ShopInfo>배달 가능점</S.ShopInfo>
+                  ) : (
+                    ''
+                  )}
+                  {currentStore && (
+                    <S.ShopInfo>
+                      {currentStore.company_owned === true ? '직영점' : '가맹점'}
+                    </S.ShopInfo>
+                  )}
+                </S.SelectedShopInfos>
+              </>
+            ) : (
+              <>
+                <S.NonSelectedShopTitle>
+                  주문할 매장을 선택해주세요.
+                </S.NonSelectedShopTitle>
+              </>
+            )}
           </S.SelectedShopWrapper>
           <S.SelectedShopAddress>{currentStore?.address}</S.SelectedShopAddress>
         </S.SelectShopWrapper>

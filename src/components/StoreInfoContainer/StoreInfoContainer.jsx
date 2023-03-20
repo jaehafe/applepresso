@@ -17,31 +17,29 @@ function StoreInfoContainer({ store, isOpenModal, setIsOpenModal }) {
   } = store;
 
   return (
-    <>
-      <S.StoreWrapper>
-        <S.StoreInfoHeader>
-          <S.StoreBranch>{company_owned === true ? '직영점' : '가맹점'}</S.StoreBranch>
-        </S.StoreInfoHeader>
-        <S.StoreInfoHero>
-          <S.StoreThumbnail src={image} alt={name} />
-          <S.StoreInfos>
-            <S.StoreInfosHeader>
-              <S.StoreTitle>{name}</S.StoreTitle>
-              {delivery_available && (
-                <S.StoreDelivery>
-                  {delivery_available === true ? '배달가능점' : ''}
-                </S.StoreDelivery>
-              )}
-            </S.StoreInfosHeader>
-            <S.StoreInfosParaWrapper>
-              <S.StoreAddr>{address}</S.StoreAddr>
-              <S.StoreOpenTime>{open_time}</S.StoreOpenTime>
-            </S.StoreInfosParaWrapper>
-          </S.StoreInfos>
-          <S.StoreDistance>{distance}</S.StoreDistance>
-        </S.StoreInfoHero>
-      </S.StoreWrapper>
-    </>
+    <S.StoreWrapper>
+      <S.StoreInfoHeader>
+        <S.StoreBranch>{company_owned === true ? '직영점' : '가맹점'}</S.StoreBranch>
+      </S.StoreInfoHeader>
+      <S.StoreInfoHero>
+        <S.StoreThumbnail src={image} alt={name} />
+        <S.StoreInfos>
+          <S.StoreInfosHeader>
+            <S.StoreTitle>{name}</S.StoreTitle>
+            {delivery_available && (
+              <S.StoreDelivery>
+                {delivery_available === true ? '배달가능점' : ''}
+              </S.StoreDelivery>
+            )}
+          </S.StoreInfosHeader>
+          <S.StoreInfosParaWrapper>
+            <S.StoreAddr>{address}</S.StoreAddr>
+            <S.StoreOpenTime>{open_time}</S.StoreOpenTime>
+          </S.StoreInfosParaWrapper>
+        </S.StoreInfos>
+        <S.StoreDistance>{distance}</S.StoreDistance>
+      </S.StoreInfoHero>
+    </S.StoreWrapper>
   );
 }
 
