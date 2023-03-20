@@ -26,7 +26,7 @@ import PaymentWaiting from './pages/Payment/PaymentWaiting';
 import OrderHistory from './pages/OrderHistory/OrderHistory';
 import DetailOrderHistory from './pages/DetailOrderHistory/DetailOrderHistory';
 import StoreInfo from './pages/StoreInfo/StoreInfo';
-import KakaoMapPage from './pages/KakaoMapPage/KakaoMapPage';
+// import KakaoMapPage from './pages/KakaoMapPage/KakaoMapPage';
 
 const Layout = () => {
   return (
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
   { path: '/orderHistory', element: <OrderHistory /> },
   { path: '/orderHistory/:id', element: <DetailOrderHistory /> },
   { path: '/storeInfo', element: <StoreInfo /> },
-  { path: '/map', element: <KakaoMapPage /> },
+  // { path: '/map', element: <KakaoMapPage /> },
   {
     path: '/main',
     element: <Layout />,

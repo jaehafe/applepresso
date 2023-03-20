@@ -1,15 +1,28 @@
 import styled from 'styled-components';
-import { BsArrowLeft } from 'react-icons/all';
+import { BsArrowLeft, AiOutlineClose } from 'react-icons/all';
 
 export const StyledBsArrowLeft = styled(BsArrowLeft)`
   font-size: 24px;
   color: #333;
   cursor: pointer;
 `;
+export const StyledAiOutlineClose = styled(AiOutlineClose)`
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+`;
 
 export const Container = styled.div`
-  border: 1px solid;
-  min-height: 100vh;
+  position: fixed;
+  z-index: 13;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 500px;
+  height: 100%;
+  border-radius: 20px;
+  background-color: #fff;
 `;
 
 // header
@@ -44,6 +57,10 @@ export const HeaderTitleWrapper = styled.div`
 `;
 export const HeaderTitle = styled.h2`
   font-weight: 500;
+`;
+export const IconWrapper = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 // map

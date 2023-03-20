@@ -1,9 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as S from './DetailStoreModal.style';
 import ReactDOM from 'react-dom';
 import { SelectedStoreContext } from '../../../contexts/SelectedStoreProvider';
+import { useNavigate, useParams } from 'react-router-dom';
+import KakaoMapPage from '../../../pages/KakaoMapPage/KakaoMapPage';
 
 function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
+  const [isOpenMapModal, setIsOpenMapModal] = useState(false);
+
+  const navigate = useNavigate();
+  const { id: paramsId } = useParams();
   const { handleSelectedStore } = useContext(SelectedStoreContext);
   const {
     id,
@@ -15,6 +21,7 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
     company_owned,
     distance,
     kakao_map,
+    LatLng: { Lat, Lng },
   } = store;
 
   const handleCloseModal = () => {
@@ -22,6 +29,7 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
   };
   const handleKaokaoMap = () => {
     console.log('123');
+    setIsOpenMapModal(true);
   };
 
   useEffect(() => {
@@ -75,6 +83,14 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
         <S.KakaoMapSearch onClick={handleKaokaoMap}>
           <S.StyledMdOutlineGpsFixed />
         </S.KakaoMapSearch>
+        {isOpenMapModal && (
+          <KakaoMapPage
+            title={name}
+            Lat={Lat}
+            Lng={Lng}
+            setIsOpenMapModal={setIsOpenMapModal}
+          />
+        )}
       </S.Container>
     </>,
     document.getElementById('overlay-root')
