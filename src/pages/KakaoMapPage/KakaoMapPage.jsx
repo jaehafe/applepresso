@@ -73,6 +73,9 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
         </S.HeaderWrapper>
       </S.HeaderContainer>
       <S.MapContainer id="map"></S.MapContainer>
+      <S.CurrentLocationButton>
+        <S.StyledBiCurrentLocation />
+      </S.CurrentLocationButton>
     </S.Container>
   );
 }
