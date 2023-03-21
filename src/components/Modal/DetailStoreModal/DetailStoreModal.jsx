@@ -3,7 +3,7 @@ import * as S from './DetailStoreModal.style';
 import ReactDOM from 'react-dom';
 import { SelectedStoreContext } from '../../../contexts/SelectedStoreProvider';
 import { useNavigate, useParams } from 'react-router-dom';
-import KakaoMapPage from '../../../pages/KakaoMapPage/KakaoMapPage';
+import KakaoMapModal from '../KakaoMapModal/KakaoMapModal';
 
 function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
   const { handleSelectedStore } = useContext(SelectedStoreContext);
@@ -83,7 +83,7 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
         </S.KakaoMapSearch>
       </S.Container>
       {isOpenMapModal && (
-        <KakaoMapPage
+        <KakaoMapModal
           title={name}
           Lat={Lat}
           Lng={Lng}

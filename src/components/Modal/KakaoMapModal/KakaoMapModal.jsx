@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import * as S from './KakaoMapPage.style';
+import * as S from './KakaoMapModal.style';
 
 const { kakao } = window;
 
-function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMapModal }) {
+function KakaoMapModal({
+  Lat = 37.5900707,
+  Lng = 127.0553692,
+  title,
+  setIsOpenMapModal,
+}) {
   const [mapInstance, setMapInstance] = useState(null);
 
   useEffect(() => {
@@ -49,17 +53,17 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
       level: 5,
     };
     //map
-    let map = new kakao.maps.Map(container, options);
+    const map = new kakao.maps.Map(container, options);
     setMapInstance(map);
 
-    let imageSrc =
+    const imageSrc =
       'https://play-lh.googleusercontent.com/PmY6TGbSTUBZkEZRQp5_h2IRw87KXL9iZoQ_FiZW0ve4U5ppt2ArK0PMKMy1X3LHVA=w480-h960-rw';
-    let imageSize = new kakao.maps.Size(40, 40); // 마커이미지의 크기입니다
-    let imageOption = { offset: new kakao.maps.Point(27, 69) }; //
-    let markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+    const imageSize = new kakao.maps.Size(40, 40); // 마커이미지의 크기입니다
+    const imageOption = { offset: new kakao.maps.Point(27, 69) }; //
+    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
     // 마커를 생성
-    let marker = new kakao.maps.Marker({
+    const marker = new kakao.maps.Marker({
       //마커가 표시 될 위치
       position: new kakao.maps.LatLng(Lat, Lng),
       image: markerImage,
@@ -99,10 +103,10 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
     if (navigator.geolocation) {
       // GeoLocation을 이용해서 접속 위치를 얻어옵니다
       navigator.geolocation.getCurrentPosition(function (position) {
-        let lat = position.coords.latitude, // 위도
+        const lat = position.coords.latitude, // 위도
           lon = position.coords.longitude; // 경도
 
-        let locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+        const locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
           message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
 
         // 마커와 인포윈도우를 표시합니다
@@ -111,7 +115,7 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
     } else {
       // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
-      let locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+      const locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
         message = 'geolocation을 사용할수 없어요..';
 
       displayMarker(locPosition, message);
@@ -139,4 +143,4 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
   );
 }
 
-export default KakaoMapPage;
+export default KakaoMapModal;
