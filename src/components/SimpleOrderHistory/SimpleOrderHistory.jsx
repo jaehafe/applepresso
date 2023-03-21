@@ -21,11 +21,38 @@ function SimpleOrderHistory() {
   const values = data.map((item) => {
     return item.value.orderDetail;
   });
-  console.log('values', values);
-  // 1. values 배열에서 각 메뉴의 amount 값을 추출하여 새로운 배열을 만듦
 
-  // 2. 가장 많이 팔린 메뉴의 amount 값을 구함
-  // console.log('Object.values(amountsById)', Object.values(amountsById));
+  // 주문 횟수를 카운팅
+  const countOrders = (values) => {
+    let orderCounts = {};
+
+    values.forEach((array) => {
+      array.forEach((item) => {
+        if (orderCounts[item.id]) {
+          orderCounts[item.id].count++;
+        } else {
+          orderCounts[item.id] = { ...item, count: 1 };
+        }
+      });
+    });
+
+    return orderCounts;
+  };
+
+  // 주문 횟수를 기준으로 내림차순 정렬
+  const sortByOrders = (orderCounts) => {
+    let sortedOrders = Object.values(orderCounts);
+
+    sortedOrders.sort((a, b) => b.count - a.count);
+
+    return sortedOrders;
+  };
+
+  const orderCounts = countOrders(values);
+  const sortedValues = sortByOrders(orderCounts);
+
+  console.log('orderCounts', orderCounts);
+  console.log('sortedValues', sortedValues);
 
   return (
     <S.AddEasyOrderButton>

@@ -11,7 +11,6 @@ function useGetMenu(url = '') {
       setLoading(true);
       const res = await axiosFirebase.get(`${url}.json`);
       const menuArr = Object.values(res.data);
-      console.log('menuArr', menuArr);
 
       setData(menuArr);
     } catch (err) {
