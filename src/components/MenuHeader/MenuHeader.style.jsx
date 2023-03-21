@@ -3,7 +3,7 @@ import { FiSearch, FiMapPin } from 'react-icons/all';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export const Container = styled.div`
-  z-index: 10;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,13 +23,14 @@ export const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 20px;
+  cursor: pointer;
 `;
 export const HeaderTitle = styled.h2`
   font-weight: 500;
 `;
 
 export const HeaderNav = styled(Swiper)`
-  z-index: 10;
+  z-index: 2;
   position: fixed;
   top: 80px;
   left: 50%;

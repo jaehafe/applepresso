@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './MenuHeader.style';
 import { A11y } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
 import { NavLink } from 'react-router-dom';
 import SelectStoreNav from '../SelectStoreNav/SelectStoreNav';
+import SearchMenuModal from '../Modal/SearchMenuModal/SearchMenuModal';
 
 const NavLists = [
   {
@@ -58,12 +59,24 @@ const NavLists = [
 ];
 
 function MenuHeader() {
+  const [isOpenSearchMenuModal, setIsOpenSearchMenuModal] = useState(false);
+
+  const handleOpenSearchMenuModal = () => {
+    setIsOpenSearchMenuModal(true);
+  };
+
   return (
     <>
+      {isOpenSearchMenuModal && (
+        <SearchMenuModal
+          isOpenSearchMenuModal={isOpenSearchMenuModal}
+          setIsOpenSearchMenuModal={setIsOpenSearchMenuModal}
+        />
+      )}
       <S.Container>
         <S.HeaderWrapper>
           <S.HeaderTitle>주문</S.HeaderTitle>
-          <S.StyledFiSearch />
+          <S.StyledFiSearch onClick={handleOpenSearchMenuModal} />
         </S.HeaderWrapper>
       </S.Container>
       <S.HeaderNav

@@ -3,7 +3,7 @@ import { BsCart2 } from 'react-icons/bs';
 import { BsBagHeart } from 'react-icons/bs';
 
 export const Container = styled.div`
-  z-index: 10;
+  z-index: 2;
   display: flex;
   /* flex-direction: column; */
   gap: 10px;

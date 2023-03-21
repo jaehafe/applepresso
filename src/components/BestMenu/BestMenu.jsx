@@ -4,17 +4,28 @@ import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 import Loading from '../Loading.jsx/Loading';
 import useGetMenu from '../../hooks/useGetMenu';
 
-function SimpleOrderHistory() {
+function BestMenu() {
   const { data, loading, error, refetchData } = useGetOrderedMenu('/pay');
-  const { data: menuData } = useGetMenu('/menu');
+
   if (loading) {
     return <Loading />;
   }
   if (error) {
     return (
-      <S.RetryButton style={{ cursor: 'pointer' }} onClick={() => refetchData()}>
-        다시 시도하기
-      </S.RetryButton>
+      <S.ButtonContainer>
+        <S.TitleWrapper>
+          <S.RetryTitle>요청사항을 처리하는데 실패했습니다.</S.RetryTitle>
+          <S.RetrySubtitle>잠시 후 다시 시도해주세요</S.RetrySubtitle>
+        </S.TitleWrapper>
+        <S.RetryButton
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            refetchData();
+          }}
+        >
+          다시 시도하기
+        </S.RetryButton>
+      </S.ButtonContainer>
     );
   }
 
@@ -86,4 +97,4 @@ function SimpleOrderHistory() {
   );
 }
 
-export default SimpleOrderHistory;
+export default BestMenu;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FiMapPin } from 'react-icons/all';
 
 export const CurrentStoreContainer = styled.div`
-  z-index: 10;
+  z-index: 2;
   position: fixed;
   top: 130px;
   left: 50%;
