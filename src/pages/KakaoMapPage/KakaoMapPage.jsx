@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './KakaoMapPage.style';
 
 const { kakao } = window;
 
 function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMapModal }) {
+  const [currentMarker, setCurrentMarker] = useState(null);
   const navigate = useNavigate();
   const handleToBack = () => {
     navigate(-1);
@@ -22,6 +23,37 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
     };
     //map
     const map = new kakao.maps.Map(container, options);
+
+    // HTML5의 geolocation을 사용하여 현재 위치를 얻어옵니다
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const lat = position.coords.latitude; // 위도
+          const lng = position.coords.longitude; // 경도
+
+          // 새로운 마커를 생성합니다
+          const marker = new kakao.maps.Marker({
+            // 마커가 표시 될 위치
+            position: new kakao.maps.LatLng(lat, lng),
+          });
+
+          // 기존 마커와 새로운 마커를 모두 지도 위에 표시합니다
+          if (currentMarker) currentMarker.setMap(null);
+          marker.setMap(map);
+
+          // 현재 위치로 지도 중심좌표를 이동합니다
+          const center = new kakao.maps.LatLng(lat, lng);
+          map.setCenter(center);
+          setCurrentMarker(marker);
+        },
+        function (error) {
+          alert('위치 정보를 가져오는 것에 실패했습니다.');
+          console.error(error);
+        }
+      );
+    } else {
+      alert('이 브라우저에서는 Geolocation이 지원되지 않습니다.');
+    }
 
     let imageSrc =
       'https://play-lh.googleusercontent.com/PmY6TGbSTUBZkEZRQp5_h2IRw87KXL9iZoQ_FiZW0ve4U5ppt2ArK0PMKMy1X3LHVA=w480-h960-rw';
@@ -66,7 +98,7 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
     marker.setMap(map);
   };
 
-  const getCurrentLocation = (position) => {};
+  const getCurrentLocation = () => {};
 
   return (
     <S.Container>
@@ -82,7 +114,7 @@ function KakaoMapPage({ Lat = 37.5900707, Lng = 127.0553692, title, setIsOpenMap
         </S.HeaderWrapper>
       </S.HeaderContainer>
       <S.MapContainer id="map"></S.MapContainer>
-      <S.CurrentLocationButton>
+      <S.CurrentLocationButton onClick={getCurrentLocation}>
         <S.StyledBiCurrentLocation />
       </S.CurrentLocationButton>
     </S.Container>
