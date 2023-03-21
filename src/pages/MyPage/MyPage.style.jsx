@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BsGithub, FaRegHandPointer } from 'react-icons/all';
+import { BsGithub, AiOutlineExclamationCircle } from 'react-icons/all';
 
 import {
   IoReceiptOutline,
@@ -191,10 +191,19 @@ export const StyledBsGithub = styled(BsGithub)`
 `;
 
 // 주문 내역
-export const ShortOrderHistoryContainer = styled.div`
+export const BestMenuContainer = styled.div`
   margin-top: 10px;
 `;
-export const ShortOrderHistoryTitle = styled.h4`
+export const BestMenuTitle = styled.h4`
   margin-bottom: 10px;
   font-size: 20px;
 `;
+export const BestMenuSubTitle = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  color: var(--subtitle-color);
+`;
+
+export const StyledAiOutlineExclamationCircle = styled(AiOutlineExclamationCircle)``;

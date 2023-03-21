@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import * as S from './SimpleOrderHistory.style';
+import * as S from './BestMenu.style';
 import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 import Loading from '../Loading.jsx/Loading';
 import useGetMenu from '../../hooks/useGetMenu';
@@ -12,9 +12,9 @@ function SimpleOrderHistory() {
   }
   if (error) {
     return (
-      <div style={{ cursor: 'pointer' }} onClick={() => refetchData()}>
+      <S.RetryButton style={{ cursor: 'pointer' }} onClick={() => refetchData()}>
         다시 시도하기
-      </div>
+      </S.RetryButton>
     );
   }
 
@@ -49,19 +49,40 @@ function SimpleOrderHistory() {
   };
 
   const orderCounts = countOrders(values);
-  const sortedValues = sortByOrders(orderCounts);
+  const sortedByBestMenus = sortByOrders(orderCounts);
 
   console.log('orderCounts', orderCounts);
-  console.log('sortedValues', sortedValues);
+  console.log('sortedByBestMenus', sortedByBestMenus);
 
   return (
-    <S.AddEasyOrderButton>
-      <S.AddEasyOrderList>
-        <S.StyledFaRegHandPointer />
-        <S.AddEasyOrderDesc>주문 내역이 아직 없네요.</S.AddEasyOrderDesc>
-      </S.AddEasyOrderList>
-      <S.AddEasyOrderExtraListButton>+</S.AddEasyOrderExtraListButton>
-    </S.AddEasyOrderButton>
+    <>
+      {sortedByBestMenus ? (
+        <S.BannerContainer>
+          <S.BannerSlides>
+            {sortedByBestMenus.map((item) => {
+              const { id, thumbnail, title, count } = item;
+              return (
+                <S.BannerWrapper key={id}>
+                  <S.MenuThumbnail src={thumbnail} alt={title} />
+                  <S.MenuInfo>
+                    <S.MenuTitle>{title}</S.MenuTitle>
+                    <S.MenuCount>{count}개</S.MenuCount>
+                  </S.MenuInfo>
+                </S.BannerWrapper>
+              );
+            })}
+          </S.BannerSlides>
+        </S.BannerContainer>
+      ) : (
+        <S.AddEasyOrderButton>
+          <S.AddEasyOrderList>
+            <S.StyledFaRegHandPointer />
+            <S.AddEasyOrderDesc>주문 내역이 아직 없네요.</S.AddEasyOrderDesc>
+          </S.AddEasyOrderList>
+          <S.AddEasyOrderExtraListButton>+</S.AddEasyOrderExtraListButton>
+        </S.AddEasyOrderButton>
+      )}
+    </>
   );
 }
 
