@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import * as S from './StoreInfo.style';
 import NearbyStores from '../../components/NearbyStores/NearbyStores';
 import FrequentStores from '../../components/NearbyStores/FrequentStores';
+import GetAllStoreMapModal from '../../components/Modal/KakaoMapModal/GetAllStoreMapModal/GetAllStoreMapModal';
 
 const StoreInfoNavItem = [
   {
@@ -20,6 +21,7 @@ const StoreInfoNavItem = [
 ];
 
 function StoreInfo() {
+  const [isOpenAllStoreModal, setIsOpenAllStoreModal] = useState(false);
   const [activeNav, setActiveNav] = useState('nearbyStore');
 
   const navigate = useNavigate();
@@ -29,6 +31,12 @@ function StoreInfo() {
 
   return (
     <S.Container>
+      {isOpenAllStoreModal && (
+        <GetAllStoreMapModal
+          isOpenAllStoreModal={isOpenAllStoreModal}
+          setIsOpenAllStoreModal={setIsOpenAllStoreModal}
+        />
+      )}
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
@@ -37,7 +45,7 @@ function StoreInfo() {
           </S.HeaderTitleWrapper>
           <S.IconWrapper>
             <S.StyledFiSearch />
-            <S.StyledFiMapPin />
+            <S.StyledFiMapPin onClick={() => setIsOpenAllStoreModal(true)} />
           </S.IconWrapper>
         </S.HeaderWrapper>
       </S.HeaderContainer>

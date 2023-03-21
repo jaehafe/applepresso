@@ -11,9 +11,7 @@ function KakaoMapModal({
   setIsOpenMapModal,
 }) {
   const [isLoading, setIsLoading] = useState(false);
-
   const [error, setError] = useState(null);
-
   const [mapInstance, setMapInstance] = useState(null);
 
   useEffect(() => {
