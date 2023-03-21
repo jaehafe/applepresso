@@ -4,12 +4,7 @@ import * as S from './KakaoMapModal.style';
 
 const { kakao } = window;
 
-function KakaoMapModal({
-  Lat = 37.5900707,
-  Lng = 127.0553692,
-  title,
-  setIsOpenMapModal,
-}) {
+function KakaoMapModal({ Lat, Lng, title, setIsOpenMapModal }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [mapInstance, setMapInstance] = useState(null);
