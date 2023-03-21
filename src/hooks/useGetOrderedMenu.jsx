@@ -2,16 +2,17 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { axiosFirebase } from '../constants/axios';
 import { LoginContext } from '../contexts/LoginContextProvider';
 
-function useGetOrderedMenu(url = '') {
+function useGetOrderedMenu(url) {
   const { currentUser } = useContext(LoginContext);
 
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const fetchOrderedMenu = async () => {
+  const fetchOrderedMenu = useCallback(async () => {
     try {
       setLoading(true);
+      setError(false);
       const res = await axiosFirebase.get(`${url}.json`);
       const orderedMenuArr = Object.entries(res.data);
       const menuArr = orderedMenuArr.map(([key, value]) => {
@@ -35,15 +36,15 @@ function useGetOrderedMenu(url = '') {
     } finally {
       setLoading(false);
     }
-  };
+  }, [url]);
 
   useEffect(() => {
     fetchOrderedMenu();
-  }, [url]);
+  }, [url, fetchOrderedMenu]);
 
   const refetchData = useCallback(() => {
     fetchOrderedMenu();
-  }, [fetchOrderedMenu]);
+  }, [url, fetchOrderedMenu]);
 
   return { data, loading, error, refetchData };
 }
