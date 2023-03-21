@@ -30,7 +30,7 @@ function OrderHistory() {
 
   const filteredData = data.filter((item) => {
     const orderDate = new Date(item.value.orderDate);
-    console.log('orderDate', orderDate);
+
     return startDate <= orderDate && orderDate <= endDate;
   });
 

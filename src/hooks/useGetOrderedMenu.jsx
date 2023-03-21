@@ -22,7 +22,6 @@ function useGetOrderedMenu(url = '') {
       const currentUserOrder = menuArr.filter(
         (items) => items.value?.user?.email === currentUser?.user?.email
       );
-      console.log('currentUserOrder', currentUserOrder);
 
       /** 최근순으로 정렬 */
       const sortedOrders = currentUserOrder.sort(

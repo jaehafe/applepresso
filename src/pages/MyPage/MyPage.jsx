@@ -8,8 +8,7 @@ import myPageBanner3 from '../../assets/myPageBanner/myPageBanner3.jpeg';
 import myPageBanner4 from '../../assets/myPageBanner/myPageBanner4.jpeg';
 import myPageBanner5 from '../../assets/myPageBanner/myPageBanner5.jpeg';
 import myPageBanner6 from '../../assets/myPageBanner/myPageBanner6.jpeg';
-import SimpleOrderHistory from '../../components/SimpleOrderHistory/SimpleOrderHistory';
-import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
+import BestMenu from '../../components/BestMenu/BestMenu';
 
 const HeaderNav = [
   { title: '카드 관리', navigate: '/selectPayment', icons: <S.StyledBsCreditCard /> },
@@ -109,10 +108,10 @@ function MyPage() {
             <Link key={title} to={navigate}>
               <S.HeroWrapper>
                 <S.HeroTitleWrapper>
-                  {icons}
+                  <div>{icons}</div>
                   <S.HeroTitle>{title}</S.HeroTitle>
                 </S.HeroTitleWrapper>
-                {directionIcon}
+                <div>{directionIcon}</div>
               </S.HeroWrapper>
             </Link>
           );
@@ -125,11 +124,15 @@ function MyPage() {
           })}
         </S.BannerSlides>
       </S.BannerIMGContainer>
-      {/* 간단한 주문내역 표시 */}
-      <S.ShortOrderHistoryContainer>
-        <S.ShortOrderHistoryTitle>내가 가장 많이 주문한 메뉴</S.ShortOrderHistoryTitle>
-        <SimpleOrderHistory />
-      </S.ShortOrderHistoryContainer>
+      {/* 가장 많이 주문한 메뉴 */}
+      <S.BestMenuContainer>
+        <S.BestMenuTitle>내가 가장 많이 주문한 메뉴 TOP10</S.BestMenuTitle>
+        <S.BestMenuSubTitle>
+          <S.StyledAiOutlineExclamationCircle />
+          10개 미만 주문 시, 주문한 개수만 집계됩니다.
+        </S.BestMenuSubTitle>
+        <BestMenu />
+      </S.BestMenuContainer>
       {/* 깃헙 */}
       <S.GithubInfoContainer
         href="https://github.com/jaehafe/applepresso"
