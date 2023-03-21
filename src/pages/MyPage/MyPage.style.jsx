@@ -58,7 +58,7 @@ export const StyledFiLogIn = styled(FiLogIn)`
 `;
 
 export const CardContainer = styled.div`
-  padding: 30px;
+  padding: 26px;
   background-color: #fff;
   border-radius: 16px;
 `;
@@ -67,10 +67,18 @@ export const HeaderNav = styled(CardContainer)`
   justify-content: space-between;
 `;
 export const HeaderList = styled.li`
+  border-radius: 10px;
+  width: 70px;
+  height: 60px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: 10px;
+  transition: background-color 0.2s ease-in-out;
+  &:hover {
+    background-color: var(--division);
+  }
 `;
 export const HeaderListTitle = styled.h2``;
 export const StyledBsCreditCard = styled(BsCreditCard)`
@@ -90,11 +98,18 @@ export const StyledBsChatDots = styled(BsChatDots)`
 export const HeroNav = styled(CardContainer)`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 6px;
 `;
 export const HeroWrapper = styled.li`
+  /* border: 1px solid; */
+  border-radius: 10px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
+  transition: background-color 0.2s ease-in-out;
+  &:hover {
+    background-color: var(--division);
+  }
 `;
 export const HeroTitleWrapper = styled.div`
   display: flex;

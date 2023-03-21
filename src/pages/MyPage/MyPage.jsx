@@ -109,10 +109,10 @@ function MyPage() {
             <Link key={title} to={navigate}>
               <S.HeroWrapper>
                 <S.HeroTitleWrapper>
-                  {icons}
+                  <div>{icons}</div>
                   <S.HeroTitle>{title}</S.HeroTitle>
                 </S.HeroTitleWrapper>
-                {directionIcon}
+                <div>{directionIcon}</div>
               </S.HeroWrapper>
             </Link>
           );
