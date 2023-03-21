@@ -905,7 +905,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/kh.jpg",
       "kakao_map": "http://naver.me/GoOlal9z",
       "name": "경희대점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.593386", "Lng": "127.052438" }
     },
     {
       "address": "서울시 강북구 미아동 60-5",
@@ -916,7 +917,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/IMG_3899-HDR.jpg",
       "kakao_map": "http://naver.me/FbRIOjSN",
       "name": "미아사거리역점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.6267911", "Lng": "127.0260748" }
     },
     {
       "address": "서울 광진구 아차산로 221 (화양동 7-4)",
@@ -927,7 +929,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_%EA%B1%B4%EB%8C%80%EC%97%AD%EC%A0%901.jpg",
       "kakao_map": "http://naver.me/xL1scuov",
       "name": "건대역점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.539677", "Lng": "127.072517" }
     },
     {
       "address": "서울시 성동구 성수동1가 13-164",
@@ -938,7 +941,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/%EB%9A%9D%EC%84%AC%EC%97%AD%EC%A0%901.jpg",
       "kakao_map": "http://naver.me/5Am0TR1m",
       "name": "뚝섬역점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.542126", "Lng": "127.056800" }
     },
     {
       "address": "서울 강동구 양재대로 1490 (길동 366-5)",
@@ -949,7 +953,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_DSC05005_1.jpg",
       "kakao_map": "http://naver.me/xaPgP2di",
       "name": "길동역점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.535722", "Lng": "127.145627" }
     },
     {
       "address": "서울 강동구 천호동 447",
@@ -960,7 +965,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/kdkd.PNG",
       "kakao_map": "http://naver.me/GBf3NMNA",
       "name": "강동역점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.538758", "Lng": "127.123184" }
     },
     {
       "address": "서울시 중구 신당동 369-9",
@@ -971,7 +977,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_20221027_201129.jpg",
       "kakao_map": "https://naver.me/5oiiju3u",
       "name": "약수역점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.563527", "Lng": "127.018409" }
     },
     {
       "address": "서울특별시 중구 필동2가 21-1",
@@ -982,7 +989,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ss01_%EB%B0%94%EB%82%98%ED%94%84%EB%A0%88%EC%86%8C_%EC%B6%A9%EB%AC%B4%EB%A1%9C%EC%A0%90%20(3).jpg",
       "kakao_map": "https://naver.me/IgN8ei30",
       "name": "충무로점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.559301", "Lng": "126.994563" }
     },
     {
       "address": "서울시 중구 을지로2가 203",
@@ -993,7 +1001,8 @@
       "image": "https://banapresso.com/from_open_storage?ws=fprocess&file=banapresso/open/store/ppo%EB%B0%94%EB%82%98%ED%94%84%EB%A0%88%EC%86%8C_%ED%8C%8C%EC%9D%B8%EC%97%90%EB%B9%84%EB%89%B4%EC%A0%90%20(4).jpg",
       "kakao_map": "http://naver.me/5ZO1iZly",
       "name": "파인에비뉴점",
-      "open_time": "07:00 ~ 23:00"
+      "open_time": "07:00 ~ 23:00",
+      "LatLng": { "Lat": "37.565582", "Lng": "126.987979" }
     }
   ]
 }

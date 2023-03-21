@@ -3,14 +3,12 @@ import * as S from './DetailStoreModal.style';
 import ReactDOM from 'react-dom';
 import { SelectedStoreContext } from '../../../contexts/SelectedStoreProvider';
 import { useNavigate, useParams } from 'react-router-dom';
-import KakaoMapPage from '../../../pages/KakaoMapPage/KakaoMapPage';
+import KakaoMapModal from '../KakaoMapModal/KakaoMapModal';
 
 function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
+  const { handleSelectedStore } = useContext(SelectedStoreContext);
   const [isOpenMapModal, setIsOpenMapModal] = useState(false);
 
-  const navigate = useNavigate();
-  const { id: paramsId } = useParams();
-  const { handleSelectedStore } = useContext(SelectedStoreContext);
   const {
     id,
     image,
@@ -83,15 +81,15 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
         <S.KakaoMapSearch onClick={handleKaokaoMap}>
           <S.StyledMdOutlineGpsFixed />
         </S.KakaoMapSearch>
-        {isOpenMapModal && (
-          <KakaoMapPage
-            title={name}
-            Lat={Lat}
-            Lng={Lng}
-            setIsOpenMapModal={setIsOpenMapModal}
-          />
-        )}
       </S.Container>
+      {isOpenMapModal && (
+        <KakaoMapModal
+          title={name}
+          Lat={Lat}
+          Lng={Lng}
+          setIsOpenMapModal={setIsOpenMapModal}
+        />
+      )}
     </>,
     document.getElementById('overlay-root')
   );
