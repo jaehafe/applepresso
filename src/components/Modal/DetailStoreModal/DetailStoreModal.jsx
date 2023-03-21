@@ -6,11 +6,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import KakaoMapPage from '../../../pages/KakaoMapPage/KakaoMapPage';
 
 function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
+  const { handleSelectedStore } = useContext(SelectedStoreContext);
   const [isOpenMapModal, setIsOpenMapModal] = useState(false);
 
-  const navigate = useNavigate();
-  const { id: paramsId } = useParams();
-  const { handleSelectedStore } = useContext(SelectedStoreContext);
   const {
     id,
     image,
