@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Loading from '../../Loading.jsx/Loading';
 import * as S from './KakaoMapModal.style';
 
 const { kakao } = window;
@@ -9,6 +10,10 @@ function KakaoMapModal({
   title,
   setIsOpenMapModal,
 }) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [error, setError] = useState(null);
+
   const [mapInstance, setMapInstance] = useState(null);
 
   useEffect(() => {
@@ -17,13 +22,7 @@ function KakaoMapModal({
 
   function displayMarker(locPosition, message) {
     if (!mapInstance) return;
-    // const container = document.getElementById('map');
-    // const options = {
-    //   center: new kakao.maps.LatLng(Lat, Lng),
-    //   level: 5,
-    // };
-    // //map
-    // let map = new kakao.maps.Map(container, options);
+
     // 마커를 생성합니다
     const marker = new kakao.maps.Marker({
       map: mapInstance,
@@ -99,31 +98,35 @@ function KakaoMapModal({
     marker.setMap(map);
   };
 
-  const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-      // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-      navigator.geolocation.getCurrentPosition(function (position) {
-        const lat = position.coords.latitude, // 위도
-          lon = position.coords.longitude; // 경도
+  const getCurrentPositionAsync = () => {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => resolve(position),
+        (error) => reject(error)
+      );
+    });
+  };
 
-        const locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-          message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+  const getCurrentLocation = async () => {
+    setIsLoading(true);
+    try {
+      const position = await getCurrentPositionAsync();
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
 
-        // 마커와 인포윈도우를 표시합니다
-        displayMarker(locPosition, message);
-      });
-    } else {
-      // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-
-      const locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
-        message = 'geolocation을 사용할수 없어요..';
-
+      const locPosition = new kakao.maps.LatLng(lat, lon);
+      const message = '<div style="padding:5px;">여기에 계신가요?!</div>';
       displayMarker(locPosition, message);
+    } catch (error) {
+      setError('현재 위치를 가져오는 데 실패했습니다.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <S.Container>
+      {isLoading && <Loading />}
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>
