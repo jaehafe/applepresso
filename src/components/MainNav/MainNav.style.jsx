@@ -6,7 +6,7 @@ import { BsCalendar2Check } from 'react-icons/bs';
 import { TbBorderAll } from 'react-icons/tb';
 
 export const Container = styled.nav`
-  z-index: 10;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   justify-content: center;
