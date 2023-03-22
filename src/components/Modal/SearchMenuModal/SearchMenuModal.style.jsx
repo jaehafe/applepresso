@@ -93,7 +93,16 @@ export const Strong = styled.strong`
 export const SearchResultContainer = styled.div`
   overflow-y: scroll;
 `;
-// export const Container = styled.div``
-// export const Container = styled.div``
+export const SearchResultMenuNameWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 20px;
+`;
+export const SearchResultMenuName = styled.h3`
+  padding: 10px 0;
+  font-size: 20px;
+  font-weight: 400;
+`;
 // export const Container = styled.div``
 // export const Container = styled.div``
