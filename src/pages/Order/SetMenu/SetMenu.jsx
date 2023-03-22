@@ -8,14 +8,14 @@ function SetMenu() {
   const { data, loading, error, refetchData } = useGetMenu('/menu');
   const setMenu = data.filter((menu) => menu.tags.includes('setMenu'));
   return (
-    <>
+    <S.Container>
       <MenuList
         menus={setMenu}
         loading={loading}
         error={error}
         refetchData={refetchData}
       />
-    </>
+    </S.Container>
   );
 }
 

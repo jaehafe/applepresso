@@ -101,7 +101,8 @@ function MenuHeader() {
           );
         })}
       </S.HeaderNav>
-      <SelectStoreNav />
+      {/* 매장 선택 nav */}
+      <SelectStoreNav top="130px" />
     </>
   );
 }

@@ -120,13 +120,16 @@ function MenuDetail() {
 
   return (
     <>
+      {/* 로그인 alert 모달창 */}
       {isOpenLoginModal && (
         <LoginAlertModal
           isOpenLoginModal={isOpenLoginModal}
           setIsOpenLoginModal={setIsOpenLoginModal}
         />
       )}
+      {/* 오른쪽 하단 장바구니 버튼 */}
       <CartButton onClick={handleNavigateToCart} />
+      {/*  */}
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>

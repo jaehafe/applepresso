@@ -18,7 +18,6 @@ function BestMenu() {
           <S.RetrySubtitle>잠시 후 다시 시도해주세요</S.RetrySubtitle>
         </S.TitleWrapper>
         <S.RetryButton
-          style={{ cursor: 'pointer' }}
           onClick={() => {
             refetchData();
           }}
@@ -77,7 +76,7 @@ function BestMenu() {
                   <S.MenuThumbnail src={thumbnail} alt={title} />
                   <S.MenuInfo>
                     <S.MenuTitle>{title}</S.MenuTitle>
-                    <S.MenuCount>{count}개</S.MenuCount>
+                    <S.MenuCount>{count}번 주문</S.MenuCount>
                   </S.MenuInfo>
                 </S.BannerWrapper>
               );

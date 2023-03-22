@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { SelectedStoreContext } from '../../contexts/SelectedStoreProvider';
 import * as S from './SelectStoreNav.style';
 
-function SelectStoreNav() {
+function SelectStoreNav({ ...props }) {
   const navigate = useNavigate();
   const { currentStore } = useContext(SelectedStoreContext);
   const navigateToSelectStore = () => {
@@ -11,7 +11,7 @@ function SelectStoreNav() {
   };
 
   return (
-    <S.CurrentStoreContainer>
+    <S.CurrentStoreContainer top={props.top}>
       {currentStore ? (
         <>
           <S.StoreTitleWrapper>
