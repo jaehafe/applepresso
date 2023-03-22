@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  /* border: 1px solid; */
-  /* margin: 0px 0 100px; */
   min-height: 100vh;
 `;
 
