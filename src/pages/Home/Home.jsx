@@ -61,8 +61,10 @@ function Home() {
       </S.BannerWrapper>
       {/*  */}
       <S.RecommendNav>
+        {/* 오늘의 메뉴 */}
         <S.TodayMenu onClick={() => navigate('/todayMenu')}>
           <S.StyledFiCoffee />
+          <S.TodayMenuBalloon>Today's</S.TodayMenuBalloon>
           <S.TodayMenuTitle>오늘의 메뉴</S.TodayMenuTitle>
         </S.TodayMenu>
         <S.UserStatsWrapper>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FiCoffee } from 'react-icons/fi';
 import { FaRegHandPointer } from 'react-icons/fa';
@@ -33,7 +33,9 @@ export const RecommendNav = styled.ul`
   margin-top: 40px;
 `;
 
+// 오늘의 메뉴
 export const TodayMenu = styled.li`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,6 +55,52 @@ export const StyledFiCoffee = styled(FiCoffee)`
 export const TodayMenuTitle = styled.p`
   font-weight: 700;
 `;
+
+const balloon = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-10px) 
+  }
+  30% {
+    transform: translateY(5px) 
+  }
+  50% {
+    transform: translateY(-5px) 
+  }
+  100% {
+    transform: translateY(0) 
+  }
+`;
+export const TodayMenuBalloon = styled.i`
+  position: absolute;
+  padding: 3px 6px;
+  top: -10px;
+  left: -10px;
+  color: #fff;
+  background-color: var(--main-color);
+  border-radius: 20px;
+  animation: ${balloon} 3000ms infinite;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    border-top-color: var(--main-color);
+    border-bottom: 0;
+    border-right: 0;
+    margin-left: -5px;
+    margin-bottom: -8px;
+  }
+`;
+
+//
+
 export const UserStatsWrapper = styled.ul`
   display: flex;
   justify-content: space-around;
