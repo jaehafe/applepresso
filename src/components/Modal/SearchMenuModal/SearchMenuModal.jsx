@@ -57,9 +57,9 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
     setSearchResults(results);
   };
 
-  if (loading) {
-    return <Loading />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
     <>
