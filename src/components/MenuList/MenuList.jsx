@@ -5,8 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Loading from '../Loading.jsx/Loading';
 
 function MenuList(props) {
-  console.log(props);
-
   if (props.loading) {
     return <Loading />;
   }
