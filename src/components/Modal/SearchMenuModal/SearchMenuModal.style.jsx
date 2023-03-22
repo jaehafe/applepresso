@@ -1,6 +1,32 @@
 import styled from 'styled-components';
 import { FiSearch, AiOutlineCloseCircle, AiOutlineClose } from 'react-icons/all';
 
+export const ButtonContainer = styled.div`
+  z-index: 5;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 60px;
+  border-radius: 16px;
+  background-color: #fff;
+`;
+export const RetryButton = styled.button`
+  border: 1px solid;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: var(--button-color);
+  color: #fff;
+`;
+export const TitleWrapper = styled.div``;
+export const RetryTitle = styled.div``;
+export const RetrySubtitle = styled.div``;
+
 export const Backdrop = styled.div`
   position: fixed;
   top: 0;

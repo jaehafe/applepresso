@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDebounce } from '../../../hooks/useDebounce';
 import useGetMenu from '../../../hooks/useGetMenu';
+import Loading from '../../Loading.jsx/Loading';
 import MenuList from '../../MenuList/MenuList';
 import * as S from './SearchMenuModal.style';
 
 function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
-  const { data, loading, error } = useGetMenu('/menu');
-
+  const { data, loading, error, refetchData } = useGetMenu('/menu');
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isShowResultsWithThumbnail, setIsShowResultsWithThumbnail] = useState(false);
@@ -34,7 +34,7 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
   }, [debouncedSearchValue]);
 
   const fetchSearchMenuName = async (searchValue) => {
-    const results = data.filter((item) => item.title.includes(searchValue));
+    const results = data?.filter((item) => item.title.includes(searchValue));
     setSearchResults(results);
   };
   console.log('searchResults', searchResults);
@@ -53,14 +53,33 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
 
   const handleDisplayMenuWithThumbnail = () => {
     setIsShowResultsWithThumbnail(true);
-    const results = data.filter((item) => item.title.includes(searchValue));
+    const results = data?.filter((item) => item.title.includes(searchValue));
     setSearchResults(results);
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
       <S.Backdrop onClick={() => setIsOpenSearchMenuModal(false)} />
       <S.Container>
+        {error && (
+          <S.ButtonContainer>
+            <S.TitleWrapper>
+              <S.RetryTitle>요청사항을 처리하는데 실패했습니다.</S.RetryTitle>
+              <S.RetrySubtitle>잠시 후 다시 시도해주세요</S.RetrySubtitle>
+            </S.TitleWrapper>
+            <S.RetryButton
+              onClick={() => {
+                refetchData();
+              }}
+            >
+              다시 시도하기
+            </S.RetryButton>
+          </S.ButtonContainer>
+        )}
         <S.HeaderWrapper>
           <S.HeaderLeft>
             <S.StyledFiSearch />
