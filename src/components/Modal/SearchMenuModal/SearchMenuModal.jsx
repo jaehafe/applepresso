@@ -6,15 +6,23 @@ import * as S from './SearchMenuModal.style';
 
 function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
   const { data, loading, error } = useGetMenu('/menu');
-  // console.log('data', data);
-  // const coffeeData = data.filter((menu) => menu.tags.includes('coffee'));
+
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [isShowResultsWithThumbnail, setIsShowResultsWithThumbnail] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChangeInputValue = (e) => {
+    setIsShowResultsWithThumbnail(false);
     setSearchValue(e.target.value);
-    // console.log('searchValue', searchValue);
+  };
+
+  const handleDeleteInputValue = () => {
+    setSearchValue('');
+    setIsShowResultsWithThumbnail(false);
+  };
+
+  const handleSearchMenuName = () => {
+    setIsShowResultsWithThumbnail(true);
   };
 
   const debouncedSearchValue = useDebounce(searchValue, 500);
@@ -59,9 +67,9 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
             <S.HeaderSearchInput
               placeholder="메뉴명을 검색하세요."
               value={searchValue}
-              onChange={handleChange}
+              onChange={handleChangeInputValue}
             />
-            <S.StyledAiOutlineCloseCircle onClick={() => setSearchValue('')} />
+            <S.StyledAiOutlineCloseCircle onClick={handleDeleteInputValue} />
           </S.HeaderLeft>
           <S.HeaderRight>
             <S.HeaderSearchButton onClick={handleDisplayMenuWithThumbnail}>
@@ -90,7 +98,10 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
                 <S.SearchResultContainer>
                   <S.SearchResultMenuNameWrapper>
                     {searchResults.map((menu) => (
-                      <S.SearchResultMenuName key={menu.id}>
+                      <S.SearchResultMenuName
+                        key={menu.id}
+                        onClick={handleSearchMenuName}
+                      >
                         {menu.title}
                       </S.SearchResultMenuName>
                     ))}
