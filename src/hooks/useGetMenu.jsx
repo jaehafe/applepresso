@@ -6,7 +6,7 @@ function useGetMenu(url = '') {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const fetchMenu = async () => {
+  const fetchMenu = useCallback(async () => {
     try {
       setError(false);
       setLoading(true);
@@ -20,7 +20,7 @@ function useGetMenu(url = '') {
     } finally {
       setLoading(false);
     }
-  };
+  }, [url]);
 
   useEffect(() => {
     fetchMenu();
