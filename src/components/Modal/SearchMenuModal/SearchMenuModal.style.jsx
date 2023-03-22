@@ -63,6 +63,9 @@ export const StyledAiOutlineCloseCircle = styled(AiOutlineCloseCircle)`
 export const HeaderCancelButton = styled.button`
   font-size: 20px;
 `;
+export const HeaderSearchButton = styled.button`
+  font-size: 20px;
+`;
 export const BodyContainer = styled.div`
   z-index: 3;
   padding: 30px 30px;
@@ -104,5 +107,5 @@ export const SearchResultMenuName = styled.h3`
   font-size: 20px;
   font-weight: 400;
 `;
-// export const Container = styled.div``
+
 // export const Container = styled.div``

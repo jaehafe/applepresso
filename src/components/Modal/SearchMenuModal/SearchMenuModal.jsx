@@ -10,6 +10,7 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
   // const coffeeData = data.filter((menu) => menu.tags.includes('coffee'));
   const [searchValue, setSearchValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isShowResultsWithThumbnail, setIsShowResultsWithThumbnail] = useState(false);
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
@@ -42,15 +43,10 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
     };
   }, [isOpenSearchMenuModal]);
 
-  const handleDisplayMenuWithThumbnail = (id) => {
-    <>
-      <S.SearchResultCount>
-        <S.Strong>'{searchValue}'</S.Strong>에 대한 검색결과가 8건이 있습니다.
-      </S.SearchResultCount>
-      <S.SearchResultContainer>
-        <MenuList menus={fetchSearchMenuName} />
-      </S.SearchResultContainer>
-    </>;
+  const handleDisplayMenuWithThumbnail = () => {
+    setIsShowResultsWithThumbnail(true);
+    const results = data.filter((item) => item.title.includes(searchValue));
+    setSearchResults(results);
   };
 
   return (
@@ -65,35 +61,50 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
               value={searchValue}
               onChange={handleChange}
             />
-            <S.StyledAiOutlineCloseCircle />
+            <S.StyledAiOutlineCloseCircle onClick={() => setSearchValue('')} />
           </S.HeaderLeft>
           <S.HeaderRight>
+            <S.HeaderSearchButton onClick={handleDisplayMenuWithThumbnail}>
+              검색
+            </S.HeaderSearchButton>
             <S.HeaderCancelButton onClick={() => setIsOpenSearchMenuModal(false)}>
               취소
             </S.HeaderCancelButton>
           </S.HeaderRight>
         </S.HeaderWrapper>
         <S.BodyContainer>
-          {searchValue ? (
-            <S.SearchResultContainer>
-              <S.SearchResultMenuNameWrapper>
-                {searchResults.map((menu) => (
-                  <S.SearchResultMenuName
-                    key={menu.id}
-                    onClick={() => handleDisplayMenuWithThumbnail(menu.id)}
-                  >
-                    {menu.title}
-                  </S.SearchResultMenuName>
-                ))}
-              </S.SearchResultMenuNameWrapper>
-            </S.SearchResultContainer>
+          {isShowResultsWithThumbnail ? (
+            <>
+              <S.SearchResultCount>
+                <S.Strong>'{searchValue}'</S.Strong>에 대한 검색결과가{' '}
+                {searchResults.length}
+                건이 있습니다.
+              </S.SearchResultCount>
+              <S.SearchResultContainer>
+                <MenuList menus={searchResults} />
+              </S.SearchResultContainer>
+            </>
           ) : (
-            <S.SearchHistoryContainer>
-              <S.SearchHistoryList>
-                <S.SearchHistoryTitle>localStorage</S.SearchHistoryTitle>
-                <S.StyledAiOutlineClose />
-              </S.SearchHistoryList>
-            </S.SearchHistoryContainer>
+            <>
+              {searchValue ? (
+                <S.SearchResultContainer>
+                  <S.SearchResultMenuNameWrapper>
+                    {searchResults.map((menu) => (
+                      <S.SearchResultMenuName key={menu.id}>
+                        {menu.title}
+                      </S.SearchResultMenuName>
+                    ))}
+                  </S.SearchResultMenuNameWrapper>
+                </S.SearchResultContainer>
+              ) : (
+                <S.SearchHistoryContainer>
+                  <S.SearchHistoryList>
+                    <S.SearchHistoryTitle>localStorage</S.SearchHistoryTitle>
+                    <S.StyledAiOutlineClose />
+                  </S.SearchHistoryList>
+                </S.SearchHistoryContainer>
+              )}
+            </>
           )}
         </S.BodyContainer>
       </S.Container>
