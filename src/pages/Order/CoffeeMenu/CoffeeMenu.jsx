@@ -1,4 +1,5 @@
 import React from 'react';
+import * as S from './CoffeeMenu.style';
 import Loading from '../../../components/Loading.jsx/Loading';
 import MenuList from '../../../components/MenuList/MenuList';
 import useGetMenu from '../../../hooks/useGetMenu';
@@ -8,14 +9,14 @@ function CoffeeMenu() {
   const coffeeData = data.filter((menu) => menu.tags.includes('coffee'));
 
   return (
-    <>
+    <S.Container>
       <MenuList
         menus={coffeeData}
         loading={loading}
         error={error}
         refetchData={refetchData}
       />
-    </>
+    </S.Container>
   );
 }
 

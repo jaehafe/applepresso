@@ -77,7 +77,7 @@ function BestMenu() {
                   <S.MenuThumbnail src={thumbnail} alt={title} />
                   <S.MenuInfo>
                     <S.MenuTitle>{title}</S.MenuTitle>
-                    <S.MenuCount>{count}개</S.MenuCount>
+                    <S.MenuCount>{count}번 주문</S.MenuCount>
                   </S.MenuInfo>
                 </S.BannerWrapper>
               );
