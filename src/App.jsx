@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import * as S from './App.style';
 
 import Home from './pages/Home/Home';
 import InitPage from './pages/InitPage/InitPage';
@@ -30,20 +29,20 @@ import TodayMenu from './pages/TodayMenu/TodayMenu';
 
 const Layout = () => {
   return (
-    <S.Container>
+    <>
       <Outlet />
       <MainNav />
-    </S.Container>
+    </>
   );
 };
 
 const OrderLayout = () => {
   return (
-    <S.Container>
+    <>
       <CartButton />
       <MenuHeader />
       <Outlet />
-    </S.Container>
+    </>
   );
 };
 
