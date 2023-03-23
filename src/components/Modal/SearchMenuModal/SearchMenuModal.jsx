@@ -65,6 +65,7 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
     <>
       <S.Backdrop onClick={() => setIsOpenSearchMenuModal(false)} />
       <S.Container>
+        {/* error boundary */}
         {error && (
           <S.ButtonContainer>
             <S.TitleWrapper>
@@ -80,6 +81,7 @@ function SearchMenuModal({ isOpenSearchMenuModal, setIsOpenSearchMenuModal }) {
             </S.RetryButton>
           </S.ButtonContainer>
         )}
+        {/*  */}
         <S.HeaderWrapper>
           <S.HeaderLeft>
             <S.StyledFiSearch />

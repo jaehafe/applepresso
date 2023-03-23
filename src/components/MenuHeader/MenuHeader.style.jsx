@@ -18,12 +18,13 @@ export const Container = styled.div`
   padding: 0 20px;
 `;
 
-export const StyledFiSearch = styled(FiSearch)``;
+export const StyledFiSearch = styled(FiSearch)`
+  cursor: pointer;
+`;
 export const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 20px;
-  cursor: pointer;
 `;
 export const HeaderTitle = styled.h2`
   font-weight: 500;
