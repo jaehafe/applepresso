@@ -56,7 +56,7 @@ export const TodayMenuTitle = styled.p`
   font-weight: 700;
 `;
 
-const balloon = keyframes`
+export const balloon = keyframes`
   0% {
     transform: translateY(0);
   }
