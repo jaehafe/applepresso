@@ -75,6 +75,7 @@ function MenuHeader() {
       )}
       <S.Container>
         <S.HeaderWrapper>
+          <S.SearchBalloon>Search!!</S.SearchBalloon>
           <S.HeaderTitle>주문</S.HeaderTitle>
           <S.StyledFiSearch onClick={handleOpenSearchMenuModal} />
         </S.HeaderWrapper>

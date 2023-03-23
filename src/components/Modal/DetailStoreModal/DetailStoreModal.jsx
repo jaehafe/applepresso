@@ -4,10 +4,14 @@ import ReactDOM from 'react-dom';
 import { SelectedStoreContext } from '../../../contexts/SelectedStoreProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import KakaoMapModal from '../KakaoMapModal/KakaoMapModal';
+import { LoginContext } from '../../../contexts/LoginContextProvider';
+import LoginAlertModal from '../LoginAlertModal/LoginAlertModal';
 
 function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
   const { handleSelectedStore } = useContext(SelectedStoreContext);
   const [isOpenMapModal, setIsOpenMapModal] = useState(false);
+  const { currentUser, handleOpenLoginModal, isOpenLoginModal, setIsOpenLoginModal } =
+    useContext(LoginContext);
 
   const {
     id,
@@ -43,12 +47,22 @@ function DetailStoreModal({ store, isOpenModal, setIsOpenModal }) {
   }, [isOpenModal]);
 
   const handleSelectStore = () => {
+    if (!currentUser) {
+      handleOpenLoginModal();
+      return;
+    }
     handleSelectedStore({ name, address, delivery_available, company_owned });
     setIsOpenModal(false);
   };
 
   return ReactDOM.createPortal(
     <>
+      {isOpenLoginModal && (
+        <LoginAlertModal
+          isOpenLoginModal={isOpenLoginModal}
+          setIsOpenLoginModal={setIsOpenLoginModal}
+        />
+      )}
       <S.Backdrop onClick={handleCloseModal} />
       <S.Container>
         <S.ModalTop>

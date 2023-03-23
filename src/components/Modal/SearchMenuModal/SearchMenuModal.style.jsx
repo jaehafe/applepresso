@@ -129,9 +129,16 @@ export const SearchResultMenuNameWrapper = styled.div`
   font-size: 20px;
 `;
 export const SearchResultMenuName = styled.h3`
-  padding: 10px 0;
+  padding: 10px 20px;
   font-size: 20px;
   font-weight: 400;
+  cursor: pointer;
+  border-radius: 20px;
+
+  &:hover,
+  &:active {
+    background-color: var(--division);
+  }
 `;
 
 // export const Container = styled.div``

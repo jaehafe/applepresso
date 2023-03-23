@@ -7,13 +7,13 @@ export const Backdrop = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 11;
+  z-index: 14;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const Container = styled.div`
   position: fixed;
-  z-index: 12;
+  z-index: 15;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

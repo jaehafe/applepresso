@@ -76,7 +76,8 @@ export const HeaderList = styled.li`
   align-items: center;
   gap: 10px;
   transition: background-color 0.2s ease-in-out;
-  &:hover {
+  &:hover,
+  &:active {
     background-color: var(--division);
   }
 `;
