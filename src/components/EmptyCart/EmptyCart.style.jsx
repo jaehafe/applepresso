@@ -27,10 +27,3 @@ export const Button = styled.button`
     background-color: #fff;
   }
 `;
-
-// export const Container = styled.div``
-// export const Container = styled.div``
-// export const Container = styled.div``
-// export const Container = styled.div``
-// export const Container = styled.div``
-// export const Container = styled.div``
