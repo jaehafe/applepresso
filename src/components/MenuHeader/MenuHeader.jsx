@@ -6,6 +6,7 @@ import 'swiper/css';
 import { NavLink } from 'react-router-dom';
 import SelectStoreNav from '../SelectStoreNav/SelectStoreNav';
 import SearchMenuModal from '../Modal/SearchMenuModal/SearchMenuModal';
+import { errorNotify } from '../../hooks/useToast';
 
 const NavLists = [
   {
@@ -32,18 +33,18 @@ const NavLists = [
     name: 'MILK TEA & LATTEE',
     active: false,
   },
-  // {
-  //   navigate: 'juiceDrink',
-  //   id: 'JUICE_DRINK',
-  //   name: 'JUICE & DRINK',
-  //   active: false,
-  // },
-  // {
-  //   navigate: 'banaccinoSmoothie',
-  //   id: 'BANACCINO_SMOOTHIE',
-  //   name: 'BANACCINO & SMOOTHIE',
-  //   active: false,
-  // },
+  {
+    navigate: 'juiceDrink',
+    id: 'JUICE_DRINK',
+    name: 'JUICE & DRINK',
+    active: false,
+  },
+  {
+    navigate: 'banaccinoSmoothie',
+    id: 'BANACCINO_SMOOTHIE',
+    name: 'BANACCINO & SMOOTHIE',
+    active: false,
+  },
   // {
   //   navigate: 'teaAde',
   //   id: 'TEA_ADE',
@@ -63,6 +64,15 @@ function MenuHeader() {
 
   const handleOpenSearchMenuModal = () => {
     setIsOpenSearchMenuModal(true);
+  };
+
+  const handleNavigate = (e, item) => {
+    if (item.name === 'BANACCINO & SMOOTHIE' || item.name === 'JUICE & DRINK') {
+      e.preventDefault();
+
+      errorNotify(`${item.name} 메뉴는 서비스 준비중입니다.`);
+      return;
+    }
   };
 
   return (
@@ -93,7 +103,7 @@ function MenuHeader() {
         {NavLists.map((item) => {
           return (
             <S.NavList key={item.id}>
-              <NavLink to={item.navigate}>
+              <NavLink to={item.navigate} onClick={(e) => handleNavigate(e, item)}>
                 {({ isActive }) => (
                   <S.NavTitle $active={isActive}>{item.name}</S.NavTitle>
                 )}
