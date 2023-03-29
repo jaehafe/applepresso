@@ -81,7 +81,7 @@ function OrderHistory() {
         />
       )}
       {/*  */}
-      {filteredData.length > 0 ? (
+      {filteredData?.length > 0 ? (
         <OrderHistoryMenu filteredData={filteredData} />
       ) : (
         <NoResult />
