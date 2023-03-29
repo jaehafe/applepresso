@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { FaRegHandPointer } from 'react-icons/all';
 
 export const AddEasyOrderButton = styled.div`
-  border: 1px solid;
   display: flex;
   align-items: center;
   gap: 20px;

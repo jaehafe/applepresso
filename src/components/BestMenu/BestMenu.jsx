@@ -28,7 +28,7 @@ function BestMenu() {
     );
   }
 
-  const values = data.map((item) => {
+  const values = data?.map((item) => {
     return item.value.orderDetail;
   });
 
@@ -66,7 +66,7 @@ function BestMenu() {
 
   return (
     <>
-      {sortedByBestMenus ? (
+      {sortedByBestMenus.length > 0 ? (
         <S.BannerContainer>
           <S.BannerSlides>
             {sortedByBestMenus.map((item) => {
@@ -86,10 +86,9 @@ function BestMenu() {
       ) : (
         <S.AddEasyOrderButton>
           <S.AddEasyOrderList>
-            <S.StyledFaRegHandPointer />
             <S.AddEasyOrderDesc>주문 내역이 아직 없네요.</S.AddEasyOrderDesc>
           </S.AddEasyOrderList>
-          <S.AddEasyOrderExtraListButton>+</S.AddEasyOrderExtraListButton>
+          {/* <S.AddEasyOrderExtraListButton>+</S.AddEasyOrderExtraListButton> */}
         </S.AddEasyOrderButton>
       )}
     </>
