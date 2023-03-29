@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LottieAni from '../../utils/lottieAni';
+import LottieAni from '../../utils/LottieAni';
 import * as S from './PayRedirect.style';
 
 function PayRedirect(props) {

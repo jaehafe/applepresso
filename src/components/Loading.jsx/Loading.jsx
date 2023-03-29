@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './Loading.style';
-import LottieAni from '../../utils/lottieAni';
+import LottieAni from '../../utils/LottieAni';
 import loading_ball from '../../assets/loading_ball.json';
 
 function Loading() {

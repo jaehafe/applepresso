@@ -1,6 +1,6 @@
 import React from 'react';
 import * as S from './NoResult.style';
-import LottieAni from '../../utils/lottieAni';
+import LottieAni from '../../utils/LottieAni';
 import no_results from '../../assets/no_results.json';
 
 function NoResult() {

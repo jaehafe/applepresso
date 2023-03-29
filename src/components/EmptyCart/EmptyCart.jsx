@@ -1,7 +1,7 @@
 import React from 'react';
 import * as S from './EmptyCart.style';
 import emptyCart from '../../assets/emptyCart.json';
-import LottieAni from '../../utils/lottieAni';
+import LottieAni from '../../utils/LottieAni';
 import { Link } from 'react-router-dom';
 
 function EmptyCart() {
