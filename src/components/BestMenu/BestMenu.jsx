@@ -36,8 +36,8 @@ function BestMenu() {
   const countOrders = (values) => {
     let orderCounts = {};
 
-    values.forEach((array) => {
-      array.forEach((item) => {
+    values?.forEach((array) => {
+      array?.forEach((item) => {
         if (orderCounts[item.id]) {
           orderCounts[item.id].count++;
         } else {
