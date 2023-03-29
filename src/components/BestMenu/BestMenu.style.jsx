@@ -18,7 +18,6 @@ export const AddEasyOrderList = styled.li`
   border-radius: 20px;
   background-color: #fff;
   box-shadow: var(--box-shadow);
-  cursor: pointer;
 `;
 export const StyledFaRegHandPointer = styled(FaRegHandPointer)`
   color: var(--main-color);

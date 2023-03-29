@@ -129,7 +129,7 @@ function MyPage() {
         <S.BestMenuTitle>내가 가장 많이 주문한 메뉴 TOP10</S.BestMenuTitle>
         <S.BestMenuSubTitle>
           <S.StyledAiOutlineExclamationCircle />
-          10개 미만 주문 시, 주문한 개수만 집계됩니다.
+          10개 미만 주문 시, 주문한 내역만 집계됩니다.
         </S.BestMenuSubTitle>
         <BestMenu />
       </S.BestMenuContainer>
