@@ -16,11 +16,11 @@ function OrderHistoryMenu({ filteredData }) {
       {filteredData?.map((items) => {
         const { id, value } = items;
 
-        const finalPrices = value.orderDetail.map((item) => {
+        const finalPrices = value?.orderDetail?.map((item) => {
           return item.amount * item.price * (1 - item.discountRate / 100);
         });
 
-        const finalPrice = finalPrices.reduce((acc, val) => {
+        const finalPrice = finalPrices?.reduce((acc, val) => {
           return (acc += val);
         }, 0);
 
