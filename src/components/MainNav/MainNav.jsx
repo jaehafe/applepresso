@@ -1,6 +1,7 @@
 import React from 'react';
 import * as S from './MainNav.style';
 import { NavLink } from 'react-router-dom';
+import { useAsyncToast, ToastContainer } from '../../hooks/useToast';
 
 const ListItem = [
   {
@@ -40,13 +41,20 @@ const ListItem = [
   },
 ];
 
+const handleAlert = (e) => {
+  if (item.name === '스토리' || '멤버십') {
+    e.preventDefault();
+    alert('해당 페이지는 준비중입니다.');
+  }
+};
+
 function MainNav() {
   return (
     <S.Container>
       <S.Lists>
         {ListItem.map((item) => (
           <S.List key={item.id}>
-            <NavLink to={item.navigate}>
+            <NavLink to={item.navigate} onClick={() => handleAlert(e)}>
               {({ isActive }) => (
                 <S.ItemWrapper>
                   <S.StyledICON as={item.icon} $active={isActive} />

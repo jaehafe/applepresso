@@ -8,8 +8,8 @@ import { LoginContext } from '../../contexts/LoginContextProvider';
 import { selectPlace, takeoutOptions } from '../../constants/constants';
 import MakingRequestModal from '../Modal/MakingRequestModal';
 import useKakaoPay from '../../hooks/useKakaoPay';
-import SelectPayment from '../SelectPayment/SelectPayment';
-import { successNotify, errorNotify, useToast } from '../../hooks/useToast';
+
+import { errorNotify, ToastContainer } from '../../hooks/useToast';
 import { orderDate } from '../../utils/format';
 
 import kakaopay_small from '../../assets/kakaopay_small.png';
@@ -170,7 +170,7 @@ function ConfirmOrder({ cartCtx }) {
 
   return (
     <S.Container>
-      {useToast()}
+      <ToastContainer />
       <S.HeaderContainer>
         <S.HeaderWrapper>
           <S.HeaderTitleWrapper>

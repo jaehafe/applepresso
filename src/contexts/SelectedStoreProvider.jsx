@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { useToast, successNotify, errorNotify } from '../hooks/useToast';
-// import { notify, toastComponent } from '../hooks/useToastify';
+import { successNotify, errorNotify, ToastContainer } from '../hooks/useToast';
 import { LoginContext } from './LoginContextProvider';
 
 export const SelectedStoreContext = createContext({
@@ -36,7 +35,7 @@ function SelectedStoreProvider({ children }) {
 
   return (
     <SelectedStoreContext.Provider value={{ currentStore, handleSelectedStore }}>
-      {useToast()}
+      <ToastContainer />
       {children}
     </SelectedStoreContext.Provider>
   );
