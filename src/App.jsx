@@ -26,6 +26,7 @@ import OrderHistory from './pages/OrderHistory/OrderHistory';
 import DetailOrderHistory from './pages/DetailOrderHistory/DetailOrderHistory';
 import StoreInfo from './pages/StoreInfo/StoreInfo';
 import TodayMenu from './pages/TodayMenu/TodayMenu';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 const Layout = () => {
   return (
@@ -47,7 +48,14 @@ const OrderLayout = () => {
 };
 
 const router = createBrowserRouter([
-  { path: '/', element: <InitPage /> },
+  {
+    path: '/',
+    element: (
+      <ProtectedRoute>
+        <InitPage />
+      </ProtectedRoute>
+    ),
+  },
   { path: '/login', element: <Login /> },
   { path: '/signup', element: <Signup /> },
   { path: '/todayMenu', element: <TodayMenu /> },

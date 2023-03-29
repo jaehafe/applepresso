@@ -17,7 +17,7 @@ function LoginContextProvider({ children }) {
     // setCurrentUser(data);
 
     if (!data) {
-      alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
+      errorNotify('아이디 혹은 비밀번호가 일치하지 않습니다.');
     }
 
     if (data !== undefined && data !== null) {
