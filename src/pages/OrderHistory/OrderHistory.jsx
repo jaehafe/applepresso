@@ -28,7 +28,7 @@ function OrderHistory() {
   //
   const { data, error, loading } = useGetOrderedMenu('/pay');
 
-  const filteredData = data.filter((item) => {
+  const filteredData = data?.filter((item) => {
     const orderDate = new Date(item.value.orderDate);
 
     return startDate <= orderDate && orderDate <= endDate;
@@ -43,6 +43,10 @@ function OrderHistory() {
   const handleOpenDatePicker = () => {
     setIsOpenDatePicker(true);
   };
+
+  if (loading) {
+    return <>데이터를 가져오는 중입니다...</>;
+  }
 
   return (
     <S.Container>
