@@ -51,9 +51,9 @@ function ConfirmOrder({ cartCtx }) {
     total_amount: cartCtx.total.finalPrice,
     vat_amount: cartCtx.total.finalPrice / 10,
     tax_free_amount: 0,
-    approval_url: 'http://localhost:5173/paymentWaiting',
-    fail_url: 'http://localhost:5173/paymentFail',
-    cancel_url: 'http://localhost:5173/paymentFail',
+    approval_url: `${import.meta.env.VITE_KAKAO_PAY_APPROVAL_URL}`,
+    fail_url: `${import.meta.env.VITE_KAKAO_PAY_FAIL_URL}`,
+    cancel_url: `${import.meta.env.VITE_KAKAO_PAY_CANCEL_URL}`,
   };
 
   const selectTakeoutPlace = (option) => {
