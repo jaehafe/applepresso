@@ -95,20 +95,3 @@ export const CurrentLocationButton = styled.button`
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
   }
 `;
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-// export const Container = styled.div``;
-// export const Container = styled.div``;
