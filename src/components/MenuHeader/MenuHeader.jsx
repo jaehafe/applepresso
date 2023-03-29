@@ -32,30 +32,30 @@ const NavLists = [
     name: 'MILK TEA & LATTEE',
     active: false,
   },
-  {
-    navigate: 'juiceDrink',
-    id: 'JUICE_DRINK',
-    name: 'JUICE & DRINK',
-    active: false,
-  },
-  {
-    navigate: 'banaccinoSmoothie',
-    id: 'BANACCINO_SMOOTHIE',
-    name: 'BANACCINO & SMOOTHIE',
-    active: false,
-  },
-  {
-    navigate: 'teaAde',
-    id: 'TEA_ADE',
-    name: 'TEA & ADE',
-    active: false,
-  },
-  {
-    navigate: 'bread',
-    id: 'BREAD',
-    name: 'BREAD',
-    active: false,
-  },
+  // {
+  //   navigate: 'juiceDrink',
+  //   id: 'JUICE_DRINK',
+  //   name: 'JUICE & DRINK',
+  //   active: false,
+  // },
+  // {
+  //   navigate: 'banaccinoSmoothie',
+  //   id: 'BANACCINO_SMOOTHIE',
+  //   name: 'BANACCINO & SMOOTHIE',
+  //   active: false,
+  // },
+  // {
+  //   navigate: 'teaAde',
+  //   id: 'TEA_ADE',
+  //   name: 'TEA & ADE',
+  //   active: false,
+  // },
+  // {
+  //   navigate: 'bread',
+  //   id: 'BREAD',
+  //   name: 'BREAD',
+  //   active: false,
+  // },
 ];
 
 function MenuHeader() {
