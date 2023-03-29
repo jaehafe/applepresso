@@ -23,7 +23,7 @@ function SelectedStoreProvider({ children }) {
   }, [currentStore]);
 
   const handleSelectedStore = (props) => {
-    if (props.name === currentStore.name) {
+    if (props.name === currentStore?.name) {
       console.log('123');
       errorNotify(`${props.name}를 이미 선택했습니다.`);
       return;
