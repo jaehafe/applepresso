@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { requestLogin, requestLogout } from '../constants/request';
+import { errorNotify, ToastContainer } from '../hooks/useToast';
 
 export const LoginContext = createContext(null);
 
@@ -45,7 +46,7 @@ function LoginContextProvider({ children }) {
   }, [currentUser]);
 
   const loginModal = () => {
-    alert('로그인 후 이용이 가능합니다');
+    errorNotify('로그인 후 이용이 가능합니다');
   };
   const handleOpenLoginModal = () => {
     setIsOpenLoginModal(true);
@@ -63,6 +64,7 @@ function LoginContextProvider({ children }) {
         handleOpenLoginModal,
       }}
     >
+      <ToastContainer />
       {children}
     </LoginContext.Provider>
   );

@@ -48,5 +48,5 @@ export function useAsyncToast() {
 }
 
 export function ToastContainer() {
-  return <Toaster position="bottom-center" reverseOrder={true} />;
+  return <Toaster position="top-center" reverseOrder={true} />;
 }
