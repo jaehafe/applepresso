@@ -12,12 +12,17 @@ function LoginContextProvider({ children }) {
 
   const login = async (info) => {
     const data = await requestLogin(info);
-    setCurrentUser(data);
+    console.log('!!!!!!!!!!!!!!!!!!', data);
+    // setCurrentUser(data);
+
+    if (data !== undefined && data !== null) {
+      setCurrentUser(data);
+    }
     return data;
   };
 
   const logout = async () => {
-    const { accessToken } = JSON.parse(localStorage.getItem('BANA_USER'));
+    const { accessToken } = JSON.parse(localStorage.getItem('BANA_USER')) || null;
     console.log(accessToken);
     if (!accessToken) {
       console.error('Access token is missing');
