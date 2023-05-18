@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SelectStoreNav from '../../components/SelectStoreNav/SelectStoreNav';
 import * as S from './TodayMenu.style';
-import banner from '../../assets/homeBanner/banner1.jpeg';
 import useGetMenu from '../../hooks/useGetMenu';
 import { formatPrice } from '../../utils/format';
 import Loading from '../../components/Loading.jsx/Loading';
@@ -121,9 +120,7 @@ function TodayMenu() {
                     <S.MenuEngTitle>{ENTitle}</S.MenuEngTitle>
                     <S.MenuPriceWrapper>
                       <S.OriginalPrice>{formatPrice(price)}원</S.OriginalPrice>
-                      <S.DiscountedPrice>
-                        {formatPrice(discountedPrice)}원
-                      </S.DiscountedPrice>
+                      <S.DiscountedPrice>{formatPrice(discountedPrice)}원</S.DiscountedPrice>
                     </S.MenuPriceWrapper>
                   </S.MenuInfo>
                 </S.MenuWrapper>

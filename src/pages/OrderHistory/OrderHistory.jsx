@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import * as S from './OrderHistory.style';
 import { useNavigate } from 'react-router-dom';
 import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 
-import Loading from '../../components/Loading.jsx/Loading';
 import Calendar from '../../components/Calendar/Calendar';
 import OrderHistoryMenu from '../../components/OrderHistoryMenu/OrderHistoryMenu';
 import NoResult from '../../components/NoResult/NoResult';
@@ -81,11 +80,7 @@ function OrderHistory() {
         />
       )}
       {/*  */}
-      {filteredData?.length > 0 ? (
-        <OrderHistoryMenu filteredData={filteredData} />
-      ) : (
-        <NoResult />
-      )}
+      {filteredData?.length > 0 ? <OrderHistoryMenu filteredData={filteredData} /> : <NoResult />}
     </S.Container>
   );
 }

@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './Login.style';
 import Logo from '../../assets/banapressoLogo.png';
-import { requestLogin } from '../../constants/request';
 import { LoginContext } from '../../contexts/LoginContextProvider';
 import SignupInput from '../../components/SignupInput/SignupInput';
 
@@ -73,14 +72,7 @@ function SignUp() {
         <S.HeroDesc>바나프레소 서비스 이용을 위해 로그인을 해주세요.</S.HeroDesc>
         <S.LoginForm>
           {inputs.map((input) => {
-            return (
-              <SignupInput
-                key={input.id}
-                {...input}
-                value={values[input.name] || ''}
-                onChange={onChange}
-              />
-            );
+            return <SignupInput key={input.id} {...input} value={values[input.name] || ''} onChange={onChange} />;
           })}
         </S.LoginForm>
         <S.HeroDesc>회원이 아니신가요?</S.HeroDesc>
