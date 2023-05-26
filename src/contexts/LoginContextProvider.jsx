@@ -7,13 +7,11 @@ export const LoginContext = createContext(null);
 function LoginContextProvider({ children }) {
   const [isOpenLoginModal, setIsOpenLoginModal] = useState(false);
 
-  const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem('BANA_USER')) || null
-  );
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('BANA_USER')) || null);
 
   const login = async (info) => {
     const data = await requestLogin(info);
-    console.log('!!!!!!!!!!!!!!!!!!', data);
+
     // setCurrentUser(data);
 
     if (!data) {

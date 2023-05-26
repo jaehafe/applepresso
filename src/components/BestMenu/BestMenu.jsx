@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import * as S from './BestMenu.style';
 import useGetOrderedMenu from '../../hooks/useGetOrderedMenu';
 import Loading from '../Loading.jsx/Loading';
-import useGetMenu from '../../hooks/useGetMenu';
 
 function BestMenu() {
   const { data, loading, error, refetchData } = useGetOrderedMenu('/pay');
