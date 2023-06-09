@@ -21,7 +21,8 @@
     - DB: Firebase
 
 ### 3. pages, components flow chart
-![air overflow](https://github.com/jaehafe/applepresso/assets/108874515/fcd8d587-fb08-4599-9b84-9cf3ff8e1631)
+![applepresso](https://github.com/jaehafe/applepresso/assets/108874515/0df582c6-3c8f-4849-811f-e81e30130235)
+
 
 ![applepresso components](https://github.com/jaehafe/applepresso/assets/108874515/dead2021-d126-45be-9a7e-32fd64380914)
 
